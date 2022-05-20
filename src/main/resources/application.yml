@@ -1,0 +1,13 @@
+server:
+  port: ${PORT:8085}
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:}
+    url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:just_project}?currentSchema=public
+  liquibase:
+    enabled: off
+    change-log: db/changelog/db-master.xml
+  jpa:
+    generate-ddl: true

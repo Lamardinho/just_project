@@ -1,0 +1,19 @@
+.gradle
+.gradle/
+.mvn
+.mvn/
+build/
+!**/src/main/**
+!**/src/test/**
+
+### IntelliJ IDEA ###
+.idea
+target
+just_project.iml
+mvnw
+mvnw.cmd
+*.iws
+*.iml
+*.ipr
+
+### local properties ###
