@@ -36,6 +36,6 @@ public class ExchangeRate {
     @Column(name = "base", nullable = false)
     private String base;
 
-    @Column(name = "rates", nullable = false)
+    @Column(name = "rates", nullable = false, length = 1024)
     private String rates;
 }

@@ -29,7 +29,7 @@ public class ExchangeRateWebController {
     }
 
     @GetMapping("/ruble/all/v1")
-    public Map<?, ?> getAllRatesByRuble() {                                                                             //NOSONAR
+    public Map<?, ?> getAllRatesByRuble() { //NOSONAR
         return rateService.getAllRatesByRuble();
     }
 

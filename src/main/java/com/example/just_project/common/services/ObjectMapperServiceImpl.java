@@ -30,11 +30,21 @@ public class ObjectMapperServiceImpl implements ObjectMapperService {
     }
 
     @Override
-    public Map<?, ?> readValueToMap(String content) {                                                                   //NOSONAR
+    public Map<?, ?> readValueToMap(String content) { //NOSONAR
         try {
             return objectMapper.readValue(content, Map.class);
         } catch (Exception e) {
             log.error(String.format(Msg.CONTENT_SERIALIZATION_FAILED_RU, content));
+            throw new AppException(e.getMessage());
+        }
+    }
+
+    @Override
+    public String writeValueAsString(Object value) { //NOSONAR
+        try {
+            return objectMapper.writeValueAsString(value);
+        } catch (Exception e) {
+            log.error(String.format(Msg.CONTENT_SERIALIZATION_FAILED_RU, value.toString()));
             throw new AppException(e.getMessage());
         }
     }

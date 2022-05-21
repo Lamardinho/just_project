@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
+import static com.example.just_project.exchangerate.util.AppConstants.RUBLE_CBR_DAILY_RU_URL;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -27,26 +29,25 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     @NonNull
     private final ExchangeRateMapper exchangeRateMapper;
 
-    private static final int C_TIMEOUT = 8_000;
-    private static final String RUBLE_URL = "https://www.cbr-xml-daily.ru/latest.js";
-
     @Override
     public BasicCurrenciesRateDto getBasicRatesByRuble() {
-        val rate = objMapService.readValue(getRubleContentFromUrl(), ExchangeRateDtoWhereRateIsMapStr.class);
+        val rate = objMapService.readValue(
+                contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL, 8000, 8000),
+                ExchangeRateDtoWhereRateIsMapStr.class
+        );
         return exchangeRateMapper.dtoWhereRateIsMapStrToBasicCurrenciesRateDto(rate);
     }
 
     @Override
-    public Map<?, ?> getAllRatesByRuble() {                                                                             //NOSONAR
-        return objMapService.readValueToMap(getRubleContentFromUrl());
+    public Map<?, ?> getAllRatesByRuble() { //NOSONAR
+        return objMapService.readValueToMap(contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL, 8000, 8000));
     }
 
     @Override
     public ExchangeRateDtoWhereRateIsRate getRatesByRuble() {
-        return objMapService.readValue(getRubleContentFromUrl(), ExchangeRateDtoWhereRateIsRate.class);
-    }
-
-    private String getRubleContentFromUrl() {
-        return contentService.getContentFromUrl(RUBLE_URL, C_TIMEOUT, C_TIMEOUT);
+        return objMapService.readValue(
+                contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL, 8000, 8000),
+                ExchangeRateDtoWhereRateIsRate.class
+        );
     }
 }

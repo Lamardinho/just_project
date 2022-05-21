@@ -9,7 +9,7 @@ public interface ExchangeRateService {
 
     BasicCurrenciesRateDto getBasicRatesByRuble();
 
-    Map<?, ?> getAllRatesByRuble();                                                                                     //NOSONAR
+    Map<?, ?> getAllRatesByRuble(); //NOSONAR
 
     ExchangeRateDtoWhereRateIsRate getRatesByRuble();
 }
