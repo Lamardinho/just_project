@@ -11,3 +11,8 @@ spring:
     change-log: db/changelog/db-master.xml
   jpa:
     generate-ddl: true
+
+springdoc:
+  packagesToScan: com.example.just_project
+  swagger-ui:
+    disable-swagger-default-url: true
