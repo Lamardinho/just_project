@@ -1,6 +1,7 @@
 package com.example.just_project.controllers.api;
 
 import com.example.just_project.exchangerate.dto.RubleRateDto;
+import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsRate;
 import com.example.just_project.exchangerate.services.ExchangeRateService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +28,10 @@ public class ExchangeRateController {
     @GetMapping("/ruble/all")
     public Map<?, ?> getAllRatesByRuble() {
         return rateService.getAllRatesByRuble();
+    }
+
+    @GetMapping("/ruble/rate")
+    public ExchangeRateDtoWhereRateIsRate getRate() {
+        return rateService.getRate();
     }
 }

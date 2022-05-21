@@ -7,9 +7,39 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ERate {
 
-    RUB("RUB"),
-    EURO("EURO"),
-    USD("USD");
-
-    private final String name;
+    RUB,
+    EUR,
+    USD,
+    AUD,
+    AZN,
+    GBP,
+    AMD,
+    BYN,
+    BGN,
+    BRL,
+    HUF,
+    HKD,
+    DKK,
+    INR,
+    KZT,
+    CAD,
+    KGS,
+    CNY,
+    MDL,
+    NOK,
+    PLN,
+    RON,
+    XDR,
+    SGD,
+    TJS,
+    TRY,
+    TMT,
+    UZS,
+    UAH,
+    CZK,
+    SEK,
+    CHF,
+    ZAR,
+    KRW,
+    JPY
 }

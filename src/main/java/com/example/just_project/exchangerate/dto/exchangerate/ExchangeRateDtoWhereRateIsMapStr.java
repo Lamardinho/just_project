@@ -1,32 +1,22 @@
-package com.example.just_project.exchangerate.dto;
+package com.example.just_project.exchangerate.dto.exchangerate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.time.LocalDate;
+import java.util.Map;
 
 /**
  * DTO для получения данных с сайта: <a href="https://www.cbr-xml-daily.ru/latest.js">cbr-xml-daily.ru</a>
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class ExchangeRateDto {
+public class ExchangeRateDtoWhereRateIsMapStr extends AExchangeRate {
 
-    /**
-     * Источник
-     */
-    private String disclaimer;
-
-    private LocalDate date;
-
-    /**
-     * Валюта
-     */
-    private String base;
-
-    private Rates rates;
+    private Map<String, Double> rates;
 }

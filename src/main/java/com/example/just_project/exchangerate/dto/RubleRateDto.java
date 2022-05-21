@@ -14,11 +14,15 @@ import java.time.LocalDate;
 public class RubleRateDto {
 
     private String disclaimer;
+
     private LocalDate date;
+
     /**
      * Валюта
      */
     private String base;
+
     private String usd = "?";
+
     private String euro = "?";
 }
