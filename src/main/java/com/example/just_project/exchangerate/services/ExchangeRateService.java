@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 import static com.example.just_project.util.CurrencyHelper.currencyToRuble;
 
@@ -33,7 +34,7 @@ public class ExchangeRateService {
     private static final int CONNECTION_TIMEOUT = 8_000;
     private static final String RUBLE_URL = "https://www.cbr-xml-daily.ru/latest.js";
 
-    public RubleRateDto getRubleRate() {
+    public RubleRateDto getUsdAndEuroRateByRuble() {
         val exchangeRateDto = objMapService.readValue(getStringFromUrl(RUBLE_URL), ExchangeRateDto.class);
 
         return new RubleRateDto(
@@ -43,6 +44,10 @@ public class ExchangeRateService {
                 currencyToRuble(exchangeRateDto.getRates().getUsd()),
                 currencyToRuble(exchangeRateDto.getRates().getEur())
         );
+    }
+
+    public Map<?, ?> getAllRatesByRuble() {
+        return objMapService.readValueToMap(getStringFromUrl(RUBLE_URL));
     }
 
     @SneakyThrows

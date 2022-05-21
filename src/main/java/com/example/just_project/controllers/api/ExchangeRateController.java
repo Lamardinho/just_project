@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/exchangerate", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -17,8 +19,13 @@ public class ExchangeRateController {
     @NonNull
     private final ExchangeRateService rateService;
 
-    @GetMapping("/ruble")
-    public RubleRateDto getRubleRate() {
-        return rateService.getRubleRate();
+    @GetMapping("/ruble/usd_euro")
+    public RubleRateDto getUsdAndEuroRateByRuble() {
+        return rateService.getUsdAndEuroRateByRuble();
+    }
+
+    @GetMapping("/ruble/all")
+    public Map<?, ?> getAllRatesByRuble() {
+        return rateService.getAllRatesByRuble();
     }
 }
