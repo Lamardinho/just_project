@@ -1,7 +1,7 @@
 package com.example.just_project.exchangerate.services;
 
-import com.example.just_project.common.services.ObjectMapperService;
 import com.example.just_project.common.services.contract.ContentService;
+import com.example.just_project.common.services.contract.ObjectMapperService;
 import com.example.just_project.exchangerate.dto.RubleRateDto;
 import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsMapStr;
 import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsRate;
