@@ -7,7 +7,7 @@ spring:
     password: ${DB_PASSWORD:}
     url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:just_project}?currentSchema=public
   liquibase:
-    enabled: off
+    enabled: on
     change-log: db/changelog/db-master.xml
   jpa:
     generate-ddl: true

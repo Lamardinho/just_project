@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "exchange_rate")
+@Table(schema = "exchange_rate", name = "exchange_rate")
 public class ExchangeRate {
 
     @Id

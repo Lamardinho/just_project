@@ -6,6 +6,6 @@
     <preConditions>
         <dbms type="postgresql"/>
     </preConditions>
-    <!-- ************************************ СОЗДАЕМ ТАБЛИЦЫ  ***************************************************** -->
-    <!--<include file="born_db/tables/tables.xml" relativeToChangelogFile="true"/>-->
+    <!-- ************************************  RUN  ***************************************************** -->
+    <include file="changesets/dev_1/1.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
