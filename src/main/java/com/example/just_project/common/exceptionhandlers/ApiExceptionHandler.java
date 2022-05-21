@@ -11,12 +11,11 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Log4j2
 @Order(0)
-@ControllerAdvice(basePackages = "com.example.just_project.controllers.api")
+//@ControllerAdvice(basePackages = "com.example.just_project...")
 public class ApiExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)

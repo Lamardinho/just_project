@@ -1,4 +1,4 @@
-package com.example.just_project.controllers.api;
+package com.example.just_project.exchangerate.controllers.api;
 
 import com.example.just_project.exchangerate.dto.RubleRateDto;
 import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsRate;
