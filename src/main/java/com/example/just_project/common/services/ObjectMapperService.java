@@ -1,6 +1,6 @@
 package com.example.just_project.common.services;
 
-import com.example.just_project.common.exc.AppException;
+import com.example.just_project.common.exceptions.AppException;
 import com.example.just_project.util.Msg;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NonNull;
@@ -22,7 +22,7 @@ public class ObjectMapperService {
         try {
             return objectMapper.readValue(content, clazz);
         } catch (Exception e) {
-            log.error(String.format(Msg.CONTENT_SERIALIZATION_FAILED, content));
+            log.error(String.format(Msg.CONTENT_SERIALIZATION_FAILED_RU, content));
             throw new AppException(e.getMessage());
         }
     }
@@ -31,7 +31,7 @@ public class ObjectMapperService {
         try {
             return objectMapper.readValue(content, Map.class);
         } catch (Exception e) {
-            log.error(String.format(Msg.CONTENT_SERIALIZATION_FAILED, content));
+            log.error(String.format(Msg.CONTENT_SERIALIZATION_FAILED_RU, content));
             throw new AppException(e.getMessage());
         }
     }

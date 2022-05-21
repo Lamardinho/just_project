@@ -1,4 +1,4 @@
-package com.example.just_project.model;
+package com.example.just_project.sqlstudy.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

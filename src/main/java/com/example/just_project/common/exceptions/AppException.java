@@ -1,4 +1,4 @@
-package com.example.just_project.common.exc;
+package com.example.just_project.common.exceptions;
 
 /**
  * Для ответа кастомными сообщениями
