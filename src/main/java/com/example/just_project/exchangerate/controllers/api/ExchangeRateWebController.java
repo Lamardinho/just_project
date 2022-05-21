@@ -1,6 +1,6 @@
 package com.example.just_project.exchangerate.controllers.api;
 
-import com.example.just_project.exchangerate.dto.RubleRateDto;
+import com.example.just_project.exchangerate.dto.BasicCurrenciesRateDto;
 import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsRate;
 import com.example.just_project.exchangerate.services.contract.ExchangeRateService;
 import lombok.NonNull;
@@ -12,26 +12,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+/**
+ * Для работы с курсом валют с вебсайтов
+ */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/exchangerate", produces = MediaType.APPLICATION_JSON_VALUE)
-public class ExchangeRateController {
+@RequestMapping(value = "/api/exchangerate/web", produces = MediaType.APPLICATION_JSON_VALUE)
+public class ExchangeRateWebController {
 
     @NonNull
     private final ExchangeRateService rateService;
 
-    @GetMapping("/ruble/usd_euro")
-    public RubleRateDto getUsdAndEuroRateByRuble() {
-        return rateService.getUsdAndEuroRateByRuble();
+    @GetMapping("/ruble/basic")
+    public BasicCurrenciesRateDto getUsdAndEuroRateByRuble() {
+        return rateService.getBasicRatesByRuble();
     }
 
-    @GetMapping("/ruble/all")
+    @GetMapping("/ruble/all/v1")
     public Map<?, ?> getAllRatesByRuble() {                                                                             //NOSONAR
         return rateService.getAllRatesByRuble();
     }
 
-    @GetMapping("/ruble/rate")
+    @GetMapping("/ruble/all/v2")
     public ExchangeRateDtoWhereRateIsRate getRate() {
-        return rateService.getRate();
+        return rateService.getRatesByRuble();
     }
 }

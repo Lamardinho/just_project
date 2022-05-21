@@ -2,7 +2,7 @@ package com.example.just_project.exchangerate.services;
 
 import com.example.just_project.common.services.contract.ContentService;
 import com.example.just_project.common.services.contract.ObjectMapperService;
-import com.example.just_project.exchangerate.dto.RubleRateDto;
+import com.example.just_project.exchangerate.dto.BasicCurrenciesRateDto;
 import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsMapStr;
 import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsRate;
 import com.example.just_project.exchangerate.dtomappers.ExchangeRateMapper;
@@ -31,9 +31,9 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     private static final String RUBLE_URL = "https://www.cbr-xml-daily.ru/latest.js";
 
     @Override
-    public RubleRateDto getUsdAndEuroRateByRuble() {
+    public BasicCurrenciesRateDto getBasicRatesByRuble() {
         val rate = objMapService.readValue(getRubleContentFromUrl(), ExchangeRateDtoWhereRateIsMapStr.class);
-        return exchangeRateMapper.exchangeRateDtoWhereRateIsMapStrToRubleRateDto(rate);
+        return exchangeRateMapper.dtoWhereRateIsMapStrToBasicCurrenciesRateDto(rate);
     }
 
     @Override
@@ -42,12 +42,11 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     }
 
     @Override
-    public ExchangeRateDtoWhereRateIsRate getRate() {
+    public ExchangeRateDtoWhereRateIsRate getRatesByRuble() {
         return objMapService.readValue(getRubleContentFromUrl(), ExchangeRateDtoWhereRateIsRate.class);
     }
 
-    @Override
-    public String getRubleContentFromUrl() {
+    private String getRubleContentFromUrl() {
         return contentService.getContentFromUrl(RUBLE_URL, C_TIMEOUT, C_TIMEOUT);
     }
 }

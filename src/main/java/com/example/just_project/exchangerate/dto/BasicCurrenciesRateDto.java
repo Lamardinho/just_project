@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class RubleRateDto {
+public class BasicCurrenciesRateDto {
 
     private String disclaimer;
 

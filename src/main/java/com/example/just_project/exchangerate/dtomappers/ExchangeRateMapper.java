@@ -1,6 +1,6 @@
 package com.example.just_project.exchangerate.dtomappers;
 
-import com.example.just_project.exchangerate.dto.RubleRateDto;
+import com.example.just_project.exchangerate.dto.BasicCurrenciesRateDto;
 import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsMapStr;
 import com.example.just_project.exchangerate.enums.ERate;
 import com.example.just_project.util.CurrencyHelper;
@@ -18,6 +18,6 @@ public interface ExchangeRateMapper {
 
     @Mapping(target = "usd", expression = "java(CurrencyHelper.calculateToRub(rate.getRates().get(ERate.USD.name())))")
     @Mapping(target = "euro", expression = "java(CurrencyHelper.calculateToRub(rate.getRates().get(ERate.EUR.name())))")
-    RubleRateDto exchangeRateDtoWhereRateIsMapStrToRubleRateDto(ExchangeRateDtoWhereRateIsMapStr rate);
+    BasicCurrenciesRateDto dtoWhereRateIsMapStrToBasicCurrenciesRateDto(ExchangeRateDtoWhereRateIsMapStr rate);
 
 }
