@@ -2,7 +2,7 @@ package com.example.just_project.exchangerate.controllers.api;
 
 import com.example.just_project.exchangerate.dto.RubleRateDto;
 import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsRate;
-import com.example.just_project.exchangerate.services.ExchangeRateService;
+import com.example.just_project.exchangerate.services.contract.ExchangeRateService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

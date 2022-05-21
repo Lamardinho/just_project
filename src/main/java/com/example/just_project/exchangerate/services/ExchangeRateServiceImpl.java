@@ -6,6 +6,7 @@ import com.example.just_project.exchangerate.dto.RubleRateDto;
 import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsMapStr;
 import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsRate;
 import com.example.just_project.exchangerate.dtomappers.ExchangeRateMapper;
+import com.example.just_project.exchangerate.services.contract.ExchangeRateService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -17,7 +18,7 @@ import java.util.Map;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class ExchangeRateService {
+public class ExchangeRateServiceImpl implements ExchangeRateService {
 
     @NonNull
     private final ObjectMapperService objMapService;
@@ -29,20 +30,24 @@ public class ExchangeRateService {
     private static final int C_TIMEOUT = 8_000;
     private static final String RUBLE_URL = "https://www.cbr-xml-daily.ru/latest.js";
 
+    @Override
     public RubleRateDto getUsdAndEuroRateByRuble() {
         val rate = objMapService.readValue(getRubleContentFromUrl(), ExchangeRateDtoWhereRateIsMapStr.class);
         return exchangeRateMapper.exchangeRateDtoWhereRateIsMapStrToRubleRateDto(rate);
     }
 
+    @Override
     public Map<?, ?> getAllRatesByRuble() {                                                                             //NOSONAR
         return objMapService.readValueToMap(getRubleContentFromUrl());
     }
 
+    @Override
     public ExchangeRateDtoWhereRateIsRate getRate() {
         return objMapService.readValue(getRubleContentFromUrl(), ExchangeRateDtoWhereRateIsRate.class);
     }
 
-    private String getRubleContentFromUrl() {
+    @Override
+    public String getRubleContentFromUrl() {
         return contentService.getContentFromUrl(RUBLE_URL, C_TIMEOUT, C_TIMEOUT);
     }
 }
