@@ -1,7 +1,7 @@
 package com.example.just_project.common.services;
 
 import com.example.just_project.common.services.contract.BufferedReaderService;
-import com.example.just_project.common.services.contract.ConnectService;
+import com.example.just_project.common.services.contract.ConnectionService;
 import com.example.just_project.common.services.contract.ContentService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +20,14 @@ import java.nio.charset.StandardCharsets;
 public class ContentServiceImpl implements ContentService {
 
     @NonNull
-    private final ConnectService connectService;
+    private final ConnectionService connectionService;
     @NonNull
     private final BufferedReaderService bufferedReaderService;
 
     @Override
     @SneakyThrows
     public String getContentFromUrl(String url, Integer connectTimeout, Integer readTimeout) {
-        try (val stream = connectService
+        try (val stream = connectionService
                 .getConnection(url, connectTimeout, readTimeout)
                 .getInputStream()
         ) {

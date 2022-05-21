@@ -4,7 +4,7 @@ import lombok.NonNull;
 
 import java.net.HttpURLConnection;
 
-public interface ConnectService {
+public interface ConnectionService {
 
     HttpURLConnection getConnection(
             @NonNull String url,
