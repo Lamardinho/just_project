@@ -17,4 +17,7 @@ public class Rates {
 
     @JsonProperty("EUR")
     private Double eur;
+
+    @JsonProperty("GBP")
+    private Double gbp;
 }

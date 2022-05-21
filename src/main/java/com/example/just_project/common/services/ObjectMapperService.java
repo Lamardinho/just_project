@@ -27,7 +27,7 @@ public class ObjectMapperService {
         }
     }
 
-    public Map<?, ?> readValueToMap(String content) {
+    public Map<?, ?> readValueToMap(String content) {                                                                   //NOSONAR
         try {
             return objectMapper.readValue(content, Map.class);
         } catch (Exception e) {

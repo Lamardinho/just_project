@@ -9,7 +9,6 @@ import lombok.val;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -20,7 +19,7 @@ public class ConnectServiceImpl implements ConnectService {
 
     @Override
     @SneakyThrows
-    public InputStream getStream(
+    public HttpURLConnection getConnection(
             @NonNull String url,
             @NonNull Integer connectTimeout,
             @NonNull Integer readTimeout
@@ -28,8 +27,8 @@ public class ConnectServiceImpl implements ConnectService {
         val connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setConnectTimeout(connectTimeout);
         connection.setReadTimeout(readTimeout);
-        connection.setRequestProperty("Content-Type", MediaType.APPLICATION_JSON_VALUE);    // TODO: убрать? //NOSONAR
+        connection.setRequestProperty("Content-Type", MediaType.APPLICATION_JSON_VALUE);    // TODO: убрать?            //NOSONAR
 
-        return connection.getInputStream();
+        return connection;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.just_project.controllers.api;
 
 import com.example.just_project.exchangerate.dto.RubleRateDto;
+import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsRate;
 import com.example.just_project.exchangerate.services.ExchangeRateService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,8 +20,18 @@ public class ExchangeRateController {
     @NonNull
     private final ExchangeRateService rateService;
 
-    @GetMapping("/ruble")
-    public RubleRateDto getRubleRate() {
-        return rateService.getRubleRate();
+    @GetMapping("/ruble/usd_euro")
+    public RubleRateDto getUsdAndEuroRateByRuble() {
+        return rateService.getUsdAndEuroRateByRuble();
+    }
+
+    @GetMapping("/ruble/all")
+    public Map<?, ?> getAllRatesByRuble() {                                                                             //NOSONAR
+        return rateService.getAllRatesByRuble();
+    }
+
+    @GetMapping("/ruble/rate")
+    public ExchangeRateDtoWhereRateIsRate getRate() {
+        return rateService.getRate();
     }
 }
