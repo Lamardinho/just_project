@@ -45,7 +45,7 @@ public class ExchangeRateService {
         );
     }
 
-    public Map<?, ?> getAllRatesByRuble() {     //NOSONAR
+    public Map<?, ?> getAllRatesByRuble() {                                                                             //NOSONAR
         return objMapService.readValueToMap(
                 contentService.getContentFromUrl(RUBLE_URL, C_TIMEOUT, C_TIMEOUT)
         );

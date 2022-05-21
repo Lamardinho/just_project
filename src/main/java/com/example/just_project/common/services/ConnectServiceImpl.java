@@ -27,7 +27,7 @@ public class ConnectServiceImpl implements ConnectService {
         val connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setConnectTimeout(connectTimeout);
         connection.setReadTimeout(readTimeout);
-        connection.setRequestProperty("Content-Type", MediaType.APPLICATION_JSON_VALUE);    // TODO: убрать? //NOSONAR
+        connection.setRequestProperty("Content-Type", MediaType.APPLICATION_JSON_VALUE);    // TODO: убрать?            //NOSONAR
 
         return connection;
     }

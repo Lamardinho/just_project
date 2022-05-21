@@ -26,7 +26,7 @@ public class ExchangeRateController {
     }
 
     @GetMapping("/ruble/all")
-    public Map<?, ?> getAllRatesByRuble() {
+    public Map<?, ?> getAllRatesByRuble() {                                                                             //NOSONAR
         return rateService.getAllRatesByRuble();
     }
 
