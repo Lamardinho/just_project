@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.time.LocalDate;
 
 /**
@@ -38,4 +39,7 @@ public class ExchangeRate {
 
     @Column(name = "rates", nullable = false, length = 1024)
     private String rates;
+
+    @Column(name = "updated", nullable = false)
+    private Instant updated = Instant.now();
 }
