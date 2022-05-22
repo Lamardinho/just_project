@@ -24,16 +24,11 @@ public class ExchangeRateDataBaseController {
 
     @GetMapping("/ruble/update")
     public void getUsdAndEuroRateByRuble() {
-        dataBaseService.create();
+        dataBaseService.createOrUpdate();
     }
 
     @GetMapping("/ruble/all")
     public List<CurrencyRateByUsdAndEuroDto> findAll() {
-        return dataBaseService.getAllDtoList();
-    }
-
-    @GetMapping("/ruble/last")
-    public CurrencyRateByUsdAndEuroDto findLast() {
-        return dataBaseService.getLastDto();
+        return dataBaseService.getAllCurrencyRateByUsdAndEuroDtoList();
     }
 }

@@ -5,6 +5,7 @@ import com.example.just_project.common.services.contract.ObjectMapperService;
 import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRatesDtoWhereRateIsMapStr;
 import com.example.just_project.exchangerate.dtomappers.ExchangeRateMapper;
+import com.example.just_project.exchangerate.enums.ERate;
 import com.example.just_project.exchangerate.model.ExchangeRate;
 import com.example.just_project.exchangerate.repositories.ExchangeRateRepository;
 import com.example.just_project.exchangerate.services.contract.ExchangeRateDataBaseService;
@@ -36,38 +37,37 @@ public class ExchangeRateDataBaseServiceImpl implements ExchangeRateDataBaseServ
     @NonNull
     private final ExchangeRateMapper exchangeRateMapper;
 
+    /**
+     * Допустим, что нам не надо несколько рейтингов одного дня.
+     * Чтобы не создавать новые рейтинги одного дня, то просто обновляем последний, иначе создаём новый.
+     */
     @Override
-    public void create() {
+    public void createOrUpdate() {
         val dto = objMapService.readValue(
                 contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL, 8000, 8000),
                 ExchangeRatesDtoWhereRateIsMapStr.class
         );
-        val exchangeRate = exchangeRateMapper.toExchangeRate(dto, new ExchangeRate());
-        rateRepository.save(exchangeRate);
+        val rateToMap = rateRepository
+                .findByBaseAndDate(ERate.RUB, dto.getDate()) //for update
+                .orElse(new ExchangeRate());                   //for create
+
+        val rateToSave = exchangeRateMapper.toExchangeRate(dto, rateToMap);
+
+        rateRepository.save(rateToSave);
     }
 
     @Override
-    public List<ExchangeRate> getAllEntity() {
+    public List<ExchangeRate> getAll() {
         return rateRepository.findAll();
     }
 
     @Override
-    public List<CurrencyRateByUsdAndEuroDto> getAllDtoList() {
-        val exchangeRates = getAllEntity();
+    public List<CurrencyRateByUsdAndEuroDto> getAllCurrencyRateByUsdAndEuroDtoList() {
+        val exchangeRates = getAll();
         return exchangeRates
                 .stream()
                 .map(this::mapToCurrencyRateByUsdAndEuroDto)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public ExchangeRate getLastEntity() {
-        return rateRepository.findFirstByOrderByIdDesc().orElseThrow();
-    }
-
-    @Override
-    public CurrencyRateByUsdAndEuroDto getLastDto() {
-        return mapToCurrencyRateByUsdAndEuroDto(getLastEntity());
     }
 
     private CurrencyRateByUsdAndEuroDto mapToCurrencyRateByUsdAndEuroDto(ExchangeRate exchangeRate) {

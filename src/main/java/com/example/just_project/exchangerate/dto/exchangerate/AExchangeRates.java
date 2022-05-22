@@ -1,5 +1,6 @@
 package com.example.just_project.exchangerate.dto.exchangerate;
 
+import com.example.just_project.exchangerate.enums.ERate;
 import lombok.Data;
 
 import java.time.Instant;
@@ -20,5 +21,5 @@ public abstract class AExchangeRates {
     /**
      * Валюта
      */
-    private String base;
+    private ERate base;
 }

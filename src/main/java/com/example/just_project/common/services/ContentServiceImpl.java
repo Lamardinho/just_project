@@ -3,6 +3,7 @@ package com.example.just_project.common.services;
 import com.example.just_project.common.services.contract.BufferedReaderService;
 import com.example.just_project.common.services.contract.ConnectionService;
 import com.example.just_project.common.services.contract.ContentService;
+import com.example.just_project.common.services.contract.ObjectMapperService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 @Log4j2
 @Component
@@ -23,6 +25,8 @@ public class ContentServiceImpl implements ContentService {
     private final ConnectionService connectionService;
     @NonNull
     private final BufferedReaderService bufferedReaderService;
+    @NonNull
+    private final ObjectMapperService objectMapperService;
 
     @Override
     @SneakyThrows
@@ -35,5 +39,11 @@ public class ContentServiceImpl implements ContentService {
                     new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))
             );
         }
+    }
+
+    @Override
+    public Map<?, ?> getJsonFromUrl(String url) { //NOSONAR
+        val content = getContentFromUrl(url, 8000, 8000);
+        return objectMapperService.readValueToMap(content);
     }
 }

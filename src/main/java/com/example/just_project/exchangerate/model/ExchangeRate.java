@@ -1,5 +1,6 @@
 package com.example.just_project.exchangerate.model;
 
+import com.example.just_project.exchangerate.enums.ERate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,8 +38,9 @@ public class ExchangeRate {
     @Column(name = "time_request", nullable = false)
     private Instant timeRequest = Instant.now();
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "currency", nullable = false)
-    private String base;
+    private ERate base;
 
     @Column(name = "rates", nullable = false, length = 1024)
     private String rates;

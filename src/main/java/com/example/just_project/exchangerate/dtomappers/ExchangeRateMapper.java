@@ -23,10 +23,6 @@ public abstract class ExchangeRateMapper {
     @Autowired
     protected ObjectMapperService objectMapperService;
 
-    @Mapping(target = "usd", expression = "java(CurrencyHelper.calculateToRub(rate.getRates().get(ERate.USD.name())))")
-    @Mapping(target = "euro", expression = "java(CurrencyHelper.calculateToRub(rate.getRates().get(ERate.EUR.name())))")
-    public abstract CurrencyRateByUsdAndEuroDto dtoWhereRateIsMapStrToCurrencyRateByUsdAndEuroDto(ExchangeRatesDtoWhereRateIsMapStr rate);
-
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "rates", expression = "java(objectMapperService.writeValueAsString(dto.getRates()))")
     public abstract ExchangeRate toExchangeRate(ExchangeRatesDtoWhereRateIsMapStr dto, @MappingTarget ExchangeRate rate);
@@ -34,4 +30,8 @@ public abstract class ExchangeRateMapper {
     @Mapping(target = "usd", ignore = true)
     @Mapping(target = "euro", ignore = true)
     public abstract CurrencyRateByUsdAndEuroDto toCurrencyRateByUsdAndEuroDto(ExchangeRate rate);
+
+    @Mapping(target = "usd", expression = "java(CurrencyHelper.calculateToRub(rate.getRates().get(ERate.USD.name())))")
+    @Mapping(target = "euro", expression = "java(CurrencyHelper.calculateToRub(rate.getRates().get(ERate.EUR.name())))")
+    public abstract CurrencyRateByUsdAndEuroDto dtoWhereRateIsMapStrToCurrencyRateByUsdAndEuroDto(ExchangeRatesDtoWhereRateIsMapStr rate);
 }

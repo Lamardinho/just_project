@@ -2,13 +2,7 @@ package com.example.just_project.exchangerate.services.contract;
 
 import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 
-import java.util.Map;
-
-public interface ExchangeRateService {
+public interface ExchangeRateWebService {
 
     CurrencyRateByUsdAndEuroDto getCurrencyRateByUsdAndEuro();
-
-    Map<?, ?> getAllRatesByCurrency(); //NOSONAR
-
-    //ExchangeRatesDtoWhereRateIsRate getRatesByCurrency();
 }

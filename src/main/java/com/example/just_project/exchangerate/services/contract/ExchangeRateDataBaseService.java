@@ -10,13 +10,9 @@ import java.util.List;
 public interface ExchangeRateDataBaseService {
 
     @Transactional
-    void create();
+    void createOrUpdate();
 
-    List<ExchangeRate> getAllEntity();
+    List<ExchangeRate> getAll();
 
-    List<CurrencyRateByUsdAndEuroDto> getAllDtoList();
-
-    ExchangeRate getLastEntity();
-
-    CurrencyRateByUsdAndEuroDto getLastDto();
+    List<CurrencyRateByUsdAndEuroDto> getAllCurrencyRateByUsdAndEuroDtoList();
 }
