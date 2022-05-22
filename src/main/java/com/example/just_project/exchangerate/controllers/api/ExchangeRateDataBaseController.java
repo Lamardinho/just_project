@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * Для работы с базой данных курсом валют
  */
@@ -25,8 +27,13 @@ public class ExchangeRateDataBaseController {
         dataBaseService.create();
     }
 
-    @GetMapping("/ruble/test")
-    public CurrencyRateByUsdAndEuroDto test() {
-        return dataBaseService.findByIds();
+    @GetMapping("/ruble/all")
+    public List<CurrencyRateByUsdAndEuroDto> findAll() {
+        return dataBaseService.getAllDtoList();
+    }
+
+    @GetMapping("/ruble/last")
+    public CurrencyRateByUsdAndEuroDto findLast() {
+        return dataBaseService.getLastDto();
     }
 }

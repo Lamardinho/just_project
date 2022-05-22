@@ -1,6 +1,7 @@
 package com.example.just_project.exchangerate.services.contract;
 
 import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
+import com.example.just_project.exchangerate.model.ExchangeRate;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -11,7 +12,11 @@ public interface ExchangeRateDataBaseService {
     @Transactional
     void create();
 
-    List<CurrencyRateByUsdAndEuroDto> findAll();
+    List<ExchangeRate> getAllEntity();
 
-    CurrencyRateByUsdAndEuroDto findByIds();
+    List<CurrencyRateByUsdAndEuroDto> getAllDtoList();
+
+    ExchangeRate getLastEntity();
+
+    CurrencyRateByUsdAndEuroDto getLastDto();
 }

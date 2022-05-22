@@ -47,19 +47,31 @@ public class ExchangeRateDataBaseServiceImpl implements ExchangeRateDataBaseServ
     }
 
     @Override
-    public List<CurrencyRateByUsdAndEuroDto> findAll() {
-        val exchangeRateList = rateRepository.findAll();
-        return exchangeRateList
+    public List<ExchangeRate> getAllEntity() {
+        return rateRepository.findAll();
+    }
+
+    @Override
+    public List<CurrencyRateByUsdAndEuroDto> getAllDtoList() {
+        val exchangeRates = getAllEntity();
+        return exchangeRates
                 .stream()
-                .map(exchangeRateMapper::toCurrencyRateByUsdAndEuroDto)
+                .map(this::mapToCurrencyRateByUsdAndEuroDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public CurrencyRateByUsdAndEuroDto findByIds() {// TODO: 22.05.2022
-        val exchangeRate = rateRepository.findAll().stream().findFirst().orElseThrow();// TODO: 22.05.2022 elseThrow //NOSONAR
-        val ratesMap = objMapService.readValueToMap(exchangeRate.getRates());
+    public ExchangeRate getLastEntity() {
+        return rateRepository.findFirstByOrderByIdDesc().orElseThrow();
+    }
 
+    @Override
+    public CurrencyRateByUsdAndEuroDto getLastDto() {
+        return mapToCurrencyRateByUsdAndEuroDto(getLastEntity());
+    }
+
+    private CurrencyRateByUsdAndEuroDto mapToCurrencyRateByUsdAndEuroDto(ExchangeRate exchangeRate) {
+        val ratesMap = objMapService.readValueToMap(exchangeRate.getRates());
         return exchangeRateMapper.toCurrencyRateByUsdAndEuroDto(exchangeRate)
                 .setUsd(CurrencyHelper.calculateToRub((double) ratesMap.get(USD.name())))
                 .setEuro(CurrencyHelper.calculateToRub((double) ratesMap.get(EUR.name())));
