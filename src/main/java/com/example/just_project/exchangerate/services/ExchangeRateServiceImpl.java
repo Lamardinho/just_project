@@ -2,9 +2,8 @@ package com.example.just_project.exchangerate.services;
 
 import com.example.just_project.common.services.contract.ContentService;
 import com.example.just_project.common.services.contract.ObjectMapperService;
-import com.example.just_project.exchangerate.dto.BasicCurrenciesRateDto;
-import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsMapStr;
-import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsRate;
+import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
+import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRatesDtoWhereRateIsMapStr;
 import com.example.just_project.exchangerate.dtomappers.ExchangeRateMapper;
 import com.example.just_project.exchangerate.services.contract.ExchangeRateService;
 import lombok.NonNull;
@@ -30,24 +29,23 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     private final ExchangeRateMapper exchangeRateMapper;
 
     @Override
-    public BasicCurrenciesRateDto getBasicRatesByRuble() {
+    public CurrencyRateByUsdAndEuroDto getCurrencyRateByUsdAndEuro() {
         val rate = objMapService.readValue(
                 contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL, 8000, 8000),
-                ExchangeRateDtoWhereRateIsMapStr.class
+                ExchangeRatesDtoWhereRateIsMapStr.class
         );
-        return exchangeRateMapper.dtoWhereRateIsMapStrToBasicCurrenciesRateDto(rate);
+        return exchangeRateMapper.dtoWhereRateIsMapStrToCurrencyRateByUsdAndEuroDto(rate);
     }
 
     @Override
-    public Map<?, ?> getAllRatesByRuble() { //NOSONAR
-        return objMapService.readValueToMap(contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL, 8000, 8000));
+    public Map<?, ?> getAllRatesByCurrency() { //NOSONAR
+        val content = contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL, 8000, 8000);
+        return objMapService.readValueToMap(content);
     }
 
-    @Override
-    public ExchangeRateDtoWhereRateIsRate getRatesByRuble() {
-        return objMapService.readValue(
-                contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL, 8000, 8000),
-                ExchangeRateDtoWhereRateIsRate.class
-        );
-    }
+    /*@Override
+    public ExchangeRatesDtoWhereRateIsRate getRatesByCurrency() {
+        val content = contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL, 8000, 8000);
+        return objMapService.readValue(content, ExchangeRatesDtoWhereRateIsRate.class);
+    }*/
 }

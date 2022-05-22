@@ -1,11 +1,12 @@
 package com.example.just_project.exchangerate.dto.exchangerate;
 
-import com.example.just_project.exchangerate.dto.Rates;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+
+import java.util.Map;
 
 /**
  * DTO для получения данных с сайта: <a href="https://www.cbr-xml-daily.ru/latest.js">cbr-xml-daily.ru</a>
@@ -15,7 +16,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class ExchangeRateDtoWhereRateIsRate extends AExchangeRate {
+public class ExchangeRatesDtoWhereRateIsMapStr extends AExchangeRates {
 
-    private Rates rates;
+    private Map<String, Double> rates;
 }

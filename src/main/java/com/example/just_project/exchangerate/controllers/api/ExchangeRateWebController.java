@@ -1,7 +1,6 @@
 package com.example.just_project.exchangerate.controllers.api;
 
-import com.example.just_project.exchangerate.dto.BasicCurrenciesRateDto;
-import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsRate;
+import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 import com.example.just_project.exchangerate.services.contract.ExchangeRateService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -21,20 +20,20 @@ import java.util.Map;
 public class ExchangeRateWebController {
 
     @NonNull
-    private final ExchangeRateService rateService;
+    private final ExchangeRateService exchangeRateService;
 
     @GetMapping("/ruble/basic")
-    public BasicCurrenciesRateDto getUsdAndEuroRateByRuble() {
-        return rateService.getBasicRatesByRuble();
+    public CurrencyRateByUsdAndEuroDto getCurrencyRateByUsdAndEuro() {
+        return exchangeRateService.getCurrencyRateByUsdAndEuro();
     }
 
     @GetMapping("/ruble/all/v1")
-    public Map<?, ?> getAllRatesByRuble() { //NOSONAR
-        return rateService.getAllRatesByRuble();
+    public Map<?, ?> getAllRatesByCurrency() { //NOSONAR
+        return exchangeRateService.getAllRatesByCurrency();
     }
 
-    @GetMapping("/ruble/all/v2")
-    public ExchangeRateDtoWhereRateIsRate getRate() {
-        return rateService.getRatesByRuble();
-    }
+    /*@GetMapping("/ruble/all/v2")
+    public ExchangeRatesDtoWhereRateIsRate getRatesByCurrency() {
+        return exchangeRateService.getRatesByCurrency();
+    }*/
 }

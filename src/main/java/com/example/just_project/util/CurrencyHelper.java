@@ -3,6 +3,7 @@ package com.example.just_project.util;
 import com.example.just_project.exchangerate.enums.ERate;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import java.util.Locale;
 
@@ -12,7 +13,7 @@ import static com.example.just_project.exchangerate.enums.ERate.USD;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CurrencyHelper {
 
-    public static String calculateTo(double sum, String currency) {
+    public static String calculateTo(double sum, @NonNull String currency) {
         return calculate(sum) + " " + currency;
     }
 

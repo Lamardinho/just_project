@@ -1,5 +1,6 @@
 package com.example.just_project.exchangerate.dto.exchangerate;
 
+import com.example.just_project.exchangerate.enums.ERate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,7 +17,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class ExchangeRateDtoWhereRateIsMapStr extends AExchangeRate {
+public class ExchangeRatesDtoWhereRateIsMapEnum extends AExchangeRates {
 
-    private Map<String, Double> rates;
+    private Map<ERate, Double> rates;
 }

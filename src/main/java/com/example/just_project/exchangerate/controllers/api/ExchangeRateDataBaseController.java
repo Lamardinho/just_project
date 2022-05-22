@@ -1,6 +1,6 @@
 package com.example.just_project.exchangerate.controllers.api;
 
-import com.example.just_project.exchangerate.dto.BasicCurrenciesRateDto;
+import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 import com.example.just_project.exchangerate.services.contract.ExchangeRateDataBaseService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class ExchangeRateDataBaseController {
     }
 
     @GetMapping("/ruble/test")
-    public BasicCurrenciesRateDto test() {
+    public CurrencyRateByUsdAndEuroDto test() {
         return dataBaseService.findByIds();
     }
 }

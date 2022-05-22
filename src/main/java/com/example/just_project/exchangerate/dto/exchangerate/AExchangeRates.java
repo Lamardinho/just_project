@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public abstract class AExchangeRate {
+public abstract class AExchangeRates {
 
     /**
      * Источник

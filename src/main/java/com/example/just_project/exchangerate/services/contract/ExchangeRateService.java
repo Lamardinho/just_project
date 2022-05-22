@@ -1,15 +1,14 @@
 package com.example.just_project.exchangerate.services.contract;
 
-import com.example.just_project.exchangerate.dto.BasicCurrenciesRateDto;
-import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRateDtoWhereRateIsRate;
+import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 
 import java.util.Map;
 
 public interface ExchangeRateService {
 
-    BasicCurrenciesRateDto getBasicRatesByRuble();
+    CurrencyRateByUsdAndEuroDto getCurrencyRateByUsdAndEuro();
 
-    Map<?, ?> getAllRatesByRuble(); //NOSONAR
+    Map<?, ?> getAllRatesByCurrency(); //NOSONAR
 
-    ExchangeRateDtoWhereRateIsRate getRatesByRuble();
+    //ExchangeRatesDtoWhereRateIsRate getRatesByCurrency();
 }
