@@ -15,10 +15,10 @@ public abstract class AExchangeRates {
 
     private LocalDate date;
 
+    private Instant timeRequest = Instant.now();
+
     /**
      * Валюта
      */
     private String base;
-
-    private Instant updated = Instant.now();
 }

@@ -28,18 +28,18 @@ public class ExchangeRate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "disclaimer", nullable = false)
+    @Column(name = "data_source", nullable = false)
     private String disclaimer;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "date_rating", nullable = false)
     private LocalDate date;
 
-    @Column(name = "base", nullable = false)
+    @Column(name = "time_request", nullable = false)
+    private Instant timeRequest = Instant.now();
+
+    @Column(name = "currency", nullable = false)
     private String base;
 
     @Column(name = "rates", nullable = false, length = 1024)
     private String rates;
-
-    @Column(name = "updated", nullable = false)
-    private Instant updated = Instant.now();
 }
