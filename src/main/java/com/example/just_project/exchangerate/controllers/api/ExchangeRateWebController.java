@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Map;
 
 import static com.example.just_project.exchangerate.util.AppConstants.CBR_XML_DAILY_ENG_BY_DATE_URL;
-import static com.example.just_project.exchangerate.util.AppConstants.RUBLE_CBR_DAILY_RU_URL;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 @Tag(name = "Курсы валют. Online", description = "Просмотр курсов валют из online источников")
@@ -35,6 +33,7 @@ public class ExchangeRateWebController {
     private final ContentService contentService;
     @NonNull
     private final XmlMapperService xmlMapperService;
+
 
     @Operation(
             summary = "Получение котировок на заданный день с www.cbr.ru",
@@ -54,13 +53,9 @@ public class ExchangeRateWebController {
         );
     }
 
+
     @GetMapping("/cbr/ruble/basic")
     public CurrencyRateByUsdAndEuroDto getCurrencyRateByUsdAndEuro() {
         return exchangeRateWebService.getCurrencyRateByUsdAndEuro();
-    }
-
-    @GetMapping("/cbr/ruble/all")
-    public Map<?, ?> getRubleRate() { //NOSONAR
-        return contentService.getJsonFromUrl(RUBLE_CBR_DAILY_RU_URL);
     }
 }

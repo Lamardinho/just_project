@@ -18,6 +18,8 @@ public class ContractResult<T> {
 
     private List<String> violations = new ArrayList<>();
 
+    private String message;
+
     public ContractResult(T data) {
         this.setData(data);
     }
