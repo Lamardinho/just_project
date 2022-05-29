@@ -23,8 +23,10 @@ import java.util.List;
 @NoArgsConstructor
 @Accessors(chain = true)
 @JacksonXmlRootElement(localName = "ValCurs")
+@Schema(description = "Exchange Rates/Курс валют")
 public class ValCurs {
 
+    @Schema(description = "Currencies/Валюты")
     @JsonProperty("Valute")
     @JacksonXmlElementWrapper(useWrapping = false)
     private List<Valute> currencies = new ArrayList<>();
