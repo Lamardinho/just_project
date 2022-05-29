@@ -3,6 +3,7 @@ package com.example.just_project.exchangerate.dto.exchangerate.cbr;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class ValCurs {
     @JacksonXmlElementWrapper(useWrapping = false)
     private List<Valute> currencies = new ArrayList<>();
 
+    @Schema(description = "Course date/Дата курса")
     @JsonProperty("Date")
     private String date;
 

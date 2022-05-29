@@ -31,7 +31,6 @@ public class ExchangeRateWebController {
     @NonNull
     private final XmlMapperService xmlMapperService;
 
-
     @Operation(
             summary = "Получение котировок на заданный день с www.cbr.ru",
             description = "Укажите дату в формате day-month-year (не раньше 01-01-1992)," +
@@ -49,7 +48,6 @@ public class ExchangeRateWebController {
                 ValCurs.class
         );
     }
-
 
     @Operation(summary = "Получить рейтинг рубля на сегодняшний день")
     @GetMapping("/cbr/ruble/basic")

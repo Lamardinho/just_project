@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.example.just_project.util.Msg.RATINGS_HAVE_BEEN_UPDATED;
+
 @Tag(name = "Курсы валют. DB", description = "Получение курса валют из online источников, запись в БД и чтение")
 @RestController
 @RequiredArgsConstructor
@@ -28,16 +30,15 @@ public class ExchangeRateDataBaseController {
     @NonNull
     private final ExchangeRateDataBaseService dataBaseService;
 
-
     @Operation(
             summary = "Обновить рейтинги",
             description = "Сохраняет сегодняшние рейтинги в БД, если сегодняшний день уже есть в БД, то просто обновляет его"
     )
     @GetMapping("/ruble/update")
-    public void getUsdAndEuroRateByRuble() {
+    public ContractResult<Boolean> getUsdAndEuroRateByRuble() {
         dataBaseService.createOrUpdate();
+        return new ContractResult<>(true).setMessage(RATINGS_HAVE_BEEN_UPDATED);
     }
-
 
     @Operation(summary = "Загрузить последние рейтинги")
     @ApiPageable
