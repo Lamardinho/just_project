@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +26,13 @@ public class ValCurs {
 
     @JsonProperty("Valute")
     @JacksonXmlElementWrapper(useWrapping = false)
-    public List<Valute> currencies = new ArrayList<>();
+    private List<Valute> currencies = new ArrayList<>();
 
     @JsonProperty("Date")
-    public String date;
+    private String date;
 
     @JsonProperty("name")
-    public String name;
+    private String name;
+
+    private LocalDate time = LocalDate.now();
 }

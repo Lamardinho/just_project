@@ -13,20 +13,20 @@ import lombok.experimental.Accessors;
 public class Valute {
 
     @JsonProperty("ID")
-    public String id;
+    private String id;
 
     @JsonProperty("NumCode")
-    public int numCode = 0;
+    private int numCode = 0;
 
     @JsonProperty("CharCode")
-    public String charCode;
+    private String charCode;
 
     @JsonProperty("Nominal")
-    public int nominal;
+    private int nominal;
 
     @JsonProperty("Name")
-    public String name;
+    private String name;
 
     @JsonProperty("Value")
-    public String value;
+    private String value;
 }
