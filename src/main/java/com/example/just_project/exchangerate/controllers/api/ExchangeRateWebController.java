@@ -1,6 +1,5 @@
 package com.example.just_project.exchangerate.controllers.api;
 
-import com.example.just_project.common.services.contract.ContentService;
 import com.example.just_project.common.services.contract.XmlMapperService;
 import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 import com.example.just_project.exchangerate.dto.exchangerate.cbr.ValCurs;
@@ -30,8 +29,6 @@ public class ExchangeRateWebController {
     @NonNull
     private final ExchangeRateWebService exchangeRateWebService;
     @NonNull
-    private final ContentService contentService;
-    @NonNull
     private final XmlMapperService xmlMapperService;
 
 
@@ -54,6 +51,7 @@ public class ExchangeRateWebController {
     }
 
 
+    @Operation(summary = "Получить рейтинг рубля на сегодняшний день")
     @GetMapping("/cbr/ruble/basic")
     public CurrencyRateByUsdAndEuroDto getCurrencyRateByUsdAndEuro() {
         return exchangeRateWebService.getCurrencyRateByUsdAndEuro();

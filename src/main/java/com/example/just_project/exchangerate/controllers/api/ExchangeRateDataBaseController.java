@@ -39,7 +39,7 @@ public class ExchangeRateDataBaseController {
     }
 
 
-    @Operation(summary = "Загрузить последние рейтинги", description = "Загрузить последние рейтинги")
+    @Operation(summary = "Загрузить последние рейтинги")
     @ApiPageable
     @GetMapping("/ruble/all")
     public ContractResult<List<CurrencyRateByUsdAndEuroDto>> findAll(
