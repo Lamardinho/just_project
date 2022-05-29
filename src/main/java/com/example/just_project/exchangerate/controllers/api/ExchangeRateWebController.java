@@ -12,10 +12,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -26,10 +23,7 @@ import static com.example.just_project.exchangerate.util.AppConstants.CBR_XML_DA
 import static com.example.just_project.exchangerate.util.AppConstants.RUBLE_CBR_DAILY_RU_URL;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
-@Tag(
-        name = "Курсы валют на заданную дату",
-        description = "Просмотр курсов валют из online источников"
-)
+@Tag(name = "Курсы валют. Online", description = "Просмотр курсов валют из online источников")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/exchangerate/web", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,14 +38,14 @@ public class ExchangeRateWebController {
 
     @Operation(
             summary = "Получение котировок на заданный день с www.cbr.ru",
-            description = "укажите дату в формате day-month-year, или оставьте без изменений для получения самых актуальных рейтингов"
+            description = "Укажите дату в формате day-month-year (не раньше 01-01-1992)," +
+                    " или оставьте пустым для получения самых актуальных рейтингов"
     )
-    @GetMapping("/cbr/ruble/xml/all/{date}")
-    public ValCurs getRubleRateFromCbrUrlXml(
-            @PathVariable(value = "date")
-            //@RequestParam(defaultValue = "#{T(java.time.LocalDate).now()}")
-            @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @PostMapping("/cbr/ruble/json/all")
+    public ValCurs getRubleRateJsonFromCbrUrlXml(
             @ApiParam(example = "28-05-2022")
+            @DateTimeFormat(pattern = "dd-MM-yyyy")
+            @RequestParam(defaultValue = "#{T(java.time.LocalDate).now()}")
             LocalDate date
     ) throws MalformedURLException {
         return xmlMapperService.readXml(
