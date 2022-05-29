@@ -12,7 +12,10 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,7 +26,10 @@ import static com.example.just_project.exchangerate.util.AppConstants.CBR_XML_DA
 import static com.example.just_project.exchangerate.util.AppConstants.RUBLE_CBR_DAILY_RU_URL;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
-@Tag(name = "Курсы валют", description = "Получение курса валют из online источников")
+@Tag(
+        name = "Курсы валют на заданную дату",
+        description = "Просмотр курсов валют из online источников"
+)
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/exchangerate/web", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,16 +42,6 @@ public class ExchangeRateWebController {
     @NonNull
     private final XmlMapperService xmlMapperService;
 
-    @GetMapping("/cbr/ruble/basic")
-    public CurrencyRateByUsdAndEuroDto getCurrencyRateByUsdAndEuro() {
-        return exchangeRateWebService.getCurrencyRateByUsdAndEuro();
-    }
-
-    @GetMapping("/cbr/ruble/all")
-    public Map<?, ?> getRubleRate() { //NOSONAR
-        return contentService.getJsonFromUrl(RUBLE_CBR_DAILY_RU_URL);
-    }
-
     @Operation(
             summary = "Получение котировок на заданный день с www.cbr.ru",
             description = "укажите дату в формате day-month-year, или оставьте без изменений для получения самых актуальных рейтингов"
@@ -53,7 +49,7 @@ public class ExchangeRateWebController {
     @GetMapping("/cbr/ruble/xml/all/{date}")
     public ValCurs getRubleRateFromCbrUrlXml(
             @PathVariable(value = "date")
-            @RequestParam(defaultValue = "#{T(java.time.LocalDate).now()}")
+            //@RequestParam(defaultValue = "#{T(java.time.LocalDate).now()}")
             @DateTimeFormat(pattern = "dd-MM-yyyy")
             @ApiParam(example = "28-05-2022")
             LocalDate date
@@ -62,5 +58,15 @@ public class ExchangeRateWebController {
                 new URL(CBR_XML_DAILY_ENG_BY_DATE_URL + date.format(ofPattern("dd-MM-yyyy"))),
                 ValCurs.class
         );
+    }
+
+    @GetMapping("/cbr/ruble/basic")
+    public CurrencyRateByUsdAndEuroDto getCurrencyRateByUsdAndEuro() {
+        return exchangeRateWebService.getCurrencyRateByUsdAndEuro();
+    }
+
+    @GetMapping("/cbr/ruble/all")
+    public Map<?, ?> getRubleRate() { //NOSONAR
+        return contentService.getJsonFromUrl(RUBLE_CBR_DAILY_RU_URL);
     }
 }
