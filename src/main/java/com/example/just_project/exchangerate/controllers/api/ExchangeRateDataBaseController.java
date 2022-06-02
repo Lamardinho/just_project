@@ -4,7 +4,6 @@ import com.example.just_project.config.ApiPageable;
 import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 import com.example.just_project.exchangerate.services.contract.ExchangeRateDataBaseService;
 import com.example.just_project.util.ContractResult;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.NonNull;
@@ -44,8 +43,7 @@ public class ExchangeRateDataBaseController {
 
     @GetMapping("/ruble/all")
     @ApiPageable
-    @ApiOperation("Загрузить последние рейтинги")
-    //@Operation(summary = "Загрузить последние рейтинги")
+    @Operation(summary = "Загрузить последние рейтинги")
     public ContractResult<List<CurrencyRateByUsdAndEuroDto>> findAll(
             @ApiIgnore
             @PageableDefault(size = 30, sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable
