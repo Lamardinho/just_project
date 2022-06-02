@@ -13,11 +13,11 @@ select count(*) from orders WHERE order_date > '1998-03-01';
 -- AND = когда и true и true
 select * from products where unit_price > 25 AND units_in_stock > 40;
 -- OR = когда любое из условий
-select * from customers where city = 'Berlin' or city = 'London' or city = 'Mannheim';
+select company_name, city from customers where city = 'Berlin' or city = 'London' or city = 'Mannheim';
 select * from orders where shipped_date > '1998-04-30' AND (freight > 75 OR freight < 150) order by freight;
 -- BETWEEN - между
 select * from orders where freight >= 20 and freight <= 21 order by freight;
-select * from orders where freight BETWEEN 20 and 21 order by freight;
+select customer_id, freight from orders where freight BETWEEN 19.97 and 21 order by freight;
 select order_id, order_date from orders where order_date BETWEEN '1998-03-30' and '1998-04-03' order by order_date;
 -- IN - содержит
 select contact_name, country from customers where country = 'USA' or country = 'Mexico' or country = 'Germany';
