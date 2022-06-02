@@ -1,6 +1,7 @@
 package com.example.just_project.exchangerate.dto.exchangerate;
 
 import com.example.just_project.exchangerate.enums.ERate;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,5 +20,6 @@ import java.util.Map;
 @Accessors(chain = true)
 public class ExchangeRatesDtoWhereRateIsMapEnum extends AExchangeRates {
 
+    @Schema(description = "Rates/Ставки")
     private Map<ERate, Double> rates;
 }

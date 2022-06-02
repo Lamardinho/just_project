@@ -13,6 +13,7 @@ import com.example.just_project.util.CurrencyHelper;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,13 +58,8 @@ public class ExchangeRateDataBaseServiceImpl implements ExchangeRateDataBaseServ
     }
 
     @Override
-    public List<ExchangeRate> getAll() {
-        return rateRepository.findAll();
-    }
-
-    @Override
-    public List<CurrencyRateByUsdAndEuroDto> getAllCurrencyRateByUsdAndEuroDtoList() {
-        val exchangeRates = getAll();
+    public List<CurrencyRateByUsdAndEuroDto> getAllCurrencyRateByUsdAndEuroDtoList(Pageable pageable) {
+        val exchangeRates = rateRepository.findAll(pageable);
         return exchangeRates
                 .stream()
                 .map(this::mapToCurrencyRateByUsdAndEuroDto)
