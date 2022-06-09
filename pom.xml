@@ -17,6 +17,7 @@
         <java.version>11</java.version>
         <kotlin.version>1.7.0-RC</kotlin.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <swaggerVersion>3.0.0</swaggerVersion>
     </properties>
     <dependencies>
         <dependency>
@@ -70,10 +71,26 @@
             <scope>test</scope>
         </dependency>
 
+        <!--swagger-->
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
             <version>2.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swaggerVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swaggerVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-bean-validators</artifactId>
+            <version>${swaggerVersion}</version>
         </dependency>
 
         <dependency>
@@ -87,6 +104,23 @@
             <version>${mapstruct.version}</version>
         </dependency>
 
+        <!-- jasperreports -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.19.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+        </dependency>
 
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
