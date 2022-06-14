@@ -6,5 +6,5 @@ public interface XmlMapperService {
 
     <T> T readXml(String url, Class<T> valueType);
 
-    <T> T readXml(URL src, Class<T> valueType);
+    <T> T readXml(URL url, Class<T> valueType);
 }

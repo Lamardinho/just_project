@@ -26,8 +26,8 @@ public class XmlMapperServiceImpl implements XmlMapperService {
 
     @Override
     @SneakyThrows
-    public <T> T readXml(URL src, Class<T> valueType) {
-        return xmlMapper.readValue(src, valueType);
+    public <T> T readXml(URL url, Class<T> valueType) {
+        return xmlMapper.readValue(url, valueType);
     }
 
     @Override
