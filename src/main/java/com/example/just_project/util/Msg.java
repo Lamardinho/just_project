@@ -11,4 +11,5 @@ public class Msg {
     public static final String AN_UNEXPECTED_ERROR_OCCURRED_RU = "Возникла непредвиденная ошибка";
     public static final String AN_UNEXPECTED_ERROR_OCCURRED_EN = "An unforeseen mistake arose";
     public static final String RATINGS_HAVE_BEEN_UPDATED = "Рейтинги обновлены";
+    public static final String FAILED_TO_CONNECT_TO_URL = "Failed to connect to: %s";
 }

@@ -27,4 +27,8 @@ public class ContractResult<T> {
     public ContractResult(T data) {
         this.setData(data);
     }
+
+    public ContractResult(List<String> violations) {
+        this.setViolations(violations);
+    }
 }
