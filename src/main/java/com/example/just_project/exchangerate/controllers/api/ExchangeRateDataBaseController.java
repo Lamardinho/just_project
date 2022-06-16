@@ -2,7 +2,7 @@ package com.example.just_project.exchangerate.controllers.api;
 
 import com.example.just_project.config.ApiPageable;
 import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
-import com.example.just_project.exchangerate.services.contract.ExchangeRateDataBaseService;
+import com.example.just_project.exchangerate.services.ExchangeRateDataBaseService;
 import com.example.just_project.util.ContractResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

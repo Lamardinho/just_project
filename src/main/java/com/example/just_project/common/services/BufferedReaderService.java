@@ -1,6 +1,5 @@
 package com.example.just_project.common.services;
 
-import com.example.just_project.common.services.contract.BufferedReaderService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.val;
@@ -10,9 +9,8 @@ import java.io.BufferedReader;
 
 @Service
 @RequiredArgsConstructor
-public class BufferedReaderServiceImpl implements BufferedReaderService {
+public class BufferedReaderService {
 
-    @Override
     @SneakyThrows
     public String readAll(BufferedReader bufferedReader) {
         val stringBuilder = new StringBuilder();

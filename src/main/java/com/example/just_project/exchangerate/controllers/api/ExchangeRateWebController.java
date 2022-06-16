@@ -1,9 +1,9 @@
 package com.example.just_project.exchangerate.controllers.api;
 
-import com.example.just_project.common.services.contract.XmlMapperService;
+import com.example.just_project.common.services.XmlMapperService;
 import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 import com.example.just_project.exchangerate.dto.exchangerate.cbr.ValCurs;
-import com.example.just_project.exchangerate.services.contract.ExchangeRateWebService;
+import com.example.just_project.exchangerate.services.ExchangeRateWebService;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

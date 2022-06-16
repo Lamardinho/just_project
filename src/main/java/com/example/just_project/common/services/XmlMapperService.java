@@ -1,6 +1,5 @@
 package com.example.just_project.common.services;
 
-import com.example.just_project.common.services.contract.XmlMapperService;
 import com.example.just_project.util.AppException;
 import com.example.just_project.util.Msg;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,18 +18,16 @@ import java.net.URL;
 
 @Log4j2
 @RequiredArgsConstructor
-public class XmlMapperServiceImpl implements XmlMapperService {
+public class XmlMapperService {
 
     private final XmlMapper xmlMapper;
     private final RestTemplate restTemplate;
 
-    @Override
     @SneakyThrows
     public <T> T readXml(URL url, Class<T> valueType) {
         return xmlMapper.readValue(url, valueType);
     }
 
-    @Override
     public <T> T readXml(String url, Class<T> valueType) {
         val content = getContentFromUrl(url);
         return toDto(content, valueType);

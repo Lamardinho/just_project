@@ -1,6 +1,5 @@
 package com.example.just_project.common.services;
 
-import com.example.just_project.common.services.contract.ObjectMapperService;
 import com.example.just_project.util.AppException;
 import com.example.just_project.util.Msg;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,12 +14,11 @@ import java.util.Map;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-public class ObjectMapperServiceImpl implements ObjectMapperService {
+public class ObjectMapperService {
 
     @NonNull
     private final ObjectMapper objectMapper;
 
-    @Override
     public <T> T readValue(String content, Class<T> clazz) {
         try {
             return objectMapper.readValue(content, clazz);
@@ -30,7 +28,6 @@ public class ObjectMapperServiceImpl implements ObjectMapperService {
         }
     }
 
-    @Override
     public <T> T readValue(URL content, Class<T> clazz) {
         try {
             return objectMapper.readValue(content, clazz);
@@ -40,7 +37,6 @@ public class ObjectMapperServiceImpl implements ObjectMapperService {
         }
     }
 
-    @Override
     public Map<?, ?> readValueToMap(String content) { //NOSONAR
         try {
             return objectMapper.readValue(content, Map.class);
@@ -50,7 +46,6 @@ public class ObjectMapperServiceImpl implements ObjectMapperService {
         }
     }
 
-    @Override
     public String writeValueAsString(Object value) { //NOSONAR
         try {
             return objectMapper.writeValueAsString(value);

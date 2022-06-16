@@ -1,6 +1,5 @@
 package com.example.just_project.common.services;
 
-import com.example.just_project.common.services.contract.ConnectionService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -15,9 +14,8 @@ import java.net.URL;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-public class ConnectionServiceImpl implements ConnectionService {
+public class ConnectionService {
 
-    @Override
     @SneakyThrows
     public HttpURLConnection getConnection(
             @NonNull String url,
