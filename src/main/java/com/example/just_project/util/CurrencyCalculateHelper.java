@@ -11,7 +11,7 @@ import static com.example.just_project.exchangerate.enums.ERate.RUB;
 import static com.example.just_project.exchangerate.enums.ERate.USD;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class CurrencyHelper {
+public class CurrencyCalculateHelper {
 
     public static String calculateTo(double sum, @NonNull String currency) {
         return calculate(sum) + " " + currency;

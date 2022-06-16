@@ -21,7 +21,7 @@ public class ContractResult<T> {
     @Schema(description = "Error messages/Сообщения ошибок")
     private List<String> violations = new ArrayList<>();
 
-    @Schema(description = "Additional message/Additional message")
+    @Schema(description = "Additional message/Дополнительное сообщение")
     private String message;
 
     public ContractResult(T data) {

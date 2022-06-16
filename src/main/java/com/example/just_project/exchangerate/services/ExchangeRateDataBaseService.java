@@ -8,7 +8,7 @@ import com.example.just_project.exchangerate.dtomappers.ExchangeRateMapper;
 import com.example.just_project.exchangerate.enums.ERate;
 import com.example.just_project.exchangerate.model.ExchangeRate;
 import com.example.just_project.exchangerate.repositories.ExchangeRateRepository;
-import com.example.just_project.util.CurrencyHelper;
+import com.example.just_project.util.CurrencyCalculateHelper;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -66,7 +66,7 @@ public class ExchangeRateDataBaseService {
     private CurrencyRateByUsdAndEuroDto mapToCurrencyRateByUsdAndEuroDto(ExchangeRate exchangeRate) {
         val ratesMap = objMapService.readValueToMap(exchangeRate.getRates());
         return exchangeRateMapper.toCurrencyRateByUsdAndEuroDto(exchangeRate)
-                .setUsd(CurrencyHelper.calculateToRub((double) ratesMap.get(USD.name())))
-                .setEuro(CurrencyHelper.calculateToRub((double) ratesMap.get(EUR.name())));
+                .setUsd(CurrencyCalculateHelper.calculateToRub((double) ratesMap.get(USD.name())))
+                .setEuro(CurrencyCalculateHelper.calculateToRub((double) ratesMap.get(EUR.name())));
     }
 }

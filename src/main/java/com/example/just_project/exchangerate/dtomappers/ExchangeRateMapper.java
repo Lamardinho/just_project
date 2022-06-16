@@ -5,7 +5,7 @@ import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRatesDtoWhereRateIsMapStr;
 import com.example.just_project.exchangerate.enums.ERate;
 import com.example.just_project.exchangerate.model.ExchangeRate;
-import com.example.just_project.util.CurrencyHelper;
+import com.example.just_project.util.CurrencyCalculateHelper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         //uses = {},
-        imports = {CurrencyHelper.class, ERate.class}
+        imports = {CurrencyCalculateHelper.class, ERate.class}
 )
 public abstract class ExchangeRateMapper {
 
@@ -31,7 +31,7 @@ public abstract class ExchangeRateMapper {
     @Mapping(target = "euro", ignore = true)
     public abstract CurrencyRateByUsdAndEuroDto toCurrencyRateByUsdAndEuroDto(ExchangeRate rate);
 
-    @Mapping(target = "usd", expression = "java(CurrencyHelper.calculateToRub(rate.getRates().get(ERate.USD.name())))")
-    @Mapping(target = "euro", expression = "java(CurrencyHelper.calculateToRub(rate.getRates().get(ERate.EUR.name())))")
+    @Mapping(target = "usd", expression = "java(CurrencyCalculateHelper.calculateToRub(rate.getRates().get(ERate.USD.name())))")
+    @Mapping(target = "euro", expression = "java(CurrencyCalculateHelper.calculateToRub(rate.getRates().get(ERate.EUR.name())))")
     public abstract CurrencyRateByUsdAndEuroDto dtoWhereRateIsMapStrToCurrencyRateByUsdAndEuroDto(ExchangeRatesDtoWhereRateIsMapStr rate);
 }
