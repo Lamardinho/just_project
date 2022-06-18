@@ -41,6 +41,7 @@ public class ExchangeRateDataBaseService {
      * Допустим, что нам не надо несколько рейтингов одного дня.
      * Чтобы не создавать новые рейтинги одного дня, то просто обновляем последний, иначе создаём новый.
      */
+    @Transactional
     public void createOrUpdate() {
         val dto = objMapService.readValue(
                 contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL, 8000, 8000),
