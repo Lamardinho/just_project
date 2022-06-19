@@ -1,6 +1,6 @@
-package com.example.just_project.exchangerate.dto.exchangerate;
+package com.example.just_project.project_exchangerate.dto.exchangerate;
 
-import com.example.just_project.exchangerate.enums.ERate;
+import com.example.just_project.project_exchangerate.enums.ERate;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;

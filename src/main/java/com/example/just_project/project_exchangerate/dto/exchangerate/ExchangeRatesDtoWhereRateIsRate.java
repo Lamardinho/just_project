@@ -1,6 +1,6 @@
-package com.example.just_project.exchangerate.dto.exchangerate;
+package com.example.just_project.project_exchangerate.dto.exchangerate;
 
-import com.example.just_project.exchangerate.dto.Rates;
+import com.example.just_project.project_exchangerate.dto.Rates;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

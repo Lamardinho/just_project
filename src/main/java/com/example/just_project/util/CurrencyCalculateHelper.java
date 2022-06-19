@@ -1,14 +1,14 @@
 package com.example.just_project.util;
 
-import com.example.just_project.exchangerate.enums.ERate;
+import com.example.just_project.project_exchangerate.enums.ERate;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import java.util.Locale;
 
-import static com.example.just_project.exchangerate.enums.ERate.RUB;
-import static com.example.just_project.exchangerate.enums.ERate.USD;
+import static com.example.just_project.project_exchangerate.enums.ERate.RUB;
+import static com.example.just_project.project_exchangerate.enums.ERate.USD;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CurrencyCalculateHelper {

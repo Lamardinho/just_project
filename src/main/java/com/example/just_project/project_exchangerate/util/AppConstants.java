@@ -1,4 +1,4 @@
-package com.example.just_project.exchangerate.util;
+package com.example.just_project.project_exchangerate.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

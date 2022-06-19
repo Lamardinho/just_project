@@ -1,6 +1,6 @@
 package com.example.just_project.common.services;
 
-import com.example.just_project.exchangerate.dto.exchangerate.cbr.ValCurs;
+import com.example.just_project.project_exchangerate.dto.exchangerate.cbr.ValCurs;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.example.just_project.exchangerate.util.AppConstants.CBR_XML_DAILY_ENG_BY_DATE_URL;
+import static com.example.just_project.project_exchangerate.util.AppConstants.CBR_XML_DAILY_ENG_BY_DATE_URL;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest

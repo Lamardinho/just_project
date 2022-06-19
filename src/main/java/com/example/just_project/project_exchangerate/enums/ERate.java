@@ -1,4 +1,4 @@
-package com.example.just_project.exchangerate.enums;
+package com.example.just_project.project_exchangerate.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
-package com.example.just_project.exchangerate.model;
+package com.example.just_project.project_exchangerate.model;
 
-import com.example.just_project.exchangerate.enums.ERate;
+import com.example.just_project.project_exchangerate.enums.ERate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

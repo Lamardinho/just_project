@@ -1,4 +1,4 @@
-package com.example.just_project.exchangerate.dto.exchangerate;
+package com.example.just_project.project_exchangerate.dto.exchangerate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

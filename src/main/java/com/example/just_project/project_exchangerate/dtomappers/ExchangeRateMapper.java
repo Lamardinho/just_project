@@ -1,10 +1,10 @@
-package com.example.just_project.exchangerate.dtomappers;
+package com.example.just_project.project_exchangerate.dtomappers;
 
 import com.example.just_project.common.services.ObjectMapperService;
-import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
-import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRatesDtoWhereRateIsMapStr;
-import com.example.just_project.exchangerate.enums.ERate;
-import com.example.just_project.exchangerate.model.ExchangeRate;
+import com.example.just_project.project_exchangerate.dto.CurrencyRateByUsdAndEuroDto;
+import com.example.just_project.project_exchangerate.dto.exchangerate.ExchangeRatesDtoWhereRateIsMapStr;
+import com.example.just_project.project_exchangerate.enums.ERate;
+import com.example.just_project.project_exchangerate.model.ExchangeRate;
 import com.example.just_project.util.CurrencyCalculateHelper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

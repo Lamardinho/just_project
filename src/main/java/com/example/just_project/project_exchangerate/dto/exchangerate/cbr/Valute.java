@@ -1,4 +1,4 @@
-package com.example.just_project.exchangerate.dto.exchangerate.cbr;
+package com.example.just_project.project_exchangerate.dto.exchangerate.cbr;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,9 +1,9 @@
-package com.example.just_project.exchangerate.controllers.api;
+package com.example.just_project.project_exchangerate.controllers.api;
 
 import com.example.just_project.common.services.XmlMapperService;
-import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
-import com.example.just_project.exchangerate.dto.exchangerate.cbr.ValCurs;
-import com.example.just_project.exchangerate.services.ExchangeRateWebService;
+import com.example.just_project.project_exchangerate.dto.CurrencyRateByUsdAndEuroDto;
+import com.example.just_project.project_exchangerate.dto.exchangerate.cbr.ValCurs;
+import com.example.just_project.project_exchangerate.services.ExchangeRateWebService;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +17,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 
-import static com.example.just_project.exchangerate.util.AppConstants.CBR_XML_DAILY_ENG_BY_DATE_URL;
+import static com.example.just_project.project_exchangerate.util.AppConstants.CBR_XML_DAILY_ENG_BY_DATE_URL;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 @Tag(name = "Курсы валют. Online", description = "Просмотр курсов валют из online источников")

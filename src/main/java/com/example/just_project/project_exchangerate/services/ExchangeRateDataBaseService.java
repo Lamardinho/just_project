@@ -1,13 +1,13 @@
-package com.example.just_project.exchangerate.services;
+package com.example.just_project.project_exchangerate.services;
 
 import com.example.just_project.common.services.ContentService;
 import com.example.just_project.common.services.ObjectMapperService;
-import com.example.just_project.exchangerate.dto.CurrencyRateByUsdAndEuroDto;
-import com.example.just_project.exchangerate.dto.exchangerate.ExchangeRatesDtoWhereRateIsMapStr;
-import com.example.just_project.exchangerate.dtomappers.ExchangeRateMapper;
-import com.example.just_project.exchangerate.enums.ERate;
-import com.example.just_project.exchangerate.model.ExchangeRate;
-import com.example.just_project.exchangerate.repositories.ExchangeRateRepository;
+import com.example.just_project.project_exchangerate.dto.CurrencyRateByUsdAndEuroDto;
+import com.example.just_project.project_exchangerate.dto.exchangerate.ExchangeRatesDtoWhereRateIsMapStr;
+import com.example.just_project.project_exchangerate.dtomappers.ExchangeRateMapper;
+import com.example.just_project.project_exchangerate.enums.ERate;
+import com.example.just_project.project_exchangerate.model.ExchangeRate;
+import com.example.just_project.project_exchangerate.repositories.ExchangeRateRepository;
 import com.example.just_project.util.CurrencyCalculateHelper;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.example.just_project.exchangerate.enums.ERate.EUR;
-import static com.example.just_project.exchangerate.enums.ERate.USD;
-import static com.example.just_project.exchangerate.util.AppConstants.RUBLE_CBR_DAILY_RU_URL;
+import static com.example.just_project.project_exchangerate.enums.ERate.EUR;
+import static com.example.just_project.project_exchangerate.enums.ERate.USD;
+import static com.example.just_project.project_exchangerate.util.AppConstants.RUBLE_CBR_DAILY_RU_URL;
 
 @Service
 @Transactional(readOnly = true)
