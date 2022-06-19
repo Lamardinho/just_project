@@ -1,5 +1,6 @@
 package com.example.just_project.project_exchangerate.controllers.api;
 
+import com.example.just_project.common.aop.TrackExecutionTime;
 import com.example.just_project.config.ApiPageable;
 import com.example.just_project.project_exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 import com.example.just_project.project_exchangerate.services.ExchangeRateDataBaseService;
@@ -35,15 +36,17 @@ public class ExchangeRateDataBaseController {
             summary = "Обновить рейтинги",
             description = "Сохраняет сегодняшние рейтинги в БД, если сегодняшний день уже есть в БД, то просто обновляет его"
     )
+    @TrackExecutionTime
     @GetMapping("/ruble/update")
     public ContractResult<Boolean> getUsdAndEuroRateByRuble() {
         dataBaseService.createOrUpdate();
         return new ContractResult<>(true).setMessage(RATINGS_HAVE_BEEN_UPDATED);
     }
 
-    @GetMapping("/ruble/all")
-    @ApiPageable
     @Operation(summary = "Загрузить последние рейтинги")
+    @ApiPageable
+    @TrackExecutionTime
+    @GetMapping("/ruble/all")
     public ContractResult<List<CurrencyRateByUsdAndEuroDto>> findAll(
             @ApiIgnore
             @PageableDefault(size = 30, sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable
