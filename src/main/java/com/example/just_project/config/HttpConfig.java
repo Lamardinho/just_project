@@ -15,10 +15,9 @@ public class HttpConfig {
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplateBuilder()
-                .setConnectTimeout(Duration.ofMinutes(10))
-                .setReadTimeout(Duration.ofMinutes(10))
-                .requestFactory(() -> new HttpComponentsClientHttpRequestFactory(
-                        HttpClientBuilder.create().build()))
+                .setConnectTimeout(Duration.ofSeconds(10))
+                .setReadTimeout(Duration.ofSeconds(10))
+                .requestFactory(() -> new HttpComponentsClientHttpRequestFactory(HttpClientBuilder.create().build()))
                 .build();
     }
 }

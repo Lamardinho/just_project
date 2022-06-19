@@ -3,7 +3,6 @@ package com.example.just_project.common.services;
 import com.example.just_project.util.AppException;
 import com.example.just_project.util.AppMsgErrors;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -15,6 +14,8 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URL;
+
+import static java.lang.String.format;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -35,7 +36,6 @@ public class XmlMapperService {
 
     private <T> T toDto(String content, Class<T> valueType) {
         try {
-            xmlMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
             return xmlMapper.readValue(content, valueType);
         } catch (JsonProcessingException exception) {
             log.error(exception.getMessage());
@@ -52,7 +52,7 @@ public class XmlMapperService {
             }
         } catch (HttpClientErrorException | HttpServerErrorException exception) {
             log.error(exception.getMessage());
-            throw new AppException(AppMsgErrors.ERROR_ACCESSING_TO + url);
+            throw new AppException(format(AppMsgErrors.ERROR_ACCESSING_TO, url));
         }
         return content;
     }
