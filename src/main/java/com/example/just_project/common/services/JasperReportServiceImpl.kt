@@ -1,6 +1,6 @@
-package com.example.just_project.reposts.services
+package com.example.just_project.common.services
 
-import com.example.just_project.reposts.services.contract.ReportService
+import com.example.just_project.common.services.contract.ReportService
 import net.sf.jasperreports.engine.JRAbstractExporter
 import net.sf.jasperreports.engine.JREmptyDataSource
 import net.sf.jasperreports.engine.JasperCompileManager
@@ -22,13 +22,9 @@ class JasperReportServiceImpl : ReportService {
             template: Resource,
             params: Map<String, Any>
     ): ByteArray {
-
         return template.inputStream.use { inputStream ->
             val reportTemplate = JasperCompileManager.compileReport(inputStream)
-
-            val jasperPrint = JasperFillManager.fillReport(
-                    reportTemplate, params, JREmptyDataSource()
-            )
+            val jasperPrint = JasperFillManager.fillReport(reportTemplate, params, JREmptyDataSource())
 
             ByteArrayOutputStream().use {
                 exporter.exporterOutput = SimpleOutputStreamExporterOutput(it)

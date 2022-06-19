@@ -1,4 +1,4 @@
-package com.example.just_project.reposts.services.contract
+package com.example.just_project.common.services.contract
 
 import net.sf.jasperreports.engine.JRAbstractExporter
 import org.springframework.core.io.Resource
