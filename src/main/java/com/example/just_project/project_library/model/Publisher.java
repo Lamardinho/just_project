@@ -1,4 +1,4 @@
-package com.example.just_project.sqlstudy.model;
+package com.example.just_project.project_library.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,20 +14,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "book")
-public class Book {
+@Table(name = "publisher")
+public class Publisher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title", unique = true, nullable = false)
     private String title;
 
-    @Column(name = "isbn", nullable = false)
-    private String isbn;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publisher_id", referencedColumnName = "id", nullable = false)
-    private Publisher publisher;
+    @Column(name = "city", nullable = false)
+    private String city;
 }

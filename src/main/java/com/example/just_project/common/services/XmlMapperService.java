@@ -1,7 +1,7 @@
 package com.example.just_project.common.services;
 
 import com.example.just_project.util.AppException;
-import com.example.just_project.util.Msg;
+import com.example.just_project.util.AppMsgErrors;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -48,11 +48,11 @@ public class XmlMapperService {
         try {
             content = restTemplate.getForObject(url, String.class);
             if (StringUtils.isBlank(content)) {
-                throw new AppException(Msg.FAILED_TO_READ_CONTENT);
+                throw new AppException(AppMsgErrors.FAILED_TO_READ_CONTENT);
             }
         } catch (HttpClientErrorException | HttpServerErrorException exception) {
             log.error(exception.getMessage());
-            throw new AppException("Error accessing to: " + url);
+            throw new AppException(AppMsgErrors.ERROR_ACCESSING_TO + url);
         }
         return content;
     }

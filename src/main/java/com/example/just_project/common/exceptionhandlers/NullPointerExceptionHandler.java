@@ -1,7 +1,7 @@
 package com.example.just_project.common.exceptionhandlers;
 
 import com.example.just_project.util.ContractResult;
-import com.example.just_project.util.Msg;
+import com.example.just_project.util.AppMsgErrors;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
@@ -19,10 +19,10 @@ public class NullPointerExceptionHandler {
 
     @ExceptionHandler(value = NullPointerException.class)
     public ResponseEntity<ContractResult<String>> handle(@NonNull Exception ex) {
-        log.error(Msg.AN_UNEXPECTED_ERROR_OCCURRED_EN, ex);
+        log.error(AppMsgErrors.AN_UNEXPECTED_ERROR_OCCURRED_EN, ex);
 
         val contractResult = new ContractResult<String>();
-        contractResult.getViolations().add(Msg.AN_UNEXPECTED_ERROR_OCCURRED_RU);
+        contractResult.getViolations().add(AppMsgErrors.AN_UNEXPECTED_ERROR_OCCURRED_RU);
 
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)

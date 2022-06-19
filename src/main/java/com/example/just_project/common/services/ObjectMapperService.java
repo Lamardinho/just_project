@@ -1,7 +1,7 @@
 package com.example.just_project.common.services;
 
 import com.example.just_project.util.AppException;
-import com.example.just_project.util.Msg;
+import com.example.just_project.util.AppMsgErrors;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class ObjectMapperService {
         try {
             return objectMapper.readValue(content, clazz);
         } catch (Exception e) {
-            log.error(String.format(Msg.CONTENT_SERIALIZATION_FAILED_RU, content));
+            log.error(String.format(AppMsgErrors.CONTENT_SERIALIZATION_FAILED_RU, content));
             throw new AppException(e.getMessage());
         }
     }
@@ -32,7 +32,7 @@ public class ObjectMapperService {
         try {
             return objectMapper.readValue(content, clazz);
         } catch (Exception e) {
-            log.error(String.format(Msg.CONTENT_SERIALIZATION_FAILED_RU, content));
+            log.error(String.format(AppMsgErrors.CONTENT_SERIALIZATION_FAILED_RU, content));
             throw new AppException(e.getMessage());
         }
     }
@@ -41,7 +41,7 @@ public class ObjectMapperService {
         try {
             return objectMapper.readValue(content, Map.class);
         } catch (Exception e) {
-            log.error(String.format(Msg.CONTENT_SERIALIZATION_FAILED_RU, content));
+            log.error(String.format(AppMsgErrors.CONTENT_SERIALIZATION_FAILED_RU, content));
             throw new AppException(e.getMessage());
         }
     }
@@ -50,7 +50,7 @@ public class ObjectMapperService {
         try {
             return objectMapper.writeValueAsString(value);
         } catch (Exception e) {
-            log.error(String.format(Msg.CONTENT_SERIALIZATION_FAILED_RU, value.toString()));
+            log.error(String.format(AppMsgErrors.CONTENT_SERIALIZATION_FAILED_RU, value.toString()));
             throw new AppException(e.getMessage());
         }
     }

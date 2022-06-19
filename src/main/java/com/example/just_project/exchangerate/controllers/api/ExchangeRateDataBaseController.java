@@ -20,7 +20,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
-import static com.example.just_project.util.Msg.RATINGS_HAVE_BEEN_UPDATED;
+import static com.example.just_project.util.AppMsgErrors.RATINGS_HAVE_BEEN_UPDATED;
 
 @Tag(name = "Курсы валют. DB", description = "Получение курса валют из online источников, запись в БД и чтение")
 @RestController

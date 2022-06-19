@@ -1,7 +1,7 @@
 package com.example.just_project.common.exceptionhandlers;
 
 import com.example.just_project.util.ContractResult;
-import com.example.just_project.util.Msg;
+import com.example.just_project.util.AppMsgErrors;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
@@ -22,7 +22,7 @@ public class UnknownHostExceptionHandler {
 
     @ExceptionHandler(value = UnknownHostException.class)
     public ResponseEntity<ContractResult<String>> handle(@NonNull Exception ex) {
-        val message = format(Msg.FAILED_TO_CONNECT_TO_URL, ex.getMessage());
+        val message = format(AppMsgErrors.FAILED_TO_CONNECT_TO_URL, ex.getMessage());
         log.error(message, ex);
 
         return ResponseEntity

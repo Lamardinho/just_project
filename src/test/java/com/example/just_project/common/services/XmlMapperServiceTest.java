@@ -27,7 +27,7 @@ class XmlMapperServiceTest {
     }
 
     @Test
-    void readXml_StringUrl() {
+    void readXml_stringUrl() {
         final var valCurs = xmlMapperService.readXml(CBR_XML_DAILY_ENG_BY_DATE_URL, ValCurs.class);
 
         assertNotNull(valCurs);
