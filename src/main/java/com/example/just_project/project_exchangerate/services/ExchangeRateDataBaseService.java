@@ -8,7 +8,6 @@ import com.example.just_project.project_exchangerate.dtomappers.ExchangeRateMapp
 import com.example.just_project.project_exchangerate.enums.ERate;
 import com.example.just_project.project_exchangerate.model.ExchangeRate;
 import com.example.just_project.project_exchangerate.repositories.ExchangeRateRepository;
-import com.example.just_project.util.CurrencyCalculateHelper;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -19,10 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.example.just_project.project_exchangerate.enums.ERate.EUR;
-import static com.example.just_project.project_exchangerate.enums.ERate.USD;
-import static com.example.just_project.project_exchangerate.util.AppConstants.RUBLE_CBR_DAILY_RU_URL;
+import static com.example.just_project.util.CurrencyCalculateHelper.calculateToRub;
 
+/**
+ * Сервис для работы с рейтингами валют
+ */
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -38,17 +38,17 @@ public class ExchangeRateDataBaseService {
     private final ExchangeRateMapper exchangeRateMapper;
 
     /**
-     * Допустим, что нам не надо несколько рейтингов одного дня.
+     * Нам не надо несколько рейтингов одного дня.
      * Чтобы не создавать новые рейтинги одного дня, то просто обновляем последний, иначе создаём новый.
      */
     @Transactional
-    public void createOrUpdate() {
+    public void createOrUpdate(String url, ERate rate) {
         val dto = objMapService.readValue(
-                contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL, 8000, 8000),
+                contentService.getContentFromUrl(url),
                 ExchangeRatesDtoWhereRateIsMapStr.class
         );
         val rateToMap = rateRepository
-                .findByBaseAndDate(ERate.RUB, dto.getDate()) //for update
+                .findByBaseAndDate(rate, dto.getDate())      //for update
                 .orElse(new ExchangeRate());                   //for create
 
         val rateToSave = exchangeRateMapper.toExchangeRate(dto, rateToMap);
@@ -60,14 +60,14 @@ public class ExchangeRateDataBaseService {
         val exchangeRates = rateRepository.findAll(pageable);
         return exchangeRates
                 .stream()
-                .map(this::mapToCurrencyRateByUsdAndEuroDto)
+                .map(it ->
+                        {
+                            val ratesMap = objMapService.readValueToMap(it.getRates());
+                            return exchangeRateMapper.toCurrencyRateByUsdAndEuroDto(it)
+                                    .setUsd(calculateToRub((double) ratesMap.get(ERate.USD.name())))
+                                    .setEuro(calculateToRub((double) ratesMap.get(ERate.EUR.name())));
+                        }
+                )
                 .collect(Collectors.toList());
-    }
-
-    private CurrencyRateByUsdAndEuroDto mapToCurrencyRateByUsdAndEuroDto(ExchangeRate exchangeRate) {
-        val ratesMap = objMapService.readValueToMap(exchangeRate.getRates());
-        return exchangeRateMapper.toCurrencyRateByUsdAndEuroDto(exchangeRate)
-                .setUsd(CurrencyCalculateHelper.calculateToRub((double) ratesMap.get(USD.name())))
-                .setEuro(CurrencyCalculateHelper.calculateToRub((double) ratesMap.get(EUR.name())));
     }
 }

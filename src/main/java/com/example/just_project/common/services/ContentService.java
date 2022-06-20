@@ -24,6 +24,10 @@ public class ContentService {
     @NonNull
     private final ObjectMapperService objectMapperService;
 
+    public String getContentFromUrl(String url) {
+        return getContentFromUrl(url, 5000, 5000);
+    }
+
     @SneakyThrows
     public String getContentFromUrl(String url, Integer connectTimeout, Integer readTimeout) {
         try (
@@ -38,7 +42,7 @@ public class ContentService {
     }
 
     public Map<?, ?> getJsonFromUrl(String url) { //NOSONAR
-        val content = getContentFromUrl(url, 8000, 8000);
+        val content = getContentFromUrl(url, 5000, 5000);
         return objectMapperService.readValueToMap(content);
     }
 }
