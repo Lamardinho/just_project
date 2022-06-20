@@ -27,7 +27,7 @@ public class ExchangeRateWebService {
 
     public CurrencyRateByUsdAndEuroDto getCurrencyRateByUsdAndEuro() {
         val rate = objMapService.readValue(
-                contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL, 8000, 8000),
+                contentService.getContentFromUrl(RUBLE_CBR_DAILY_RU_URL),
                 ExchangeRatesDtoWhereRateIsMapStr.class
         );
         return exchangeRateMapper.dtoWhereRateIsMapStrToCurrencyRateByUsdAndEuroDto(rate);

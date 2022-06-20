@@ -42,7 +42,7 @@ public class ContentService {
     }
 
     public Map<?, ?> getJsonFromUrl(String url) { //NOSONAR
-        val content = getContentFromUrl(url, 5000, 5000);
+        val content = getContentFromUrl(url);
         return objectMapperService.readValueToMap(content);
     }
 }

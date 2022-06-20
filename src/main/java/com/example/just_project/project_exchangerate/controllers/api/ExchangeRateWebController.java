@@ -37,7 +37,7 @@ public class ExchangeRateWebController {
 
     @Operation(
             summary = "Получение котировок на заданный день с www.cbr.ru",
-            description = "Укажите дату в формате day-month-year (не раньше 01-01-1992)," +
+            description = "Укажите дату в формате day-month-year (не раньше 01-07-1992)," +
                     " или оставьте пустым для получения самых актуальных рейтингов"
     )
     @GetMapping("/cbr/ruble/json/all")
