@@ -5,6 +5,7 @@ import com.example.just_project.config.ApiPageable;
 import com.example.just_project.project_exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 import com.example.just_project.project_exchangerate.enums.ERate;
 import com.example.just_project.project_exchangerate.services.ExchangeRateDataBaseService;
+import com.example.just_project.project_exchangerate.util.AppConstants;
 import com.example.just_project.util.ContractResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,13 +17,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
-import static com.example.just_project.project_exchangerate.util.AppConstants.RUBLE_CBR_DAILY_RU_URL;
 import static com.example.just_project.util.AppMsgErrors.RATINGS_HAVE_BEEN_UPDATED;
 
 @Tag(name = "Курсы валют. DB", description = "Получение курса валют из online источников, запись в БД и чтение")
@@ -39,9 +40,9 @@ public class ExchangeRateDataBaseController {
             description = "Сохраняет сегодняшние рейтинги в БД, если сегодняшний день уже есть в БД, то просто обновляет его"
     )
     @TrackExecutionTime
-    @GetMapping("/ruble/update/today")
+    @PutMapping("/ruble/update/today")
     public ContractResult<Boolean> getUsdAndEuroRateByRuble() {
-        dataBaseService.createOrUpdate(RUBLE_CBR_DAILY_RU_URL, ERate.RUB);
+        dataBaseService.createOrUpdate(AppConstants.RUBLE_CBR_DAILY_RU_URL, ERate.RUB);
         return new ContractResult<>(true).setMessage(RATINGS_HAVE_BEEN_UPDATED);
     }
 
