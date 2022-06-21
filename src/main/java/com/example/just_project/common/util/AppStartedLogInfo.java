@@ -1,4 +1,4 @@
-package com.example.just_project;
+package com.example.just_project.common.util;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;

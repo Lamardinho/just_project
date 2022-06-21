@@ -21,7 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 
-import static com.example.just_project.project_exchangerate.util.AppConstants.CBR_XML_DAILY_ENG_BY_DATE_URL;
+import static com.example.just_project.project_exchangerate.enums.ESource.CBR_RU_DAILY_ENG_XML;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 @Tag(name = "Курсы валют. Online", description = "Просмотр курсов валют из online источников")
@@ -49,7 +49,7 @@ public class ExchangeRateWebController {
             LocalDate date
     ) throws MalformedURLException {
         return xmlMapperService.readXml(
-                new URL(CBR_XML_DAILY_ENG_BY_DATE_URL + date.format(ofPattern("dd-MM-yyyy"))),
+                new URL(CBR_RU_DAILY_ENG_XML.getUrl() + date.format(ofPattern("dd-MM-yyyy"))),
                 ValCurs.class
         );
     }

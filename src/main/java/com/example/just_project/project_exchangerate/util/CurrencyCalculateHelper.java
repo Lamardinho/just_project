@@ -1,4 +1,4 @@
-package com.example.just_project.util;
+package com.example.just_project.project_exchangerate.util;
 
 import com.example.just_project.project_exchangerate.enums.ERate;
 import lombok.AccessLevel;

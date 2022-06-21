@@ -1,7 +1,7 @@
 package com.example.just_project.common.services;
 
-import com.example.just_project.util.AppException;
-import com.example.just_project.util.AppMsgErrors;
+import com.example.just_project.common.util.AppException;
+import com.example.just_project.common.util.AppMsgErrors;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.RequiredArgsConstructor;

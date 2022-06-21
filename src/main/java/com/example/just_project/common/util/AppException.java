@@ -1,4 +1,4 @@
-package com.example.just_project.util;
+package com.example.just_project.common.util;
 
 /**
  * Для ответа кастомными сообщениями

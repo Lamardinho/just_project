@@ -27,21 +27,23 @@ public class ExchangeRate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "data_source", nullable = false)
-    private String disclaimer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "data_source")
+    private DataSource dataSource;
 
     @Column(name = "date_rating", nullable = false)
-    private LocalDate date;
+    private LocalDate dateRating;
 
     @Column(name = "time_request", nullable = false)
     private Instant timeRequest = Instant.now();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "currency", nullable = false)
-    private ERate base;
+    private ERate currency;
 
-    @Column(name = "rates", nullable = false, length = 1024)
+    @Column(name = "rates", nullable = false, length = 7000)
     private String rates;
 }

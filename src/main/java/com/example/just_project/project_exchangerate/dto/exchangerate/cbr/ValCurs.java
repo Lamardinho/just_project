@@ -9,21 +9,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * DTO для получения данных с сайта: <a href="https://www.cbr-xml-daily.ru/daily_json.js">cbr-xml-daily.ru</a>
- * <p>
- * Info: <a href="https://www.cbr-xml-daily.ru/#howto">https://www.cbr-xml-daily.ru/#howto</a>
+ * DTO для получения данных с сайта: <a href="https://www.cbr.ru/scripts/XML_daily_eng.asp?date_req=">...</a>
  */
+@Schema(description = "Exchange Rates/Курс валют")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
 @JacksonXmlRootElement(localName = "ValCurs")
-@Schema(description = "Exchange Rates/Курс валют")
 public class ValCurs {
 
     @Schema(description = "Currencies/Валюты")
@@ -35,8 +33,10 @@ public class ValCurs {
     @JsonProperty("Date")
     private String date;
 
+    @Schema(description = "Page name/Имя страницы")
     @JsonProperty("name")
     private String name;
 
-    private LocalDate time = LocalDate.now();
+    @Schema(description = "Request time/Время запроса")
+    private Instant time = Instant.now();
 }

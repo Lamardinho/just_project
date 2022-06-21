@@ -1,4 +1,4 @@
-package com.example.just_project.util;
+package com.example.just_project.common.util;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

@@ -9,7 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.example.just_project.project_exchangerate.util.AppConstants.CBR_XML_DAILY_ENG_BY_DATE_URL;
+import static com.example.just_project.project_exchangerate.enums.ESource.CBR_RU_DAILY_ENG_XML;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
@@ -21,14 +21,14 @@ class XmlMapperServiceTest {
 
     @Test
     void readXml_urlUrl() throws MalformedURLException {
-        final var valCurs = xmlMapperService.readXml(new URL(CBR_XML_DAILY_ENG_BY_DATE_URL), ValCurs.class);
+        final var valCurs = xmlMapperService.readXml(new URL(CBR_RU_DAILY_ENG_XML.getUrl()), ValCurs.class);
 
         assertNotNull(valCurs);
     }
 
     @Test
     void readXml_stringUrl() {
-        final var valCurs = xmlMapperService.readXml(CBR_XML_DAILY_ENG_BY_DATE_URL, ValCurs.class);
+        final var valCurs = xmlMapperService.readXml(CBR_RU_DAILY_ENG_XML.getUrl(), ValCurs.class);
 
         assertNotNull(valCurs);
     }
