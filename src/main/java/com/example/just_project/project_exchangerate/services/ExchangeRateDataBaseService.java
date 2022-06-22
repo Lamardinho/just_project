@@ -4,6 +4,7 @@ import com.example.just_project.common.services.ContentService;
 import com.example.just_project.common.services.ObjectMapperService;
 import com.example.just_project.common.services.XmlMapperService;
 import com.example.just_project.common.util.AppException;
+import com.example.just_project.project_exchangerate.dto.exchangerate.ExchangeRateDto;
 import com.example.just_project.project_exchangerate.dto.exchangerate.cbr.ValCurs;
 import com.example.just_project.project_exchangerate.dtomappers.ExchangeRateMapper;
 import com.example.just_project.project_exchangerate.dtomappers.RateMapper;
@@ -17,12 +18,14 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.val;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.example.just_project.project_exchangerate.util.ExchangeErrors.DATA_SOURCE_NOT_FOUND;
@@ -106,18 +109,11 @@ public class ExchangeRateDataBaseService {
         exchangeRateRepository.save(exchangeRate);
     }
 
-    /*public List<CurrencyRateByUsdAndEuroDto> getAllCurrencyRateByUsdAndEuroDtoList(Pageable pageable) {
-        val exchangeRates = rateRepository.findAll(pageable);
-        return exchangeRates
+    public List<ExchangeRateDto> getAllCurrencyRateByUsdAndEuroDtoList(Pageable pageable) {
+        val exchangeRatePage = exchangeRateRepository.findAllByCurrency(ERate.RUB, pageable);
+        return exchangeRatePage.getContent()
                 .stream()
-                .map(it ->
-                        {
-                            val ratesMap = objMapService.readValueToMap(it.getRates());
-                            return exchangeRateMapper.toCurrencyRateByUsdAndEuroDto(it)
-                                    .setUsd(calculateToRub((double) ratesMap.get(ERate.USD.name())))
-                                    .setEuro(calculateToRub((double) ratesMap.get(ERate.EUR.name())));
-                        }
-                )
+                .map(exchangeRateMapper::toExchangeRateDto)
                 .collect(Collectors.toList());
-    }*/
+    }
 }
