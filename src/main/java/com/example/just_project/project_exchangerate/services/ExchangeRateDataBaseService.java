@@ -53,24 +53,6 @@ public class ExchangeRateDataBaseService {
     @NonNull
     private final ExchangeRateMapper exchangeRateMapper;
 
-    /**
-     * Нам не надо несколько рейтингов одного дня.
-     * Чтобы не создавать новые рейтинги одного дня, то просто обновляем последний, иначе создаём новый.
-     */
-    /*@Transactional
-    public void createOrUpdateFromJson(String url, ERate rate) {
-        val dto = objMapService.readValue(
-                contentService.getContentFromUrl(url),
-                ExchangeRatesDtoWhereRateIsMapStr.class
-        );
-        val rateToMap = rateRepository
-                .findByBaseAndDate(rate, dto.getDate())      //for update
-                .orElse(new ExchangeRate());                   //for create
-
-        val rateToSave = exchangeRateMapper.toExchangeRate(dto, rateToMap);
-
-        rateRepository.save(rateToSave);
-    }*/
     @SneakyThrows
     @Transactional
     public void createOrUpdateRubleRateFromCbrXml(ESource source) {

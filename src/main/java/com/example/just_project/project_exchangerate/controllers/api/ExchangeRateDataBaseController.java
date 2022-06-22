@@ -24,17 +24,6 @@ public class ExchangeRateDataBaseController {
     @NonNull
     private final ExchangeRateDataBaseService dataBaseService;
 
-    /*@Operation(
-            summary = "Обновить рейтинги сегодняшнего дня с сайта " + AppConstants.RUBLE_CBR_DAILY_RU_URL,
-            description = "Сохраняет сегодняшние рейтинги в БД, если сегодняшний день уже есть в БД, то просто обновляет его"
-    )
-    @TrackExecutionTime
-    @PutMapping("/ruble/update/today")
-    public ContractResult<Boolean> createOrUpdateFromJson() {
-        dataBaseService.createOrUpdateFromJson(AppConstants.RUBLE_CBR_DAILY_RU_URL, ERate.RUB);
-        return new ContractResult<>(true).setMessage(ExchangeRateMessages.RATINGS_HAVE_BEEN_UPDATED);
-    }*/
-
     @Operation(
             summary = "Обновить рейтинги сегодняшнего дня c cbr.ru",
             description = "Сохраняет сегодняшние рейтинги в БД, если сегодняшний день уже есть в БД, то просто обновляет его"
