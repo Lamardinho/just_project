@@ -43,13 +43,13 @@ public class ExchangeRateWebController {
     @GetMapping("/cbr/ruble/json/all")
     @TrackExecutionTime
     public ValCurs getRubleRateJsonFromCbrUrlXml(
-            @ApiParam(example = "28-05-2022")
-            @DateTimeFormat(pattern = "dd-MM-yyyy")
+            @ApiParam(example = "28/05/2022")
+            @DateTimeFormat(pattern = "dd/MM/yyyy")
             @RequestParam(defaultValue = "#{T(java.time.LocalDate).now()}")
             LocalDate date
     ) throws MalformedURLException {
         return xmlMapperService.readXml(
-                new URL(CBR_RU_DAILY_ENG_XML.getUrl() + date.format(ofPattern("dd-MM-yyyy"))),
+                new URL(CBR_RU_DAILY_ENG_XML.getUrl() + date.format(ofPattern("dd/MM/yyyy"))),
                 ValCurs.class
         );
     }

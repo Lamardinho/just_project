@@ -19,8 +19,8 @@ import javax.persistence.*;
 public class Rate {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "valute_id", nullable = false)
@@ -29,8 +29,8 @@ public class Rate {
     @Column(name = "num_code", nullable = false)
     private int numCode = 0;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "char_code", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ERate charCode;
 
     @Column(name = "name", nullable = false)

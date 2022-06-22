@@ -2,7 +2,6 @@ package com.example.just_project.project_exchangerate.controllers.api;
 
 import com.example.just_project.common.aop.TrackExecutionTime;
 import com.example.just_project.common.util.ContractResult;
-import com.example.just_project.project_exchangerate.enums.ERate;
 import com.example.just_project.project_exchangerate.services.ExchangeRateDataBaseService;
 import com.example.just_project.project_exchangerate.util.ExchangeRateMessages;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import static com.example.just_project.project_exchangerate.enums.ESource.CBR_RU_DAILY_ENG_XML;
 
 @Tag(name = "Курсы валют. DB", description = "Получение курса валют из online источников, запись в БД и чтение")
 @RestController
@@ -41,7 +42,7 @@ public class ExchangeRateDataBaseController {
     @TrackExecutionTime
     @PutMapping("/ruble/update/today/cbr")
     public ContractResult<Boolean> createOrUpdateFromCbrXml() {
-        dataBaseService.createOrUpdateFromCbrXml(ERate.RUB);
+        dataBaseService.createOrUpdateRubleRateFromCbrXml(CBR_RU_DAILY_ENG_XML);
         return new ContractResult<>(true).setMessage(ExchangeRateMessages.RATINGS_HAVE_BEEN_UPDATED);
     }
 
