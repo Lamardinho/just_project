@@ -8,5 +8,5 @@
     </preConditions>
     <!-- ************************************  RUN  ***************************************************** -->
     <include file="changesets/exchange_rate/1_cr_schema_exchange_rate.sql" relativeToChangelogFile="true"/>
-    <include file="changesets/exchange_rate/2_cr_tables.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/exchange_rate/2_data_source.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

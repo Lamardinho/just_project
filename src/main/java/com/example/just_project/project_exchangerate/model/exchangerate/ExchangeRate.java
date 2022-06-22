@@ -1,4 +1,4 @@
-package com.example.just_project.project_exchangerate.model;
+package com.example.just_project.project_exchangerate.model.exchangerate;
 
 import com.example.just_project.project_exchangerate.enums.ERate;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,8 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Курс валют по отношению к рублю.
@@ -44,6 +46,12 @@ public class ExchangeRate {
     @Column(name = "currency", nullable = false)
     private ERate currency;
 
-    @Column(name = "rates", nullable = false, length = 7000)
-    private String rates;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(
+            schema = "exchange_rate",
+            name = "exchange_rate_has_rate",
+            joinColumns = @JoinColumn(name = "exchange_rate_id"),
+            inverseJoinColumns = @JoinColumn(name = "rate_Id")
+    )
+    private List<Rate> rates = new ArrayList<>();
 }

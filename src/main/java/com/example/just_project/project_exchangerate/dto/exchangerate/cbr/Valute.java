@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 public class Valute {
 
     @JsonProperty("ID")
-    private String id;
+    private String valuteId;
 
     @JsonProperty("NumCode")
     private int numCode = 0;

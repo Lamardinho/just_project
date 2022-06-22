@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
-        //uses = {},
         imports = {CurrencyCalculateHelper.class, ERate.class}
 )
 public abstract class ExchangeRateMapper {

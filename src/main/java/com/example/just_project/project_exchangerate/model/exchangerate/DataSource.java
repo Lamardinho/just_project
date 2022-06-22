@@ -1,4 +1,4 @@
-package com.example.just_project.project_exchangerate.model;
+package com.example.just_project.project_exchangerate.model.exchangerate;
 
 import com.example.just_project.project_exchangerate.enums.ESource;
 import lombok.AllArgsConstructor;

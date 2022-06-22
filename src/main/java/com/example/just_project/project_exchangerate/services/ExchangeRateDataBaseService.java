@@ -6,10 +6,12 @@ import com.example.just_project.common.services.XmlMapperService;
 import com.example.just_project.common.util.AppException;
 import com.example.just_project.project_exchangerate.dto.exchangerate.cbr.ValCurs;
 import com.example.just_project.project_exchangerate.dtomappers.ExchangeRateMapper;
+import com.example.just_project.project_exchangerate.dtomappers.RateMapper;
 import com.example.just_project.project_exchangerate.enums.ERate;
-import com.example.just_project.project_exchangerate.model.ExchangeRate;
+import com.example.just_project.project_exchangerate.model.exchangerate.ExchangeRate;
 import com.example.just_project.project_exchangerate.repositories.DataSourceRepository;
 import com.example.just_project.project_exchangerate.repositories.ExchangeRateRepository;
+import com.example.just_project.project_exchangerate.repositories.RateRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 import static com.example.just_project.project_exchangerate.enums.ESource.CBR_RU_DAILY_ENG_XML;
 import static com.example.just_project.project_exchangerate.util.ExchangeErrors.DATA_SOURCE_NOT_FOUND;
@@ -34,7 +37,11 @@ import static java.lang.String.format;
 public class ExchangeRateDataBaseService {
 
     @NonNull
-    private final ExchangeRateRepository rateRepository;
+    private final ExchangeRateRepository exchangeRateRepository;
+    @NonNull
+    private final DataSourceRepository dataSourceRepository;
+    @NonNull
+    private final RateRepository rateRepository;
     @NonNull
     private final ObjectMapperService objMapService;
     @NonNull
@@ -42,9 +49,9 @@ public class ExchangeRateDataBaseService {
     @NonNull
     private final ContentService contentService;
     @NonNull
-    private final ExchangeRateMapper exchangeRateMapper;
+    private final RateMapper rateMapper;
     @NonNull
-    private final DataSourceRepository dataSourceRepository;
+    private final ExchangeRateMapper exchangeRateMapper;
 
     /**
      * Нам не надо несколько рейтингов одного дня.
@@ -71,16 +78,22 @@ public class ExchangeRateDataBaseService {
      */
     @Transactional
     @SneakyThrows
-    public void createOrUpdateFromCbrXml() {
-        val url = CBR_RU_DAILY_ENG_XML.getUrl();
-        val currency = ERate.RUB;
-        val valCurs = xmlMapperService.readXml(new URL(url), ValCurs.class);
+    public void createOrUpdateFromCbrXml(ERate currency) {
+        val valCurs = xmlMapperService.readXml(new URL(CBR_RU_DAILY_ENG_XML.getUrl()), ValCurs.class);
         val dateOfRating = LocalDate.parse(valCurs.getDate(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        val rateToMap = rateRepository
+        // если находим -> обновляем, иначе создаём новый
+        val rateToMap = exchangeRateRepository
                 .findByCurrencyAndDateRating(currency, dateOfRating)     //for update
-                .orElse(new ExchangeRate());                 //for create
+                .orElse(new ExchangeRate());                       //for create
 
-        val result = new ExchangeRate(
+        var rates = valCurs.getCurrencies()
+                .stream()
+                .map(rateMapper::toEntity)
+                .collect(Collectors.toList());
+
+        rates = rateRepository.saveAll(rates);
+
+        val exchangeRate = new ExchangeRate(
                 rateToMap.getId(),
                 dataSourceRepository
                         .findBySource(CBR_RU_DAILY_ENG_XML)
@@ -88,10 +101,10 @@ public class ExchangeRateDataBaseService {
                 dateOfRating,
                 valCurs.getTime(),
                 currency,
-                objMapService.writeValueAsString(valCurs.getCurrencies())
+                rates
         );
 
-        rateRepository.save(result);
+        exchangeRateRepository.save(exchangeRate);
     }
 
     /*public List<CurrencyRateByUsdAndEuroDto> getAllCurrencyRateByUsdAndEuroDtoList(Pageable pageable) {

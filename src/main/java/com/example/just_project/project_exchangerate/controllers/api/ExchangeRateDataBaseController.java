@@ -2,6 +2,7 @@ package com.example.just_project.project_exchangerate.controllers.api;
 
 import com.example.just_project.common.aop.TrackExecutionTime;
 import com.example.just_project.common.util.ContractResult;
+import com.example.just_project.project_exchangerate.enums.ERate;
 import com.example.just_project.project_exchangerate.services.ExchangeRateDataBaseService;
 import com.example.just_project.project_exchangerate.util.ExchangeRateMessages;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,7 +41,7 @@ public class ExchangeRateDataBaseController {
     @TrackExecutionTime
     @PutMapping("/ruble/update/today/cbr")
     public ContractResult<Boolean> createOrUpdateFromCbrXml() {
-        dataBaseService.createOrUpdateFromCbrXml();
+        dataBaseService.createOrUpdateFromCbrXml(ERate.RUB);
         return new ContractResult<>(true).setMessage(ExchangeRateMessages.RATINGS_HAVE_BEEN_UPDATED);
     }
 
