@@ -1,7 +1,5 @@
 package com.example.just_project.project_exchangerate.services;
 
-import com.example.just_project.common.services.ContentService;
-import com.example.just_project.common.services.ObjectMapperService;
 import com.example.just_project.common.services.XmlMapperService;
 import com.example.just_project.common.util.AppException;
 import com.example.just_project.project_exchangerate.dto.exchangerate.ExchangeRateDto;
@@ -26,10 +24,12 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import static com.example.just_project.project_exchangerate.enums.ERate.EUR;
+import static com.example.just_project.project_exchangerate.enums.ERate.USD;
 import static com.example.just_project.project_exchangerate.util.ExchangeErrors.DATA_SOURCE_NOT_FOUND;
 import static java.lang.String.format;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Сервис для работы с рейтингами валют
@@ -46,11 +46,7 @@ public class ExchangeRateDataBaseService {
     @NonNull
     private final RateRepository rateRepository;
     @NonNull
-    private final ObjectMapperService objMapService;
-    @NonNull
     private final XmlMapperService xmlMapperService;
-    @NonNull
-    private final ContentService contentService;
     @NonNull
     private final RateMapper rateMapper;
     @NonNull
@@ -86,7 +82,7 @@ public class ExchangeRateDataBaseService {
         var rates = valCursDto.getCurrencies()
                 .stream()
                 .map(rateMapper::toEntity)
-                .collect(Collectors.toList());
+                .collect(toList());
 
         rates = rateRepository.saveAll(rates);
 
@@ -109,11 +105,32 @@ public class ExchangeRateDataBaseService {
         exchangeRateRepository.save(exchangeRate);
     }
 
-    public List<ExchangeRateDto> getAllCurrencyRateByUsdAndEuroDtoList(Pageable pageable) {
-        val exchangeRatePage = exchangeRateRepository.findAllByCurrency(ERate.RUB, pageable);
+    public List<ExchangeRateDto> getExchangeRateDtoList(ERate currency, ESource source, Pageable pageable) {
+        val exchangeRatePage = exchangeRateRepository.findAllByCurrencyAndDataSource(
+                currency,
+                dataSourceRepository.findBySource(source)
+                        .orElseThrow(() -> new AppException(format(DATA_SOURCE_NOT_FOUND, source))),
+                pageable
+        );
         return exchangeRatePage.getContent()
                 .stream()
                 .map(exchangeRateMapper::toExchangeRateDto)
-                .collect(Collectors.toList());
+                .collect(toList());
+    }
+
+    public List<ExchangeRateDto> getExchangeRateUsdAndEuroDtoList(ERate currency, ESource source, Pageable pageable) {
+        val exchangeRateDtoList = getExchangeRateDtoList(currency, source, pageable);
+        filterByUsdAndEuro(exchangeRateDtoList);
+        return exchangeRateDtoList;
+    }
+
+    private void filterByUsdAndEuro(List<ExchangeRateDto> exchangeRateDtoList) {
+        exchangeRateDtoList.forEach(exchangeRate ->
+                exchangeRate.setRates(
+                        exchangeRate.getRates()
+                                .stream()
+                                .filter(rate -> rate.getCharCode() == USD || rate.getCharCode() == EUR)
+                                .collect(toList()))
+        );
     }
 }

@@ -23,6 +23,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
+import static com.example.just_project.project_exchangerate.enums.ERate.RUB;
 import static com.example.just_project.project_exchangerate.enums.ESource.CBR_RU_DAILY_ENG_XML;
 
 @Tag(name = "Курсы валют. DB", description = "Получение курса валют из online источников, запись в БД и чтение")
@@ -39,7 +40,7 @@ public class ExchangeRateDataBaseController {
             description = "Сохраняет сегодняшние рейтинги в БД, если сегодняшний день уже есть в БД, то просто обновляет его"
     )
     @TrackExecutionTime
-    @PutMapping("/ruble/update/today/cbr")
+    @PutMapping("/ruble/cbr/update/today")
     public ContractResult<Boolean> createOrUpdateFromCbrXml() {
         dataBaseService.createOrUpdateRubleRateFromCbrXml(CBR_RU_DAILY_ENG_XML);
         return new ContractResult<>(true).setMessage(ExchangeRateMessages.RATINGS_HAVE_BEEN_UPDATED);
@@ -48,12 +49,12 @@ public class ExchangeRateDataBaseController {
     @Operation(summary = "Загрузить последние рейтинги")
     @ApiPageable
     @TrackExecutionTime
-    @GetMapping("/ruble/all")
+    @GetMapping("/ruble/cbr/all")
     public ContractResult<List<ExchangeRateDto>> findAll(
             @ApiIgnore
             @PageableDefault(size = 30, sort = {"dateRating"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        val result = dataBaseService.getAllCurrencyRateByUsdAndEuroDtoList(pageable);
+        val result = dataBaseService.getExchangeRateUsdAndEuroDtoList(RUB, CBR_RU_DAILY_ENG_XML, pageable);
         return new ContractResult<>(result).setMessage("size: " + result.size());
     }
 }

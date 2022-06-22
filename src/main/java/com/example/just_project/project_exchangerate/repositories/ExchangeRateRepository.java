@@ -1,6 +1,7 @@
 package com.example.just_project.project_exchangerate.repositories;
 
 import com.example.just_project.project_exchangerate.enums.ERate;
+import com.example.just_project.project_exchangerate.model.exchangerate.DataSource;
 import com.example.just_project.project_exchangerate.model.exchangerate.ExchangeRate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,5 +18,5 @@ public interface ExchangeRateRepository extends JpaRepository<ExchangeRate, Long
 
     Optional<ExchangeRate> findByCurrencyAndDateRating(ERate currency, LocalDate date);
 
-    Page<ExchangeRate> findAllByCurrency(ERate currency, Pageable pageable);
+    Page<ExchangeRate> findAllByCurrencyAndDataSource(ERate currency, DataSource dataSource, Pageable pageable);
 }
