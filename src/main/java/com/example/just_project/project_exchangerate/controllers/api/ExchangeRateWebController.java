@@ -1,7 +1,6 @@
 package com.example.just_project.project_exchangerate.controllers.api;
 
 import com.example.just_project.common.aop.TrackExecutionTime;
-import com.example.just_project.common.services.XmlMapperService;
 import com.example.just_project.project_exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 import com.example.just_project.project_exchangerate.dto.exchangerate.cbr.ValCurs;
 import com.example.just_project.project_exchangerate.services.ExchangeRateWebService;
@@ -17,12 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.LocalDate;
-
-import static com.example.just_project.project_exchangerate.enums.ESource.CBR_RU_DAILY_ENG_XML;
-import static java.time.format.DateTimeFormatter.ofPattern;
 
 @Tag(name = "Курсы валют. Online", description = "Просмотр курсов валют из online источников")
 @RestController
@@ -32,8 +26,6 @@ public class ExchangeRateWebController {
 
     @NonNull
     private final ExchangeRateWebService exchangeRateWebService;
-    @NonNull
-    private final XmlMapperService xmlMapperService;
 
     @Operation(
             summary = "Получение котировок на заданный день с www.cbr.ru",
@@ -47,11 +39,8 @@ public class ExchangeRateWebController {
             @DateTimeFormat(pattern = "dd/MM/yyyy")
             @RequestParam(defaultValue = "#{T(java.time.LocalDate).now()}")
             LocalDate date
-    ) throws MalformedURLException {
-        return xmlMapperService.readXml(
-                new URL(CBR_RU_DAILY_ENG_XML.getUrl() + date.format(ofPattern("dd/MM/yyyy"))),
-                ValCurs.class
-        );
+    ) {
+        return exchangeRateWebService.getRubleRateJsonFromCbrUrlXml(date);
     }
 
     @Operation(summary = "Получить рейтинг рубля на сегодняшний день")
