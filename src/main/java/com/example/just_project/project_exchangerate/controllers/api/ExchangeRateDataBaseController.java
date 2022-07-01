@@ -54,7 +54,9 @@ public class ExchangeRateDataBaseController {
             @ApiIgnore
             @PageableDefault(size = 30, sort = {"dateRating"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        val result = dataBaseService.getExchangeRateUsdAndEuroDtoList(RUB, CBR_RU_DAILY_ENG_XML, pageable);
+        val result = dataBaseService.findAllExchangeRateDtoListAndFilterByUsdAndEurCacheable(
+                RUB, CBR_RU_DAILY_ENG_XML, pageable
+        );
         return new ContractResult<>(result).setMessage("size: " + result.size());
     }
 }

@@ -16,6 +16,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.val;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -105,7 +107,33 @@ public class ExchangeRateDataBaseService {
         exchangeRateRepository.save(exchangeRate);
     }
 
-    public List<ExchangeRateDto> getExchangeRateDtoList(ERate currency, ESource source, Pageable pageable) {
+    /**
+     * Кешированный метод для {@link #findAllExchangeRateDtoListAndFilterByUsdAndEur(ERate, ESource, Pageable)}
+     */
+    @Cacheable(cacheNames = "exchangeRateUsdAndEuro")
+    public List<ExchangeRateDto> findAllExchangeRateDtoListAndFilterByUsdAndEurCacheable(ERate currency, ESource source, Pageable pageable) {
+        return findAllExchangeRateDtoListAndFilterByUsdAndEur(currency, source, pageable);
+    }
+
+    /**
+     * Находим рейтинги {@link #findAllExchangeRateDtoList(ERate, ESource, Pageable)}
+     * и фильтруем {@link #filterByUsdAndEuro(List<ExchangeRateDto>)}
+     */
+    public List<ExchangeRateDto> findAllExchangeRateDtoListAndFilterByUsdAndEur(ERate currency, ESource source, Pageable pageable) {
+        val exchangeRateDtoList = findAllExchangeRateDtoList(currency, source, pageable);
+        filterByUsdAndEuro(exchangeRateDtoList);
+        return exchangeRateDtoList;
+    }
+
+    /**
+     * Находим список {@link ExchangeRate} по параметрам и мапим в DTO
+     *
+     * @param currency - валюта
+     * @param source   - источник
+     * @param pageable - параметры поиска
+     * @return - list of {@link ExchangeRateDto}
+     */
+    public List<ExchangeRateDto> findAllExchangeRateDtoList(ERate currency, ESource source, Pageable pageable) {
         val exchangeRatePage = exchangeRateRepository.findAllByCurrencyAndDataSource(
                 currency,
                 dataSourceRepository.findBySource(source)
@@ -118,13 +146,10 @@ public class ExchangeRateDataBaseService {
                 .collect(toList());
     }
 
-    public List<ExchangeRateDto> getExchangeRateUsdAndEuroDtoList(ERate currency, ESource source, Pageable pageable) {
-        val exchangeRateDtoList = getExchangeRateDtoList(currency, source, pageable);
-        filterByUsdAndEuro(exchangeRateDtoList);
-        return exchangeRateDtoList;
-    }
-
-    private void filterByUsdAndEuro(List<ExchangeRateDto> exchangeRateDtoList) {
+    /**
+     * Фильтруем по {@link ERate#USD} and {@link ERate#EUR}
+     */
+    private void filterByUsdAndEuro(@NotNull List<ExchangeRateDto> exchangeRateDtoList) {
         exchangeRateDtoList.forEach(exchangeRate ->
                 exchangeRate.setRates(
                         exchangeRate.getRates()
