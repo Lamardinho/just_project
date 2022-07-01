@@ -46,7 +46,7 @@ public class ExchangeRateDataBaseController {
         return new ContractResult<>(true).setMessage(ExchangeRateMessages.RATINGS_HAVE_BEEN_UPDATED);
     }
 
-    @Operation(summary = "Загрузить последние рейтинги")
+    @Operation(summary = "Загрузить все рейтинги")
     @ApiPageable
     @TrackExecutionTime
     @GetMapping("/ruble/cbr/all")
@@ -56,6 +56,17 @@ public class ExchangeRateDataBaseController {
     ) {
         val result = dataBaseService.findAllExchangeRateDtoListAndFilterByUsdAndEurCacheable(
                 RUB, CBR_RU_DAILY_ENG_XML, pageable
+        );
+        return new ContractResult<>(result).setMessage("size: " + result.size());
+    }
+
+    @Operation(summary = "Загрузить рейтинги за последние 30 дней", description = "использует кешированный метод")
+    @ApiPageable
+    @TrackExecutionTime
+    @GetMapping("/ruble/cbr/last-30-days")
+    public ContractResult<List<ExchangeRateDto>> findLast30Days(boolean sortDesc) {
+        val result = dataBaseService.findLast30ExchangeRateDtoListAndFilterByUsdAndEurCacheable(
+                RUB, CBR_RU_DAILY_ENG_XML, sortDesc
         );
         return new ContractResult<>(result).setMessage("size: " + result.size());
     }
