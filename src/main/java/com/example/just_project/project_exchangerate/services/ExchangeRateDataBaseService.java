@@ -8,6 +8,7 @@ import com.example.just_project.project_exchangerate.dtomappers.ExchangeRateMapp
 import com.example.just_project.project_exchangerate.dtomappers.RateMapper;
 import com.example.just_project.project_exchangerate.enums.ERate;
 import com.example.just_project.project_exchangerate.enums.ESource;
+import com.example.just_project.project_exchangerate.model.exchangerate.DataSource;
 import com.example.just_project.project_exchangerate.model.exchangerate.ExchangeRate;
 import com.example.just_project.project_exchangerate.repositories.DataSourceRepository;
 import com.example.just_project.project_exchangerate.repositories.ExchangeRateRepository;
@@ -98,9 +99,7 @@ public class ExchangeRateDataBaseService {
 
         exchangeRate = new ExchangeRate(
                 exchangeRate.getId(),
-                dataSourceRepository
-                        .findBySource(source)
-                        .orElseThrow(() -> new AppException(format(DATA_SOURCE_NOT_FOUND, source))),
+                findDataSourceBySource(source),
                 dateOfRating,
                 valCursDto.getTime(),
                 currency,
@@ -137,7 +136,7 @@ public class ExchangeRateDataBaseService {
     /**
      * Находим рейтинги и фильтруем по USD и EURO
      */
-    private List<ExchangeRateDto> findAllExchangeRateDtoListAndFilterByUsdAndEur(
+    public List<ExchangeRateDto> findAllExchangeRateDtoListAndFilterByUsdAndEur(
             @NonNull ERate currency,
             @NonNull ESource source,
             @NonNull Pageable pageable
@@ -150,7 +149,7 @@ public class ExchangeRateDataBaseService {
     /**
      * Находим рейтинги за последние 30 дней и фильтруем по USD и EURO
      */
-    private List<ExchangeRateDto> findLast30ExchangeRateDtoListAndFilterByUsdAndEur(
+    public List<ExchangeRateDto> findLast30ExchangeRateDtoListAndFilterByUsdAndEur(
             @NonNull ERate currency,
             @NonNull ESource source,
             boolean sortDesc
@@ -192,10 +191,14 @@ public class ExchangeRateDataBaseService {
     ) {
         return exchangeRateRepository.findAllByCurrencyAndDataSource(
                 currency,
-                dataSourceRepository.findBySource(source)
-                        .orElseThrow(() -> new AppException(format(DATA_SOURCE_NOT_FOUND, source))),
+                findDataSourceBySource(source),
                 pageable
         );
+    }
+
+    private DataSource findDataSourceBySource(@NotNull ESource source) {
+        return dataSourceRepository.findBySource(source)
+                .orElseThrow(() -> new AppException(format(DATA_SOURCE_NOT_FOUND, source)));
     }
 
     /**

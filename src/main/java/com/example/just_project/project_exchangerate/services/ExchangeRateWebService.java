@@ -36,6 +36,11 @@ public class ExchangeRateWebService {
     @NonNull
     private final ExchangeRateMapper exchangeRateMapper;
 
+    /**
+     * Получение сегодняшнего курса валют.
+     * Источник: <a href="https://www.cbr-xml-daily.ru/latest.js">...</a>.
+     * Соотношение: RUB -> Currency.
+     */
     @Cacheable(cacheNames = "getCurrencyRateByUsdAndEuro")
     public CurrencyRateByUsdAndEuroDto getCurrencyRateByUsdAndEuro() {
         val rate = objMapService.readValue(
@@ -45,6 +50,11 @@ public class ExchangeRateWebService {
         return exchangeRateMapper.dtoWhereRateIsMapStrToCurrencyRateByUsdAndEuroDto(rate);
     }
 
+    /**
+     * Получение курса валют по заданному дню (сегодняшний по умолчанию).
+     * Источник <a href="https://www.cbr.ru/scripts/XML_daily_eng.asp?date_req=">...</a>.
+     * Соотношение: Currency -> RUB
+     */
     @Cacheable(cacheNames = "getRubleRateJsonFromCbrUrlXml")
     @SneakyThrows
     public ValCurs getRubleRateJsonFromCbrUrlXml(LocalDate date) {
