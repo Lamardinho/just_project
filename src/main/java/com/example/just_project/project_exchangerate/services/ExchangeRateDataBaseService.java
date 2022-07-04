@@ -33,6 +33,7 @@ import java.util.List;
 
 import static com.example.just_project.project_exchangerate.enums.ERate.EUR;
 import static com.example.just_project.project_exchangerate.enums.ERate.USD;
+import static com.example.just_project.project_exchangerate.enums.ESource.CBR_RU_DAILY_ENG_XML;
 import static com.example.just_project.project_exchangerate.util.ExchangeErrors.DATA_SOURCE_NOT_FOUND;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
@@ -60,7 +61,8 @@ public class ExchangeRateDataBaseService {
 
     @SneakyThrows
     @Transactional
-    public void createOrUpdateRubleRateFromCbrXml(@NonNull ESource source) {
+    public void createOrUpdateRubleRateFromCbrXml() {
+        var source = CBR_RU_DAILY_ENG_XML;
         val valCurs = xmlMapperService.readXml(new URL(source.getUrl()), ValCurs.class);
         val dateOfRating = LocalDate.parse(valCurs.getDate(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         save(ERate.RUB, valCurs, source, dateOfRating);

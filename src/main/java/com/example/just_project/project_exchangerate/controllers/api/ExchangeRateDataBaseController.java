@@ -42,7 +42,7 @@ public class ExchangeRateDataBaseController {
     @TrackExecutionTime
     @PutMapping("/ruble/cbr/update/today")
     public ContractResult<Boolean> createOrUpdateFromCbrXml() {
-        dataBaseService.createOrUpdateRubleRateFromCbrXml(CBR_RU_DAILY_ENG_XML);
+        dataBaseService.createOrUpdateRubleRateFromCbrXml();
         return new ContractResult<>(true).setMessage(ExchangeRateMessages.RATINGS_HAVE_BEEN_UPDATED);
     }
 
