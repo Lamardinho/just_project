@@ -15,6 +15,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.URI;
 import java.net.URL;
 import java.time.LocalDate;
 
@@ -35,6 +36,8 @@ public class ExchangeRateWebService {
     private final ContentService contentService;
     @NonNull
     private final ExchangeRateMapper exchangeRateMapper;
+    @NonNull
+    private final CbrFeignClient cbrFeignClient;
 
     /**
      * Получение сегодняшнего курса валют.
@@ -61,6 +64,17 @@ public class ExchangeRateWebService {
         return xmlMapperService.readXml(
                 new URL(CBR_RU_DAILY_ENG_XML.getUrl() + date.format(ofPattern("dd/MM/yyyy"))),
                 ValCurs.class
+        );
+    }
+
+    /**
+     * Аналог {@link #getRubleRateJsonFromCbrUrlXml(LocalDate)} реализованный через FeignClient
+     */
+    @Cacheable(cacheNames = "getRubleRateJsonFromCbrUrlXmlFeignClient")
+    @SneakyThrows
+    public ValCurs getRubleRateJsonFromCbrUrlXmlFeignClient(LocalDate date) {
+        return cbrFeignClient.getRubleRateJsonFromCbrUrlXml(
+                URI.create(CBR_RU_DAILY_ENG_XML.getUrl() + date.format(ofPattern("dd/MM/yyyy")))
         );
     }
 }

@@ -29,7 +29,7 @@ public class ExchangeRateWebController {
 
     @Operation(
             summary = "Получение котировок на заданный день с www.cbr.ru",
-            description = "Укажите дату в формате day-month-year (не раньше 01-07-1992)," +
+            description = "Укажите дату в формате day-month-year (не раньше 01/07/1992)," +
                     " или оставьте пустым для получения самых актуальных рейтингов"
     )
     @GetMapping("/cbr/ruble/json/all")
@@ -41,6 +41,22 @@ public class ExchangeRateWebController {
             LocalDate date
     ) {
         return exchangeRateWebService.getRubleRateJsonFromCbrUrlXml(date);
+    }
+
+    @Operation(
+            summary = "Получение котировок на заданный день с www.cbr.ru (через FeignClient)",
+            description = "Укажите дату в формате day-month-year (не раньше 01/07/1992)," +
+                    " или оставьте пустым для получения самых актуальных рейтингов"
+    )
+    @GetMapping("/cbr/ruble/json/all/v2")
+    @TrackExecutionTime
+    public ValCurs getRubleRateJsonFromCbrUrlXmlV2(
+            @ApiParam(example = "28/05/2022")
+            @DateTimeFormat(pattern = "dd/MM/yyyy")
+            @RequestParam(defaultValue = "#{T(java.time.LocalDate).now()}")
+            LocalDate date
+    ) {
+        return exchangeRateWebService.getRubleRateJsonFromCbrUrlXmlFeignClient(date);
     }
 
     @Operation(summary = "Получить рейтинг рубля на сегодняшний день")
