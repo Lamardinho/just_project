@@ -37,7 +37,7 @@ public class ExchangeRateWebService {
     @NonNull
     private final ExchangeRateMapper exchangeRateMapper;
     @NonNull
-    private final CbrFeignClient cbrFeignClient;
+    private final CbrRubleRatesClient cbrRubleRatesClient;
 
     /**
      * Получение сегодняшнего курса валют.
@@ -73,7 +73,7 @@ public class ExchangeRateWebService {
     @Cacheable(cacheNames = "getRubleRateJsonFromCbrUrlXmlFeignClient")
     @SneakyThrows
     public ValCurs getRubleRateJsonFromCbrUrlXmlFeignClient(LocalDate date) {
-        return cbrFeignClient.getRubleRateJsonFromCbrUrlXml(
+        return cbrRubleRatesClient.getRubleRateJsonFromCbrUrlXml(
                 URI.create(CBR_RU_DAILY_ENG_XML.getUrl() + date.format(ofPattern("dd/MM/yyyy")))
         );
     }

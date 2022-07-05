@@ -6,6 +6,7 @@ import com.example.just_project.config.ApiPageable;
 import com.example.just_project.project_exchangerate.dto.exchangerate.ExchangeRateDto;
 import com.example.just_project.project_exchangerate.services.ExchangeRateDataBaseService;
 import com.example.just_project.project_exchangerate.util.ExchangeRateMessages;
+import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.NonNull;
@@ -14,13 +15,12 @@ import lombok.val;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.example.just_project.project_exchangerate.enums.ERate.RUB;
@@ -36,13 +36,18 @@ public class ExchangeRateDataBaseController {
     private final ExchangeRateDataBaseService dataBaseService;
 
     @Operation(
-            summary = "Обновить рейтинги сегодняшнего дня c cbr.ru",
-            description = "Сохраняет сегодняшние рейтинги в БД, если сегодняшний день уже есть в БД, то просто обновляет его"
+            summary = "Обновить рейтинги c cbr.ru по указанной дате (в формате: dd/MM/yyyy)",
+            description = "Сохраняет рейтинги по заданной дате в БД, если рейтинг с таким днём уже есть в БД, то просто обновляет его"
     )
     @TrackExecutionTime
     @PutMapping("/ruble/cbr/update/today")
-    public ContractResult<Boolean> createOrUpdateFromCbrXml() {
-        dataBaseService.createOrUpdateRubleRateFromCbrXml();
+    public ContractResult<Boolean> createOrUpdateFromCbrXml(
+            @ApiParam(example = "28/05/2022")
+            @DateTimeFormat(pattern = "dd/MM/yyyy")
+            @RequestParam(defaultValue = "#{T(java.time.LocalDate).now()}")
+            LocalDate date
+    ) {
+        dataBaseService.createOrUpdateRubleRateFromCbrXml(date);
         return new ContractResult<>(true).setMessage(ExchangeRateMessages.RATINGS_HAVE_BEEN_UPDATED);
     }
 

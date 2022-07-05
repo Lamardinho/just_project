@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.net.URI;
 
-
 @FeignClient(name = "cbrrates", url = "plug_because_the_dynamic_address")
-public interface CbrFeignClient {
+public interface CbrRubleRatesClient {
 
     @GetMapping
     ValCurs getRubleRateJsonFromCbrUrlXml(URI uri);

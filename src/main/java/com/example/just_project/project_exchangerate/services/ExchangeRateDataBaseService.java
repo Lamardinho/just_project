@@ -1,6 +1,5 @@
 package com.example.just_project.project_exchangerate.services;
 
-import com.example.just_project.common.services.XmlMapperService;
 import com.example.just_project.common.util.AppException;
 import com.example.just_project.project_exchangerate.dto.exchangerate.ExchangeRateDto;
 import com.example.just_project.project_exchangerate.dto.exchangerate.cbr.ValCurs;
@@ -26,9 +25,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.URL;
+import java.net.URI;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static com.example.just_project.project_exchangerate.enums.ERate.EUR;
@@ -36,6 +34,7 @@ import static com.example.just_project.project_exchangerate.enums.ERate.USD;
 import static com.example.just_project.project_exchangerate.enums.ESource.CBR_RU_DAILY_ENG_XML;
 import static com.example.just_project.project_exchangerate.util.ExchangeErrors.DATA_SOURCE_NOT_FOUND;
 import static java.lang.String.format;
+import static java.time.format.DateTimeFormatter.ofPattern;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -47,13 +46,13 @@ import static java.util.stream.Collectors.toList;
 public class ExchangeRateDataBaseService {
 
     @NonNull
+    private final CbrRubleRatesClient cbrRubleRatesClient;
+    @NonNull
     private final ExchangeRateRepository exchangeRateRepository;
     @NonNull
     private final DataSourceRepository dataSourceRepository;
     @NonNull
     private final RateRepository rateRepository;
-    @NonNull
-    private final XmlMapperService xmlMapperService;
     @NonNull
     private final RateMapper rateMapper;
     @NonNull
@@ -61,10 +60,12 @@ public class ExchangeRateDataBaseService {
 
     @SneakyThrows
     @Transactional
-    public void createOrUpdateRubleRateFromCbrXml() {
+    public void createOrUpdateRubleRateFromCbrXml(LocalDate date) {
         var source = CBR_RU_DAILY_ENG_XML;
-        val valCurs = xmlMapperService.readXml(new URL(source.getUrl()), ValCurs.class);
-        val dateOfRating = LocalDate.parse(valCurs.getDate(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        val valCurs = cbrRubleRatesClient.getRubleRateJsonFromCbrUrlXml(
+                URI.create(source.getUrl() + date.format(ofPattern("dd/MM/yyyy")))
+        );
+        val dateOfRating = LocalDate.parse(valCurs.getDate(), ofPattern("dd.MM.yyyy"));
         save(ERate.RUB, valCurs, source, dateOfRating);
     }
 
