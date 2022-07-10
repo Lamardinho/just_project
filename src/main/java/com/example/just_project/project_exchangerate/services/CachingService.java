@@ -23,10 +23,10 @@ public class CachingService {
     /**
      * Автоматически запускает очистку кэша через определенный промежуток времени
      */
-    @Scheduled(fixedRate = 240, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedRate = 6, timeUnit = TimeUnit.HOURS)
     public void schedulerToClearAllCaches() {
-        clearAllCaches();
         log.info("run schedulerToClearAllCaches");
+        clearAllCaches();
     }
 
     /**
