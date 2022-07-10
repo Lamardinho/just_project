@@ -51,6 +51,17 @@ public class ExchangeRateDataBaseController {
         return new ContractResult<>(true).setMessage(ExchangeRateMessages.RATINGS_HAVE_BEEN_UPDATED);
     }
 
+    @Operation(
+            summary = "Обновить рейтинги c cbr.ru за последние 30 дней",
+            description = "Сохраняет рейтинги за последние 30 дней в БД, если рейтинг с таким днём уже есть в БД, то просто обновляет его"
+    )
+    @TrackExecutionTime
+    @PutMapping("/ruble/cbr/update/over-past-30-days")
+    public ContractResult<Boolean> createOrUpdateRubleRateFromCbrXmlOverPast30Days() {
+        dataBaseService.createOrUpdateRubleRateFromCbrXmlOverPast30Days();
+        return new ContractResult<>(true).setMessage(ExchangeRateMessages.RATINGS_HAVE_BEEN_UPDATED);
+    }
+
     @Operation(summary = "Загрузить все рейтинги")
     @ApiPageable
     @TrackExecutionTime

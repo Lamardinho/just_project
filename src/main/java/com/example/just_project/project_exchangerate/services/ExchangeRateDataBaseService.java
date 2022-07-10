@@ -92,12 +92,26 @@ public class ExchangeRateDataBaseService {
     @SneakyThrows
     @Transactional
     public void createOrUpdateRubleRateFromCbrXml(LocalDate date) {
-        var source = CBR_RU_DAILY_ENG_XML;
+        val source = CBR_RU_DAILY_ENG_XML;
         val valCurs = cbrRubleRatesClient.getRubleRateJsonFromCbrUrlXml(
                 URI.create(source.getUrl() + date.format(ofPattern("dd/MM/yyyy")))
         );
         val dateOfRating = LocalDate.parse(valCurs.getDate(), ofPattern("dd.MM.yyyy"));
         save(ERate.RUB, valCurs, source, dateOfRating);
+    }
+
+    @SneakyThrows
+    @Transactional
+    public void createOrUpdateRubleRateFromCbrXmlOverPast30Days() {
+        for (int i = 30; i > 0; i--) {
+            val date = LocalDate.now().minusDays(i);
+            val optionalExchangeRate = exchangeRateRepository.findByCurrencyAndDateRating(
+                    ERate.RUB, date
+            );
+            if (optionalExchangeRate.isEmpty()) {
+                createOrUpdateRubleRateFromCbrXml(date);
+            }
+        }
     }
 
     /**
@@ -107,7 +121,7 @@ public class ExchangeRateDataBaseService {
      * Нам не надо несколько рейтингов одного дня.
      * Чтобы не создавать новые рейтинги одного дня, то просто обновляем последний, иначе создаём новый.
      *
-     * @param currency     - currency on which the Reetings will be formed / валюта по которой будут формироваться рейтинги
+     * @param currency     - currency on which the Ratings will be formed / валюта по которой будут формироваться рейтинги
      * @param valCursDto   - DTO with ratings data / DTO с данными о рейтингах
      * @param source       - data source / источник данных
      * @param dateOfRating - the date of the ratings / дата рейтингов
