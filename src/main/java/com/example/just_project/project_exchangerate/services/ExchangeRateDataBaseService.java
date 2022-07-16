@@ -20,7 +20,6 @@ import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -69,7 +68,7 @@ public class ExchangeRateDataBaseService {
      * <p>
      * Автоматически обновляет сегодняшний рейтинг.
      */
-    @Scheduled(fixedRate = 6, timeUnit = TimeUnit.HOURS)
+    @Scheduled(fixedRate = 360, initialDelay = 1, timeUnit = TimeUnit.MINUTES)
     @Transactional
     public void updateToday() {
         try {
@@ -155,30 +154,6 @@ public class ExchangeRateDataBaseService {
         );
 
         exchangeRateRepository.save(exchangeRate);
-    }
-
-    /**
-     * Кешированный метод для {@link #findAllExchangeRateDtoListAndFilterByUsdAndEur(ERate, ESource, Pageable)}
-     */
-    @Cacheable(cacheNames = "findAllExchangeRateDtoListAndFilterByUsdAndEurCacheable")
-    public List<ExchangeRateDto> findAllExchangeRateDtoListAndFilterByUsdAndEurCacheable(
-            @NonNull ERate currency,
-            @NonNull ESource source,
-            @NonNull Pageable pageable
-    ) {
-        return findAllExchangeRateDtoListAndFilterByUsdAndEur(currency, source, pageable);
-    }
-
-    /**
-     * Кешированный метод для {@link #findLast30ExchangeRateDtoListAndFilterByUsdAndEur(ERate, ESource, boolean)}
-     */
-    @Cacheable(cacheNames = "findLast30ExchangeRateDtoListAndFilterByUsdAndEurCacheable")
-    public List<ExchangeRateDto> findLast30ExchangeRateDtoListAndFilterByUsdAndEurCacheable(
-            @NonNull ERate currency,
-            @NonNull ESource source,
-            boolean sortDesc
-    ) {
-        return findLast30ExchangeRateDtoListAndFilterByUsdAndEur(currency, source, sortDesc);
     }
 
     /**

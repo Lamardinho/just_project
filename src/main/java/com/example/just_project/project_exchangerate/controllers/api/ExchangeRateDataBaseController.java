@@ -70,18 +70,18 @@ public class ExchangeRateDataBaseController {
             @ApiIgnore
             @PageableDefault(size = 30, sort = {"dateRating"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        val result = dataBaseService.findAllExchangeRateDtoListAndFilterByUsdAndEurCacheable(
+        val result = dataBaseService.findAllExchangeRateDtoListAndFilterByUsdAndEur(
                 RUB, CBR_RU_DAILY_ENG_XML, pageable
         );
         return new ContractResult<>(result).setMessage("size: " + result.size());
     }
 
-    @Operation(summary = "Загрузить рейтинги за последние 30 дней", description = "использует кешированный метод")
+    @Operation(summary = "Загрузить рейтинги за последние 30 дней")
     @ApiPageable
     @TrackExecutionTime
     @GetMapping("/ruble/cbr/last-30-days")
     public ContractResult<List<ExchangeRateDto>> findLast30Days(boolean sortDesc) {
-        val result = dataBaseService.findLast30ExchangeRateDtoListAndFilterByUsdAndEurCacheable(
+        val result = dataBaseService.findLast30ExchangeRateDtoListAndFilterByUsdAndEur(
                 RUB, CBR_RU_DAILY_ENG_XML, sortDesc
         );
         return new ContractResult<>(result).setMessage("size: " + result.size());

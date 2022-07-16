@@ -3,6 +3,7 @@ package com.example.just_project.project_exchangerate.services;
 import com.example.just_project.common.services.ContentService;
 import com.example.just_project.common.services.ObjectMapperService;
 import com.example.just_project.common.services.XmlMapperService;
+import com.example.just_project.common.util.CacheNames;
 import com.example.just_project.project_exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 import com.example.just_project.project_exchangerate.dto.exchangerate.ExchangeRatesDtoWhereRateIsMapStr;
 import com.example.just_project.project_exchangerate.dto.exchangerate.cbr.ValCurs;
@@ -44,8 +45,8 @@ public class ExchangeRateWebService {
      * Источник: <a href="https://www.cbr-xml-daily.ru/latest.js">...</a>.
      * Соотношение: RUB -> Currency.
      */
-    @Cacheable(cacheNames = "getCurrencyRateByUsdAndEuro")
-    public CurrencyRateByUsdAndEuroDto getCurrencyRateByUsdAndEuro() {
+    @Cacheable(cacheNames = CacheNames.GET_ACTUAL_RUBLE_RATES_BY_USD_AND_EURO)
+    public CurrencyRateByUsdAndEuroDto getActualRubleRatesByUsdAndEuro() {
         val rate = objMapService.readValue(
                 contentService.getContentFromUrl(CBR_NOT_OFFICIAL_XML_DAILY_RU_LATEST_JSON.getUrl()),
                 ExchangeRatesDtoWhereRateIsMapStr.class
@@ -58,9 +59,9 @@ public class ExchangeRateWebService {
      * Источник <a href="https://www.cbr.ru/scripts/XML_daily_eng.asp?date_req=">...</a>.
      * Соотношение: Currency -> RUB
      */
-    @Cacheable(cacheNames = "getRubleRateJsonFromCbrUrlXml")
+    @Cacheable(cacheNames = CacheNames.GET_RUBLE_RATES_JSON_FROM_CBR_URL_XML)
     @SneakyThrows
-    public ValCurs getRubleRateJsonFromCbrUrlXml(LocalDate date) {
+    public ValCurs getRubleRatesJsonFromCbrUrlXml(LocalDate date) {
         return xmlMapperService.readXml(
                 new URL(CBR_RU_DAILY_ENG_XML.getUrl() + date.format(ofPattern("dd/MM/yyyy"))),
                 ValCurs.class
@@ -68,11 +69,11 @@ public class ExchangeRateWebService {
     }
 
     /**
-     * Аналог {@link #getRubleRateJsonFromCbrUrlXml(LocalDate)} реализованный через FeignClient
+     * Аналог {@link #getRubleRatesJsonFromCbrUrlXml(LocalDate)} реализованный через FeignClient
      */
-    @Cacheable(cacheNames = "getRubleRateJsonFromCbrUrlXmlFeignClient")
+    @Cacheable(cacheNames = CacheNames.GET_RUBLE_RATES_JSON_FROM_CBR_URL_XML_FEIGN_CLIENT)
     @SneakyThrows
-    public ValCurs getRubleRateJsonFromCbrUrlXmlFeignClient(LocalDate date) {
+    public ValCurs getRubleRatesJsonFromCbrUrlXmlFeignClient(LocalDate date) {
         return cbrRubleRatesClient.getRubleRateJsonFromCbrUrlXml(
                 URI.create(CBR_RU_DAILY_ENG_XML.getUrl() + date.format(ofPattern("dd/MM/yyyy")))
         );
