@@ -74,7 +74,7 @@ public class ExchangeRateWebService {
     @Cacheable(cacheNames = CacheNames.GET_RUBLE_RATES_FROM_CBR_XML_URL_BY_DATE_FEIGN_CLIENT)
     @SneakyThrows
     public ValCurs getRubleRatesFromCbrXmlUrlByDateFeignClient(LocalDate date) {
-        return cbrRubleRatesClient.getRubleRateJsonFromCbrUrlXml(
+        return cbrRubleRatesClient.getRubleRatesFromCbrXmlUrl(
                 URI.create(CBR_RU_DAILY_ENG_XML.getUrl() + date.format(ofPattern("dd/MM/yyyy")))
         );
     }

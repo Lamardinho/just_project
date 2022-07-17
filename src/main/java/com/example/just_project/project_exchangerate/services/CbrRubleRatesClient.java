@@ -10,5 +10,5 @@ import java.net.URI;
 public interface CbrRubleRatesClient {
 
     @GetMapping
-    ValCurs getRubleRateJsonFromCbrUrlXml(URI uri);
+    ValCurs getRubleRatesFromCbrXmlUrl(URI uri);
 }

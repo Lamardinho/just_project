@@ -92,7 +92,7 @@ public class ExchangeRateDataBaseService {
     @Transactional
     public void createOrUpdateRubleRatesFromCbrUrlXmlByDate(LocalDate date) {
         val source = CBR_RU_DAILY_ENG_XML;
-        val valCurs = cbrRubleRatesClient.getRubleRateJsonFromCbrUrlXml(
+        val valCurs = cbrRubleRatesClient.getRubleRatesFromCbrXmlUrl(
                 URI.create(source.getUrl() + date.format(ofPattern("dd/MM/yyyy")))
         );
         val dateOfRating = LocalDate.parse(valCurs.getDate(), ofPattern("dd.MM.yyyy"));
