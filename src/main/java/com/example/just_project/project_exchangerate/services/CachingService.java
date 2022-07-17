@@ -64,15 +64,15 @@ public class CachingService {
      * Очищает кэш и заполняет его только для сегодняшнего дня.
      */
     @Scheduled(fixedRate = 30, initialDelay = 29, timeUnit = TimeUnit.DAYS)
-    public void updateGetRubleRatesJsonFromCbrUrlXml() {
-        clearCache(CacheNames.GET_RUBLE_RATES_JSON_FROM_CBR_URL_XML);
+    public void updateGetRubleRatesFromCbrXmlUrlByDate() {
+        clearCache(CacheNames.GET_RUBLE_RATES_FROM_CBR_XML_URL_BY_DATE);
     }
 
     /**
      * Очищает кэш и заполняет его только для сегодняшнего дня.
      */
     @Scheduled(fixedRate = 30, initialDelay = 29, timeUnit = TimeUnit.DAYS)
-    public void updateGetRubleRatesJsonFromCbrUrlXmlFeignClient() {
-        clearCache(CacheNames.GET_RUBLE_RATES_JSON_FROM_CBR_URL_XML_FEIGN_CLIENT);
+    public void updateGetRubleRatesFromCbrXmlUrlByDateFeignClient() {
+        clearCache(CacheNames.GET_RUBLE_RATES_FROM_CBR_XML_URL_BY_DATE_FEIGN_CLIENT);
     }
 }

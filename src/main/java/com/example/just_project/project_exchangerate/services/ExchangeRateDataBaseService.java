@@ -72,7 +72,7 @@ public class ExchangeRateDataBaseService {
     @Transactional
     public void updateToday() {
         try {
-            createOrUpdateRubleRateFromCbrXml(LocalDate.now());
+            createOrUpdateRubleRatesFromCbrUrlXmlByDate(LocalDate.now());
             log.info(ExchangeRateMessages.TODAY_RATINGS_UPDATE_SUCCESSFUL);
         } catch (Exception e) {
             log.error(ExchangeErrors.FAILED_TO_UPDATE_RATING + ": " + e);
@@ -90,7 +90,7 @@ public class ExchangeRateDataBaseService {
      */
     @SneakyThrows
     @Transactional
-    public void createOrUpdateRubleRateFromCbrXml(LocalDate date) {
+    public void createOrUpdateRubleRatesFromCbrUrlXmlByDate(LocalDate date) {
         val source = CBR_RU_DAILY_ENG_XML;
         val valCurs = cbrRubleRatesClient.getRubleRateJsonFromCbrUrlXml(
                 URI.create(source.getUrl() + date.format(ofPattern("dd/MM/yyyy")))
@@ -108,7 +108,7 @@ public class ExchangeRateDataBaseService {
                     ERate.RUB, date
             );
             if (optionalExchangeRate.isEmpty()) {
-                createOrUpdateRubleRateFromCbrXml(date);
+                createOrUpdateRubleRatesFromCbrUrlXmlByDate(date);
             }
         }
     }

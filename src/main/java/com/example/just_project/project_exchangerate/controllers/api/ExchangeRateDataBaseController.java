@@ -41,13 +41,13 @@ public class ExchangeRateDataBaseController {
     )
     @TrackExecutionTime
     @PutMapping("/ruble/cbr/update/today")
-    public ContractResult<Boolean> createOrUpdateFromCbrXml(
+    public ContractResult<Boolean> createOrUpdateRubleRatesFromCbrUrlXmlByDate(
             @ApiParam(example = "28/05/2022")
             @DateTimeFormat(pattern = "dd/MM/yyyy")
             @RequestParam(defaultValue = "#{T(java.time.LocalDate).now()}")
             LocalDate date
     ) {
-        dataBaseService.createOrUpdateRubleRateFromCbrXml(date);
+        dataBaseService.createOrUpdateRubleRatesFromCbrUrlXmlByDate(date);
         return new ContractResult<>(true).setMessage(ExchangeRateMessages.RATINGS_HAVE_BEEN_UPDATED);
     }
 
@@ -62,7 +62,7 @@ public class ExchangeRateDataBaseController {
         return new ContractResult<>(true).setMessage(ExchangeRateMessages.RATINGS_HAVE_BEEN_UPDATED);
     }
 
-    @Operation(summary = "Загрузить все рейтинги")
+    @Operation(summary = "Показать все рейтинги")
     @ApiPageable
     @TrackExecutionTime
     @GetMapping("/ruble/cbr/all")
@@ -76,7 +76,7 @@ public class ExchangeRateDataBaseController {
         return new ContractResult<>(result).setMessage("size: " + result.size());
     }
 
-    @Operation(summary = "Загрузить рейтинги за последние 30 дней")
+    @Operation(summary = "Показать рейтинги за последние 30 дней")
     @ApiPageable
     @TrackExecutionTime
     @GetMapping("/ruble/cbr/last-30-days")

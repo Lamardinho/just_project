@@ -51,7 +51,7 @@ public class ExchangeRateWebService {
                 contentService.getContentFromUrl(CBR_NOT_OFFICIAL_XML_DAILY_RU_LATEST_JSON.getUrl()),
                 ExchangeRatesDtoWhereRateIsMapStr.class
         );
-        return exchangeRateMapper.dtoWhereRateIsMapStrToCurrencyRateByUsdAndEuroDto(rate);
+        return exchangeRateMapper.toDtoWhereRatesIsMapToCurrencyRateByUsdAndEuroDto(rate);
     }
 
     /**
@@ -59,9 +59,9 @@ public class ExchangeRateWebService {
      * Источник <a href="https://www.cbr.ru/scripts/XML_daily_eng.asp?date_req=">...</a>.
      * Соотношение: Currency -> RUB
      */
-    @Cacheable(cacheNames = CacheNames.GET_RUBLE_RATES_JSON_FROM_CBR_URL_XML)
+    @Cacheable(cacheNames = CacheNames.GET_RUBLE_RATES_FROM_CBR_XML_URL_BY_DATE)
     @SneakyThrows
-    public ValCurs getRubleRatesJsonFromCbrUrlXml(LocalDate date) {
+    public ValCurs getRubleRatesFromCbrXmlUrlByDate(LocalDate date) {
         return xmlMapperService.readXml(
                 new URL(CBR_RU_DAILY_ENG_XML.getUrl() + date.format(ofPattern("dd/MM/yyyy"))),
                 ValCurs.class
@@ -69,11 +69,11 @@ public class ExchangeRateWebService {
     }
 
     /**
-     * Аналог {@link #getRubleRatesJsonFromCbrUrlXml(LocalDate)} реализованный через FeignClient
+     * Аналог {@link #getRubleRatesFromCbrXmlUrlByDate(LocalDate)} реализованный через FeignClient
      */
-    @Cacheable(cacheNames = CacheNames.GET_RUBLE_RATES_JSON_FROM_CBR_URL_XML_FEIGN_CLIENT)
+    @Cacheable(cacheNames = CacheNames.GET_RUBLE_RATES_FROM_CBR_XML_URL_BY_DATE_FEIGN_CLIENT)
     @SneakyThrows
-    public ValCurs getRubleRatesJsonFromCbrUrlXmlFeignClient(LocalDate date) {
+    public ValCurs getRubleRatesFromCbrXmlUrlByDateFeignClient(LocalDate date) {
         return cbrRubleRatesClient.getRubleRateJsonFromCbrUrlXml(
                 URI.create(CBR_RU_DAILY_ENG_XML.getUrl() + date.format(ofPattern("dd/MM/yyyy")))
         );

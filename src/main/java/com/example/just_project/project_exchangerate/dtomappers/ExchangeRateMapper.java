@@ -28,5 +28,5 @@ public abstract class ExchangeRateMapper {
 
     @Mapping(target = "usd", expression = "java(CurrencyCalculateHelper.calculateToRub(rate.getRates().get(ERate.USD.name())))")
     @Mapping(target = "euro", expression = "java(CurrencyCalculateHelper.calculateToRub(rate.getRates().get(ERate.EUR.name())))")
-    public abstract CurrencyRateByUsdAndEuroDto dtoWhereRateIsMapStrToCurrencyRateByUsdAndEuroDto(ExchangeRatesDtoWhereRateIsMapStr rate);
+    public abstract CurrencyRateByUsdAndEuroDto toDtoWhereRatesIsMapToCurrencyRateByUsdAndEuroDto(ExchangeRatesDtoWhereRateIsMapStr rate);
 }

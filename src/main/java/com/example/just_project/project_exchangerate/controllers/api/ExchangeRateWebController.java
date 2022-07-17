@@ -34,13 +34,13 @@ public class ExchangeRateWebController {
     )
     @GetMapping("/cbr/ruble/json/all")
     @TrackExecutionTime
-    public ValCurs getRubleRatesJsonFromCbrUrlXml(
+    public ValCurs getRubleRatesFromCbrXmlUrlByDate(
             @ApiParam(example = "28/05/2022")
             @DateTimeFormat(pattern = "dd/MM/yyyy")
             @RequestParam(defaultValue = "#{T(java.time.LocalDate).now()}")
             LocalDate date
     ) {
-        return exchangeRateWebService.getRubleRatesJsonFromCbrUrlXml(date);
+        return exchangeRateWebService.getRubleRatesFromCbrXmlUrlByDate(date);
     }
 
     @Operation(
@@ -50,16 +50,16 @@ public class ExchangeRateWebController {
     )
     @GetMapping("/cbr/ruble/json/all/v2")
     @TrackExecutionTime
-    public ValCurs getRubleRatesJsonFromCbrUrlXmlFeignClient(
+    public ValCurs getRubleRatesFromCbrXmlUrlByDateFeignClient(
             @ApiParam(example = "28/05/2022")
             @DateTimeFormat(pattern = "dd/MM/yyyy")
             @RequestParam(defaultValue = "#{T(java.time.LocalDate).now()}")
             LocalDate date
     ) {
-        return exchangeRateWebService.getRubleRatesJsonFromCbrUrlXmlFeignClient(date);
+        return exchangeRateWebService.getRubleRatesFromCbrXmlUrlByDateFeignClient(date);
     }
 
-    @Operation(summary = "Получить рейтинг рубля на сегодняшний день")
+    @Operation(summary = "Получить рейтинг рубля на сегодняшний день (USD и EURO)")
     @TrackExecutionTime
     @GetMapping("/cbr/ruble/basic/today")
     public CurrencyRateByUsdAndEuroDto getActualRubleRatesByUsdAndEuro() {
