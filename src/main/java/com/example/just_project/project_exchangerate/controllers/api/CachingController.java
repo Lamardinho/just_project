@@ -22,15 +22,15 @@ public class CachingController {
     @NonNull
     private final CachingService cachingService;
 
-    @Operation(summary = "Очистить все кэши", description = "Очистить все кэши")
-    @DeleteMapping
-    public void clearAllCaches() {
-        cachingService.clearAllCaches();
-    }
-
     @Operation(summary = "Посмотреть список кэшей", description = "Посмотреть список кэшей")
     @GetMapping("cache-names")
     public Collection<String> getCacheNames() {
         return cachingService.getCacheNames();
+    }
+
+    @Operation(summary = "Очистить все кэши", description = "Очистить все кэши")
+    @DeleteMapping
+    public void clearAllCaches() {
+        cachingService.clearAllCaches();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.just_project.project_exchangerate.services;
 
+import com.example.just_project.common.aop.TrackExecutionTime;
 import com.example.just_project.common.util.CacheNames;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,14 @@ public class CachingService {
     private final CacheManager cacheManager;
     @NonNull
     private final ExchangeRateWebService exchangeRateWebService;
+    @NonNull
+    private final AsyncTestStudyService asyncTestStudyService;
 
+    @TrackExecutionTime
     public Collection<String> getCacheNames() {
-        return cacheManager.getCacheNames();
+        val cacheNames = cacheManager.getCacheNames();
+        asyncTestStudyService.testAsyncMethod();    // just for test @Async
+        return cacheNames;
     }
 
     public void clearAllCaches() {
