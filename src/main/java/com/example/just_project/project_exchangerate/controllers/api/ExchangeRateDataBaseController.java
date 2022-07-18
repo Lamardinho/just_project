@@ -53,7 +53,7 @@ public class ExchangeRateDataBaseController {
 
     @Operation(
             summary = "Обновить рейтинги c cbr.ru за последние 30 дней",
-            description = "Сохраняет рейтинги за последние 30 дней в БД, если рейтинг с таким днём уже есть в БД, то просто обновляет его"
+            description = "Сохраняет рейтинги за последние 30 дней в БД. Сохраняет только те, которых нет в БД"
     )
     @TrackExecutionTime
     @PutMapping("/ruble/cbr/update/over-past-30-days")

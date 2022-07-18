@@ -1,7 +1,6 @@
 package com.example.just_project.project_exchangerate.services;
 
 import com.example.just_project.common.aop.TrackExecutionTime;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
@@ -18,16 +17,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AsyncTestStudyService {
 
-    @NonNull
-    private final ExchangeRateDataBaseService exchangeRateDataBaseService;
-
     /**
      * Просто тестовый метод для изучения темы {@link Async}
      */
     @Async
     @TrackExecutionTime
     public synchronized void testAsyncMethod() {
-        val list = List.of("3", "2", "1");
+        val list = List.of(3, 2, 1);
         list.forEach(
                 it -> {
                     try {
