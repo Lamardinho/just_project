@@ -68,7 +68,7 @@ public class ExchangeRateDataBaseService {
      * <p>
      * Автоматически обновляет сегодняшний рейтинг.
      */
-    @Scheduled(fixedRate = 360, initialDelay = 1, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedRate = 360, initialDelay = 15, timeUnit = TimeUnit.SECONDS)
     @Transactional
     public void updateToday() {
         try {
@@ -182,9 +182,15 @@ public class ExchangeRateDataBaseService {
                 ? PageRequest.of(0, 30, Sort.by(sortParam).descending())
                 : PageRequest.of(0, 30, Sort.by(sortParam));
 
-        val exchangeRateDtoList = findAllExchangeRateDtoList(currency, source, pageable);
-        filterByUsdAndEuro(exchangeRateDtoList);
-        return exchangeRateDtoList;
+        val exchangeRatePage = findAllExchangeRates(currency, source, pageable);
+        val dtoList = mapToDtoList(exchangeRatePage.getContent());
+        val newList = exchangeRateRepository.f(
+                pageable, /*RUB, findDataSourceBySource(source),*/ List.of(USD, EUR)
+        );
+        val dtoList2 = mapToDtoList(newList);
+        log.info(dtoList2.size());
+        filterByUsdAndEuro(dtoList);
+        return dtoList;
     }
 
     /**
@@ -201,10 +207,7 @@ public class ExchangeRateDataBaseService {
             @NonNull Pageable pageable
     ) {
         val exchangeRatePage = findAllExchangeRates(currency, source, pageable);
-        return exchangeRatePage.getContent()
-                .stream()
-                .map(exchangeRateMapper::toExchangeRateDto)
-                .collect(toList());
+        return mapToDtoList(exchangeRatePage.getContent());
     }
 
     private Page<ExchangeRate> findAllExchangeRates(
@@ -222,6 +225,14 @@ public class ExchangeRateDataBaseService {
     private DataSource findDataSourceBySource(@NotNull ESource source) {
         return dataSourceRepository.findBySource(source)
                 .orElseThrow(() -> new AppException(format(DATA_SOURCE_NOT_FOUND, source)));
+    }
+
+    @NotNull
+    public List<ExchangeRateDto> mapToDtoList(List<ExchangeRate> exchangeRates) {
+        return exchangeRates
+                .stream()
+                .map(exchangeRateMapper::toExchangeRateDto)
+                .collect(toList());
     }
 
     /**

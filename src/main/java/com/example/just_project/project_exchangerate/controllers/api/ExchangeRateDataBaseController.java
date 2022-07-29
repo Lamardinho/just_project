@@ -68,7 +68,7 @@ public class ExchangeRateDataBaseController {
     @GetMapping("/ruble/cbr/all")
     public ContractResult<List<ExchangeRateDto>> findAll(
             @ApiIgnore
-            @PageableDefault(size = 30, sort = {"dateRating"}, direction = Sort.Direction.DESC) Pageable pageable
+            @PageableDefault(size = 300, sort = {"dateRating"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
         val result = dataBaseService.findAllExchangeRateDtoListAndFilterByUsdAndEur(
                 RUB, CBR_RU_DAILY_ENG_XML, pageable
