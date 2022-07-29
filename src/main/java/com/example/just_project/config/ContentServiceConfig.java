@@ -1,7 +1,7 @@
 package com.example.just_project.config;
 
-import com.example.just_project.common.services.XmlMapperServiceImpl;
-import com.example.just_project.common.services.contract.XmlMapperService;
+import com.example.just_project.common.services.XmlMapperService;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -21,7 +21,8 @@ public class ContentServiceConfig {
 
     @Bean
     public XmlMapperService defaultContentService() {
-        return new XmlMapperServiceImpl(xmlMapper(), restTemplate());
+        xmlMapper().configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+        return new XmlMapperService(xmlMapper(), restTemplate());
     }
 
     private RestTemplate restTemplate() {

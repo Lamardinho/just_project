@@ -7,6 +7,6 @@
         <dbms type="postgresql"/>
     </preConditions>
     <!-- ************************************  RUN  ***************************************************** -->
-    <include file="changesets/dev_1/1.sql" relativeToChangelogFile="true"/>
-    <include file="changesets/dev_1/cr_tb_exchange_rate.exchange_rate.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/exchange_rate/1_cr_schema_exchange_rate.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/exchange_rate/2_data_source.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

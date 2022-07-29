@@ -1,7 +1,7 @@
 package com.example.just_project.common.exceptionhandlers;
 
-import com.example.just_project.util.ContractResult;
-import com.example.just_project.util.Msg;
+import com.example.just_project.common.util.AppMsgErrors;
+import com.example.just_project.common.util.ContractResult;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Log4j2
 @Order(0)
-//@ControllerAdvice(basePackages = "com.example.just_project...")
 public class ApiExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<ContractResult<String>> handle(@NonNull Exception ex) {
-        log.error(Msg.AN_UNEXPECTED_ERROR_OCCURRED_EN, ex);
+        log.error(AppMsgErrors.AN_UNEXPECTED_ERROR_OCCURRED_EN, ex);
 
         val contractResult = new ContractResult<String>();
         contractResult.getViolations().add(StringUtils.substringAfter(ExceptionUtils.getRootCauseMessage(ex), ":"));

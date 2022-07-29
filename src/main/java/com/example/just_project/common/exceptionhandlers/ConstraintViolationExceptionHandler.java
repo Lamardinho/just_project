@@ -1,6 +1,6 @@
 package com.example.just_project.common.exceptionhandlers;
 
-import com.example.just_project.util.ContractResult;
+import com.example.just_project.common.util.ContractResult;
 import lombok.NonNull;
 import lombok.val;
 import org.springframework.core.annotation.Order;
