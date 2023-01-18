@@ -155,7 +155,6 @@ UNION ALL
 select country
 from employees
 order by country;
-
 -- INTERSECT - находим те которые есть и там и там
 select country
 from customers
@@ -163,10 +162,10 @@ INTERSECT
 select country
 from suppliers
 order by country;
-
 -- EXCEPT - есть в первой табличке, но нет во второй
 select country
 from customers
 EXCEPT
 select country
-from suppliers;
+from suppliers
+order by country;
