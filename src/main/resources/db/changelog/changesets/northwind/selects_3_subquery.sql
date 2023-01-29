@@ -11,7 +11,7 @@ order by s.company_name;
 --
 select category_name, sum(units_in_stock)
 from products
-         join categories using (category_id)
+         join categories c on products.category_id = c.category_id
 group by category_name
 order by sum(units_in_stock) desc
 limit (select min(product_id) + 4 from products);
@@ -20,7 +20,7 @@ select product_name, units_in_stock
 from products
 where units_in_stock > (select avg(units_in_stock) from products)
 order by units_in_stock;
---
+--=============================================  EXISTS  ==========================================================
 select company_name, contact_name
 from customers
 where exists(select customer_id
@@ -42,19 +42,21 @@ where not exists(select orders.order_id
                           join order_details using (order_id)
                  where order_details.product_id = products.product_id
                    and order_date between '1995.02.01' and '1995.02.15');
--- Подзапросы с квантификаторами ANY, ALL
+--=============================================  ANY, ALL  ==========================================================
 select distinct company_name
-from customers
-         join orders using (customer_id)
-         join order_details using (order_id)
-where quantity > 40;
+from customers c
+         join orders o using (customer_id)
+         join order_details od using (order_id)
+where od.quantity > 40
+order by c.company_name;
 
-select distinct company_name
-from customers
-where customer_id = any (select customer_id
+select distinct c.company_name
+from customers c
+where c.customer_id = ANY (select customer_id
                          from orders
                                   join order_details using (order_id)
-                         where quantity > 40);
+                         where quantity > 40)
+order by c.company_name;
 
 select distinct product_name, quantity
 from products
@@ -65,5 +67,5 @@ order by quantity;
 select distinct product_name, quantity
 from products
          join order_details od using (product_id)
-where quantity > all (select avg(quantity) from order_details group by product_id)
+where quantity > ALL (select avg(quantity) from order_details group by product_id)
 order by quantity;
