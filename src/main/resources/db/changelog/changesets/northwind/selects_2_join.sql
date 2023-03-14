@@ -91,7 +91,7 @@ from customers
          LEFT JOIN orders o on customers.customer_id = o.customer_id
 where order_id is null;
 
---для примера, ниже юзаем LEFT JOIN, без LEFT он сопоставляет записи, а с LEFT по другому:
+--для примера, ниже юзаем JOIN, без LEFT он сопоставляет записи, а с LEFT по другому:
 select company_name, order_id
 from customers
          JOIN orders o on customers.customer_id = o.customer_id
