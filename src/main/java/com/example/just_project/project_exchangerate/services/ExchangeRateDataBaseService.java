@@ -12,8 +12,6 @@ import com.example.just_project.project_exchangerate.model.exchangerate.Exchange
 import com.example.just_project.project_exchangerate.repositories.DataSourceRepository;
 import com.example.just_project.project_exchangerate.repositories.ExchangeRateRepository;
 import com.example.just_project.project_exchangerate.repositories.RateRepository;
-import com.example.just_project.project_exchangerate.util.ExchangeErrors;
-import com.example.just_project.project_exchangerate.util.ExchangeRateMessages;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -24,14 +22,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static com.example.just_project.project_exchangerate.enums.ERate.EUR;
 import static com.example.just_project.project_exchangerate.enums.ERate.USD;
@@ -64,22 +60,6 @@ public class ExchangeRateDataBaseService {
     private final ExchangeRateMapper exchangeRateMapper;
 
     /**
-     * Automatically updates today's rating.
-     * <p>
-     * Автоматически обновляет сегодняшний рейтинг.
-     */
-    @Scheduled(fixedRate = 360, initialDelay = 15, timeUnit = TimeUnit.SECONDS)
-    @Transactional
-    public void updateToday() {
-        try {
-            createOrUpdateRubleRatesFromCbrUrlXmlByDate(LocalDate.now());
-            log.info(ExchangeRateMessages.TODAY_RATINGS_UPDATE_SUCCESSFUL);
-        } catch (Exception e) {
-            log.error(ExchangeErrors.FAILED_TO_UPDATE_RATING + ": " + e);
-        }
-    }
-
-    /**
      * Forces updating (or creating if missing) the rating for the specified day.
      * Takes the rating from the site cbr.ru -> checks if it is in our database -> updates or creates a new one.
      * <p>
@@ -88,8 +68,8 @@ public class ExchangeRateDataBaseService {
      *
      * @param date - rating date to be updated (дата рейтинга, который стоит обновить)
      */
-    @SneakyThrows
     @Transactional
+    @SneakyThrows
     public void createOrUpdateRubleRatesFromCbrUrlXmlByDate(LocalDate date) {
         val source = CBR_RU_DAILY_ENG_XML;
         val valCurs = cbrRubleRatesClient.getRubleRatesFromCbrXmlUrl(
@@ -99,8 +79,8 @@ public class ExchangeRateDataBaseService {
         save(ERate.RUB, valCurs, source, dateOfRating);
     }
 
-    @SneakyThrows
     @Transactional
+    @SneakyThrows
     public void createOrUpdateRubleRateFromCbrXmlOverPast30Days() {
         for (int i = 30; i > 0; i--) {
             val date = LocalDate.now().minusDays(i);
