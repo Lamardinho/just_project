@@ -1,6 +1,6 @@
 package com.example.just_project.project_exchangerate.controllers.api;
 
-import com.example.just_project.project_exchangerate.services.CachingService;
+import com.example.just_project.project_exchangerate.services.caching.CachingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.NonNull;
