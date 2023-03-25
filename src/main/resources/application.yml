@@ -11,8 +11,28 @@ spring:
     change-log: db/changelog/db-master.xml
   jpa:
     generate-ddl: true
+  mail:
+    #default-encoding: UTF-8
+    host: smtp.yandex.ru
+    port: 465
+    username: ${MAIL_SERVER_USERNAME:secret}
+    password: ${MAIL_SERVER_PASSWORD:secret}
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            enable: true
+    test-connection: false
 
 springdoc:
   packagesToScan: com.example.just_project
   swagger-ui:
     disable-swagger-default-url: true
+
+my-app:
+  mail-server:
+    username: ${MY_APP_MAIL_USER_NAME:}
