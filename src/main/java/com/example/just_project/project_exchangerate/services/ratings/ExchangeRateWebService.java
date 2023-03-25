@@ -1,4 +1,4 @@
-package com.example.just_project.project_exchangerate.services;
+package com.example.just_project.project_exchangerate.services.ratings;
 
 import com.example.just_project.common.services.ContentService;
 import com.example.just_project.common.services.ObjectMapperService;
@@ -8,6 +8,7 @@ import com.example.just_project.project_exchangerate.dto.CurrencyRateByUsdAndEur
 import com.example.just_project.project_exchangerate.dto.exchangerate.ExchangeRatesDtoWhereRateIsMapStr;
 import com.example.just_project.project_exchangerate.dto.exchangerate.cbr.ValCurs;
 import com.example.just_project.project_exchangerate.dtomappers.ExchangeRateMapper;
+import com.example.just_project.project_exchangerate.services.CbrRubleRatesClient;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

@@ -1,6 +1,5 @@
-package com.example.just_project.project_exchangerate.services.caching;
+package com.example.just_project.project_exchangerate.services.ratings;
 
-import com.example.just_project.project_exchangerate.services.ExchangeRateDataBaseService;
 import com.example.just_project.project_exchangerate.util.ExchangeErrors;
 import com.example.just_project.project_exchangerate.util.ExchangeRateMessages;
 import lombok.NonNull;

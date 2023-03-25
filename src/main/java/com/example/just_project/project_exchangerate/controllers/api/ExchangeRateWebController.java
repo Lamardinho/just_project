@@ -3,7 +3,7 @@ package com.example.just_project.project_exchangerate.controllers.api;
 import com.example.just_project.common.aop.TrackExecutionTime;
 import com.example.just_project.project_exchangerate.dto.CurrencyRateByUsdAndEuroDto;
 import com.example.just_project.project_exchangerate.dto.exchangerate.cbr.ValCurs;
-import com.example.just_project.project_exchangerate.services.ExchangeRateWebService;
+import com.example.just_project.project_exchangerate.services.ratings.ExchangeRateWebService;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

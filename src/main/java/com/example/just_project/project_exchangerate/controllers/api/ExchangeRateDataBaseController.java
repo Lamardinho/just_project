@@ -4,7 +4,7 @@ import com.example.just_project.common.aop.TrackExecutionTime;
 import com.example.just_project.common.util.ContractResult;
 import com.example.just_project.config.ApiPageable;
 import com.example.just_project.project_exchangerate.dto.exchangerate.ExchangeRateDto;
-import com.example.just_project.project_exchangerate.services.ExchangeRateDataBaseService;
+import com.example.just_project.project_exchangerate.services.ratings.ExchangeRateDataBaseService;
 import com.example.just_project.project_exchangerate.util.ExchangeRateMessages;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
