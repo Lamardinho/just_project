@@ -1,4 +1,4 @@
-package com.example.just_project.project_exchangerate.services;
+package com.example.just_project.project_exchangerate.services.ratings;
 
 import com.example.just_project.common.util.AppException;
 import com.example.just_project.project_exchangerate.dto.exchangerate.ExchangeRateDto;
@@ -12,6 +12,7 @@ import com.example.just_project.project_exchangerate.model.exchangerate.Exchange
 import com.example.just_project.project_exchangerate.repositories.DataSourceRepository;
 import com.example.just_project.project_exchangerate.repositories.ExchangeRateRepository;
 import com.example.just_project.project_exchangerate.repositories.RateRepository;
+import com.example.just_project.project_exchangerate.services.CbrRubleRatesClient;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

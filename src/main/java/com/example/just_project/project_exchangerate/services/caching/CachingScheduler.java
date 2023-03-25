@@ -2,7 +2,7 @@ package com.example.just_project.project_exchangerate.services.caching;
 
 import com.example.just_project.common.aop.TrackExecutionTime;
 import com.example.just_project.common.util.CacheNames;
-import com.example.just_project.project_exchangerate.services.ExchangeRateWebService;
+import com.example.just_project.project_exchangerate.services.ratings.ExchangeRateWebService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 @RequiredArgsConstructor
-public class CacheScheduler {
+public class CachingScheduler {
 
     @NonNull
     private final CachingService cachingService;
