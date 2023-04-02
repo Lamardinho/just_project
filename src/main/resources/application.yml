@@ -36,3 +36,8 @@ springdoc:
 my-app:
   mail-server:
     username: ${MY_APP_MAIL_USER_NAME:}
+
+telegram:
+  bot:
+    token: ${TELEGRAM_BOT_TOKEN:}
+    send-msg-post-url: ${TELEGRAM_SEND-MSG-POST-URL:https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s}
