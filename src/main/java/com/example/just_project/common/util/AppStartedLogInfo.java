@@ -1,7 +1,6 @@
 package com.example.just_project.common.util;
 
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -13,7 +12,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 
-@Slf4j
 @Configuration
 @Log4j2
 public class AppStartedLogInfo {
