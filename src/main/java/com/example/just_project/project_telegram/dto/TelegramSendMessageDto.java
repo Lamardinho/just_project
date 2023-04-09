@@ -1,4 +1,4 @@
-package com.example.just_project.project_telegram;
+package com.example.just_project.project_telegram.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Schema(description = "Для отправки сообщений")
 @Data
 @AllArgsConstructor
-class TelegramSendMessageDto {
+public class TelegramSendMessageDto {
 
     @Schema(description = "адресат/чат id")
     @NonNull

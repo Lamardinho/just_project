@@ -1,5 +1,6 @@
-package com.example.just_project.project_telegram;
+package com.example.just_project.project_telegram.service;
 
+import com.example.just_project.project_telegram.dto.TelegramSendMessageDto;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -11,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 @RequiredArgsConstructor
 @Validated
-class TelegramMessageService {
+public class TelegramMessageService {
 
     @NonNull
     private final RestTemplate restTemplate;

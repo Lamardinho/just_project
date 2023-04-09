@@ -1,5 +1,6 @@
-package com.example.just_project.project_mail;
+package com.example.just_project.project_mail.service;
 
+import com.example.just_project.project_mail.dto.SendingMailDto;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-class EmailServiceApp {
+public class EmailServiceApp {
 
     @NonNull
     private final JavaMailSender emailSender;

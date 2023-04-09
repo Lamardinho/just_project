@@ -1,4 +1,4 @@
-package com.example.just_project.project_mail;
+package com.example.just_project.project_mail.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 @Schema(description = "для отправки сообщений")
 @Data
-class SendingMailDto {
+public class SendingMailDto {
 
     @Schema(description = "адрес почты кому отправляем")
     @Email
