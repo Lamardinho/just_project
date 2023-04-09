@@ -31,7 +31,7 @@ class XlsxReportServiceImplTest {
         //act:
         val result = xlsxReportService.makeReport(json, "Report");
         // Записываем отчет на диск:
-        val reportPath = Paths.get("src/test/resources/reports/xlsx_report_service_test/nba_stars_new.xlsx");
+        val reportPath = Paths.get("\\tmp/xlsxReportServiceImplTest.nba_stars_new.xlsx");
         val newFilePath = Files.write(reportPath, result);
 
         // проверяем содержимое:
@@ -44,8 +44,7 @@ class XlsxReportServiceImplTest {
     private void testCompareExcelFiles(@NonNull Path newFilePath) throws IOException, InvalidFormatException {
         @SuppressWarnings("resource") val expectedWorkbook =
                 new XSSFWorkbook(new File("src/test/resources/reports/xlsx_report_service_test/nba_stars_old.xlsx"));
-        @SuppressWarnings("resource") val actualWorkbook =
-                new XSSFWorkbook(new File(newFilePath.toString()));
+        @SuppressWarnings("resource") val actualWorkbook = new XSSFWorkbook(new File(newFilePath.toString()));
 
         // Сравниваем кол-во листов в рабочих тетрадях:
         assertThat(expectedWorkbook.getNumberOfSheets()).isEqualTo(actualWorkbook.getNumberOfSheets());
