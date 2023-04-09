@@ -1,6 +1,6 @@
 package com.example.just_project.common.services.reports
 
-import com.example.just_project.common.services.reports.contract.ReportService
+import com.example.just_project.common.services.reports.contract.JasperReportService
 import net.sf.jasperreports.engine.JRAbstractExporter
 import net.sf.jasperreports.engine.JREmptyDataSource
 import net.sf.jasperreports.engine.JasperCompileManager
@@ -15,7 +15,7 @@ import java.io.ByteArrayOutputStream
  * Сервис для формирования отчетов с помощью JasperSoft
  */
 @Service
-class JasperReportServiceImpl : ReportService {
+class JasperReportServiceImpl : JasperReportService {
 
     override fun makeReport(
             exporter: JRAbstractExporter<*, *, *, *>,
