@@ -1,5 +1,6 @@
 package com.example.just_project.common.services.reports;
 
+import com.example.just_project.common.aop.TrackExecutionTime;
 import com.example.just_project.common.enums.JasperReportExtension;
 import com.example.just_project.common.services.reports.contract.JasperReportsService;
 import com.example.just_project.common.util.AppException;
@@ -7,17 +8,19 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,14 +33,14 @@ public class JasperReportsServiceImpl implements JasperReportsService {
     @Value("classpath:reports/templates/offers.jrxml")
     private Resource dynamicReportResource;
 
-    /*@TrackExecutionTime
+    @TrackExecutionTime
     public byte[] test(List<?> data) throws JRException, IOException {
         val dataSource = new JRBeanCollectionDataSource(data);
         val hashMap = new HashMap<String, Object>();
         hashMap.put("ROWS_TABLE", dataSource);
 
         return makeReport(JasperReportExtension.XLSX, hashMap, dynamicReportResource);
-    }*/
+    }
 
     @Override
     public byte[] makeReport(
