@@ -1,4 +1,4 @@
-package com.example.just_project.common.enums;
+package com.example.just_project.project_reports.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

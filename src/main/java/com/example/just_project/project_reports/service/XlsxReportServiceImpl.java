@@ -1,7 +1,7 @@
-package com.example.just_project.common.services.reports;
+package com.example.just_project.project_reports.service;
 
 import com.example.just_project.common.services.ObjectMapperService;
-import com.example.just_project.common.services.reports.contract.XlsxReportService;
+import com.example.just_project.project_reports.service.contract.XlsxReportService;
 import com.example.just_project.common.util.AppException;
 import com.example.just_project.common.util.AppMsgErrors;
 import com.fasterxml.jackson.databind.JsonNode;

@@ -1,4 +1,4 @@
-package com.example.just_project.common.services.reports.contract;
+package com.example.just_project.project_reports.service.contract;
 
 import lombok.NonNull;
 import lombok.SneakyThrows;

@@ -1,6 +1,6 @@
-package com.example.just_project.common.services.reports.contract;
+package com.example.just_project.project_reports.service.contract;
 
-import com.example.just_project.common.enums.JasperReportExtension;
+import com.example.just_project.project_reports.enums.JasperReportExtension;
 import lombok.NonNull;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.core.io.Resource;
