@@ -1,0 +1,125 @@
+[
+  {
+    "name": "LeBron James",
+    "team": "Los Angeles Lakers",
+    "position": "Small Forward",
+    "points_per_game": 25.0,
+    "rebounds_per_game": 7.9,
+    "assists_per_game": 7.8,
+    "teams": [
+      {
+        "team_name": "Cleveland Cavaliers",
+        "years_played": [
+          "2003-2010",
+          "2014-2018"
+        ]
+      },
+      {
+        "team_name": "Miami Heat",
+        "years_played": [
+          "2010-2014"
+        ]
+      },
+      {
+        "team_name": "Los Angeles Lakers",
+        "years_played": [
+          "2018-2021"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Kevin Durant",
+    "team": "Brooklyn Nets",
+    "position": "Small Forward",
+    "points_per_game": 26.0,
+    "rebounds_per_game": 6.4,
+    "assists_per_game": 5.9,
+    "teams": [
+      {
+        "team_name": "Seattle SuperSonics",
+        "years_played": [
+          "2007-2008"
+        ]
+      },
+      {
+        "team_name": "Oklahoma City Thunder",
+        "years_played": [
+          "2008-2016"
+        ]
+      },
+      {
+        "team_name": "Golden State Warriors",
+        "years_played": [
+          "2016-2019"
+        ]
+      },
+      {
+        "team_name": "Brooklyn Nets",
+        "years_played": [
+          "2019-2021"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Stephen Curry",
+    "team": "Golden State Warriors",
+    "position": "Point Guard",
+    "points_per_game": 29.5,
+    "rebounds_per_game": 5.5,
+    "assists_per_game": 6.4,
+    "teams": [
+      {
+        "team_name": "Golden State Warriors",
+        "years_played": [
+          "2009-present"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Giannis Antetokounmpo",
+    "team": "Milwaukee Bucks",
+    "position": "Power Forward",
+    "points_per_game": 28.1,
+    "rebounds_per_game": 11.0,
+    "assists_per_game": 5.9,
+    "teams": [
+      {
+        "team_name": "Milwaukee Bucks",
+        "years_played": [
+          "2013-present"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Kawhi Leonard",
+    "team": "Los Angeles Clippers",
+    "position": "Small Forward",
+    "points_per_game": 25.0,
+    "rebounds_per_game": 6.5,
+    "assists_per_game": 5.0,
+    "teams": [
+      {
+        "team_name": "San Antonio Spurs",
+        "years_played": [
+          "2011-2018"
+        ]
+      },
+      {
+        "team_name": "Toronto Raptors",
+        "years_played": [
+          "2018-2019"
+        ]
+      },
+      {
+        "team_name": "Los Angeles Clippers",
+        "years_played": [
+          "2019-present"
+        ]
+      }
+    ]
+  }
+]
