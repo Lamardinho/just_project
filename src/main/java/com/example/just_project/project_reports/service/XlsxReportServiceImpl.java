@@ -34,17 +34,17 @@ public class XlsxReportServiceImpl implements XlsxReportService {
 
     @Override
     @SneakyThrows
-    public byte[] generateXlsx(
+    public byte[] makeReport(
             @NonNull final List<Objects> dtoList,
             @NonNull final String reportName
     ) {
         val json = objectMapperService.writeValueAsString(dtoList);
-        return generateXlsx(json, reportName);
+        return makeReport(json, reportName);
     }
 
     @Override
     @SneakyThrows
-    public byte[] generateXlsx(
+    public byte[] makeReport(
             @NonNull final String json,
             @NonNull final String reportName
     ) {

@@ -9,13 +9,13 @@ import java.util.Objects;
 public interface XlsxReportService {
 
     @SneakyThrows
-    byte[] generateXlsx(
+    byte[] makeReport(
             @NonNull List<Objects> dtoList,
             @NonNull String reportName
     );
 
     @SneakyThrows
-    byte[] generateXlsx(
+    byte[] makeReport(
             @NonNull String json,
             @NonNull String reportName
     );
