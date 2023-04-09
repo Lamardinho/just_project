@@ -1,6 +1,7 @@
-package com.example.just_project.project_mail.service;
+package com.example.just_project.project_messengers.service;
 
-import com.example.just_project.project_mail.dto.SendingMailDto;
+import com.example.just_project.project_messengers.dto.SendingMailDto;
+import com.example.just_project.project_messengers.service.contract.EmailServiceApp;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class EmailServiceApp {
+public class EmailServiceAppImpl implements EmailServiceApp {
 
     @NonNull
     private final JavaMailSender emailSender;
@@ -19,6 +20,7 @@ public class EmailServiceApp {
     @Value("${my-app.mail-server.username}")
     private String appMailUserName;
 
+    @Override
     public void sendMessage(@NonNull final SendingMailDto dto) {
         val message = new SimpleMailMessage();
         message.setFrom(appMailUserName);

@@ -1,8 +1,8 @@
-package com.example.just_project.project_telegram.controller;
+package com.example.just_project.project_messengers.controller;
 
 import com.example.just_project.common.aop.TrackExecutionTime;
-import com.example.just_project.project_telegram.dto.TelegramSendMessageDto;
-import com.example.just_project.project_telegram.service.TelegramMessageService;
+import com.example.just_project.project_messengers.dto.TelegramSendMessageDto;
+import com.example.just_project.project_messengers.service.contract.TelegramMessageService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

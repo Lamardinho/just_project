@@ -1,8 +1,8 @@
-package com.example.just_project.project_mail.controller;
+package com.example.just_project.project_messengers.controller;
 
 import com.example.just_project.common.aop.TrackExecutionTime;
-import com.example.just_project.project_mail.service.EmailServiceApp;
-import com.example.just_project.project_mail.dto.SendingMailDto;
+import com.example.just_project.project_messengers.dto.SendingMailDto;
+import com.example.just_project.project_messengers.service.contract.EmailServiceApp;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

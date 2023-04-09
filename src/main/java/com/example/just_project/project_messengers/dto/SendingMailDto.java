@@ -1,4 +1,4 @@
-package com.example.just_project.project_mail.dto;
+package com.example.just_project.project_messengers.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
