@@ -12,7 +12,7 @@ import org.springframework.web.client.HttpClientErrorException;
 
 @ControllerAdvice
 @Log4j2
-public class ForbiddenExceptionHandler {
+public class HttpClientErrorExceptionHandler {
 
     @ExceptionHandler(value = {HttpClientErrorException.class})
     public ResponseEntity<ContractResult<String>> handleAccessDeniedException(
