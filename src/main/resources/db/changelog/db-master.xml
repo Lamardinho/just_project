@@ -13,4 +13,6 @@
     <include file="changesets/exchange_rate/2023_04_15__4_rate.sql" relativeToChangelogFile="true"/>
     <include file="changesets/exchange_rate/2023_04_15__5_exchange_rate_has_rate.sql" relativeToChangelogFile="true"/>
     <include file="changesets/sports/2023_04_15__1_cr_schema_sports.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/sports/2023_04_15__2_cr_data_source.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/sports/2023_04_15__3_cr_match_schedule.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
