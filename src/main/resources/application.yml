@@ -27,17 +27,20 @@ spring:
           ssl:
             enable: true
     test-connection: false
+  cache:
+    type: simple
 
 springdoc:
   packagesToScan: com.example.just_project
   swagger-ui:
     disable-swagger-default-url: true
 
-my-app:
+app:
   mail-server:
     username: ${MY_APP_MAIL_USER_NAME:}
-
-telegram:
-  bot:
-    token: ${TELEGRAM_BOT_TOKEN:}
-    send-msg-post-url: ${TELEGRAM_SEND-MSG-POST-URL:https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s}
+  telegram:
+    bot:
+      token: ${TELEGRAM_BOT_TOKEN:}
+      send-msg-post-url: ${TELEGRAM_SEND-MSG-POST-URL:https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s}
+  rapid-api:
+    key: ${RAPIDAPI_KEY:secret}

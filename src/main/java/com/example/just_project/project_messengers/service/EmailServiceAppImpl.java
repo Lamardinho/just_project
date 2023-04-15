@@ -17,7 +17,7 @@ public class EmailServiceAppImpl implements EmailServiceApp {
     @NonNull
     private final JavaMailSender emailSender;
 
-    @Value("${my-app.mail-server.username}")
+    @Value("${app.mail-server.username}")
     private String appMailUserName;
 
     @Override

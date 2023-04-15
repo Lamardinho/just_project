@@ -18,9 +18,9 @@ public class TelegramMessageServiceImpl implements TelegramMessageService {
     @NonNull
     private final RestTemplate restTemplate;
 
-    @Value("${telegram.bot.token}")
+    @Value("${app.telegram.bot.token}")
     private String botToken;
-    @Value("${telegram.bot.send-msg-post-url}")
+    @Value("${app.telegram.bot.send-msg-post-url}")
     private String sendMsgPostUrl;
 
     @Override
