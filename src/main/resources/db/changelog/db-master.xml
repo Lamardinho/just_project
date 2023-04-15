@@ -9,4 +9,7 @@
     <!-- ************************************  RUN  ***************************************************** -->
     <include file="changesets/exchange_rate/1_cr_schema_exchange_rate.sql" relativeToChangelogFile="true"/>
     <include file="changesets/exchange_rate/2_data_source.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/exchange_rate/3_exchange_rate.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/exchange_rate/4_rate.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/exchange_rate/5_exchange_rate_has_rate.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
