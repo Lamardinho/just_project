@@ -15,6 +15,6 @@ public class CacheNames {
     // SPORTS:
     public static final String RAPID_API_FOOT_API_7_MATCHES_SERVICE_GET_MATCH_SCHEDULE_AND_RESULTS =
             "rapidApiFootApi7MatchesService_getMatchScheduleAndResults";
-    public static final String RAPID_API_FOOT_API_7_MATCHES_SERVICE_GET_RESPONSE_ENTITY =
-            "rapidApiFootApi7MatchesService_getResponseEntity";
+    public static final String RAPID_API_FOOT_API_7_MATCHES_SERVICE_GET_MATCH_SCHEDULE_AND_RESULTS_RESPONSE_ENTITY =
+            "rapidApiFootApi7MatchesService_getMatchScheduleAndResultsResponseEntity";
 }

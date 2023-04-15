@@ -38,7 +38,7 @@ public class RapidApiFootApi7MatchesService {
 
     /**
      * Получить расписание на указанную дату.
-     * Все параметры являются обязательными, т.к. по ним формируется кеш(через DTO не получится)
+     * Все параметры являются обязательными, т.к. по ним формируется кеш.
      *
      * @param category* - категория чемпионата
      * @param day*      - день
@@ -47,12 +47,21 @@ public class RapidApiFootApi7MatchesService {
      */
     @Cacheable(value = CacheNames.RAPID_API_FOOT_API_7_MATCHES_SERVICE_GET_MATCH_SCHEDULE_AND_RESULTS)
     public EventsDTO getMatchScheduleAndResults(int category, int day, int month, int year) {
-        val response = getResponseEntity(category, day, month, year);
+        val response = getMatchScheduleAndResultsResponseEntity(category, day, month, year);
         return objectMapperService.readValue(response.getBody(), EventsDTO.class);
     }
 
-    @Cacheable(value = CacheNames.RAPID_API_FOOT_API_7_MATCHES_SERVICE_GET_RESPONSE_ENTITY)
-    public ResponseEntity<String> getResponseEntity(int category, int day, int month, int year) {
+    /**
+     * Получить расписание на указанную дату.
+     * Все параметры являются обязательными, т.к. по ним формируется кеш.
+     *
+     * @param category* - категория чемпионата
+     * @param day*      - день
+     * @param month*    - месяц
+     * @param year*     - год
+     */
+    @Cacheable(value = CacheNames.RAPID_API_FOOT_API_7_MATCHES_SERVICE_GET_MATCH_SCHEDULE_AND_RESULTS_RESPONSE_ENTITY)
+    public ResponseEntity<String> getMatchScheduleAndResultsResponseEntity(int category, int day, int month, int year) {
         val headers = new HttpHeaders();
         headers.set(RAPID_API_KEY_HEADER_NAME, rapidApiKey);
         headers.set(RAPID_API_HOST_HEADER_NAME, RAPID_API_FOOTAPI7_HOST_HEADER_VALUE);
