@@ -7,9 +7,10 @@
         <dbms type="postgresql"/>
     </preConditions>
     <!-- ************************************  RUN  ***************************************************** -->
-    <include file="changesets/exchange_rate/1_cr_schema_exchange_rate.sql" relativeToChangelogFile="true"/>
-    <include file="changesets/exchange_rate/2_data_source.sql" relativeToChangelogFile="true"/>
-    <include file="changesets/exchange_rate/3_exchange_rate.sql" relativeToChangelogFile="true"/>
-    <include file="changesets/exchange_rate/4_rate.sql" relativeToChangelogFile="true"/>
-    <include file="changesets/exchange_rate/5_exchange_rate_has_rate.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/exchange_rate/2023_04_15__1_cr_schema_exchange_rate.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/exchange_rate/2023_04_15__2_data_source.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/exchange_rate/2023_04_15__3_exchange_rate.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/exchange_rate/2023_04_15__4_rate.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/exchange_rate/2023_04_15__5_exchange_rate_has_rate.sql" relativeToChangelogFile="true"/>
+    <include file="changesets/sports/2023_04_15__1_cr_schema_sports.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
