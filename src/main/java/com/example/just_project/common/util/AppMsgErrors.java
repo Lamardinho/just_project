@@ -12,5 +12,7 @@ public class AppMsgErrors {
     public static final String AN_UNEXPECTED_ERROR_OCCURRED_EN = "An unforeseen mistake arose";
     public static final String FAILED_TO_CONNECT_TO_URL = "Failed to connect to: %s";
     public static final String ERROR_ACCESSING_TO = "Ошибка доступа к: %s";
-    public static final String FAILED_TO_GENERATE_REPORT = "Failed to generate report";
+    public static final String FAILED_TO_GENERATE_REPORT = "Failed to generate report: %s";
+    public static final String ALL_OBJECTS_IN_JSON_MUST_HAVE_THE_SAME_SET_OF_FIELDS =
+            "Все объекты в JSON должны иметь одинаковый набор полей.";
 }

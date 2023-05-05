@@ -1,8 +1,8 @@
-package com.example.just_project.project_reports.service;
+package com.example.just_project.project_reports.service.impl;
 
 import com.example.just_project.common.aop.TrackExecutionTime;
 import com.example.just_project.project_reports.enums.JasperReportExtension;
-import com.example.just_project.project_reports.service.contract.JasperReportsService;
+import com.example.just_project.project_reports.service.JasperReportsService;
 import com.example.just_project.common.util.AppException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
