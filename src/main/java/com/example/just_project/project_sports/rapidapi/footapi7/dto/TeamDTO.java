@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,7 +21,7 @@ public class TeamDTO {
     private String shortName;
     private String slug;
     private SportDTO sport;
-    private List<Object> subTeams;
+    private List<Object> subTeams = new ArrayList<>();
     private TeamColorsDTO teamColors;
     private int type;
     private int userCount;

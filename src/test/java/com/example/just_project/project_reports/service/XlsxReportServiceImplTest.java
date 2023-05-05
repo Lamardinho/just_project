@@ -31,7 +31,7 @@ class XlsxReportServiceImplTest {
         //act:
         val result = xlsxReportService.makeReport(json, "Report");
         // Записываем отчет на диск:
-        val reportPath = Paths.get("\\tmp/xlsxReportServiceImplTest.nba_stars_new.xlsx");
+        val reportPath = Paths.get("/tmp/xlsxReportServiceImplTest.nba_stars_new.xlsx");
         val newFilePath = Files.write(reportPath, result);
 
         // проверяем содержимое:

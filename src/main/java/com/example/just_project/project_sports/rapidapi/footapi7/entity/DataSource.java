@@ -1,4 +1,4 @@
-package com.example.just_project.project_exchangerate.model.exchangerate;
+package com.example.just_project.project_sports.rapidapi.footapi7.entity;
 
 import com.example.just_project.project_exchangerate.enums.ESource;
 import lombok.AllArgsConstructor;
@@ -9,13 +9,13 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
-@Entity(name = "exchangeRateDataSource")
-@Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity(name = "sportsDataSource")
+@Table(schema = "sports", name = "data_source")
 @Getter
 @Setter
-@Table(schema = "exchange_rate", name = "data_source")
+@NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
 public class DataSource {
 
     @Id
