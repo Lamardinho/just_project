@@ -1,4 +1,4 @@
-package com.example.just_project.project_reports.service.contract;
+package com.example.just_project.project_reports.service;
 
 import com.example.just_project.project_reports.enums.JasperReportExtension;
 import lombok.NonNull;

@@ -26,7 +26,8 @@
           "2018-2021"
         ]
       }
-    ]
+    ],
+    "playing_now": true
   },
   {
     "name": "Kevin Durant",
@@ -60,7 +61,8 @@
           "2019-2021"
         ]
       }
-    ]
+    ],
+    "playing_now": true
   },
   {
     "name": "Stephen Curry",
@@ -76,7 +78,8 @@
           "2009-present"
         ]
       }
-    ]
+    ],
+    "playing_now": true
   },
   {
     "name": "Giannis Antetokounmpo",
@@ -92,7 +95,8 @@
           "2013-present"
         ]
       }
-    ]
+    ],
+    "playing_now": true
   },
   {
     "name": "Kawhi Leonard",
@@ -120,6 +124,7 @@
           "2019-present"
         ]
       }
-    ]
+    ],
+    "playing_now": true
   }
 ]
